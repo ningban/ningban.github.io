@@ -1,0 +1,570 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>计算机基础篇之字符集与字符编码 | JNing+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="JNing">
+    
+
+    
+    <meta name="description" content="记得曾经面试Tencent的时候，被面试官问过字符编码的的知识，恰巧最近看到有篇文章讲解的非常好，该博文详细讲述了常用字符集与字符编码，以及Unicode，最后又讲解了HTTP中涉及字符编码的消息头字段...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机基础篇之字符集与字符编码">
+<meta property="og:url" content="https://ningban.github.io/2014/11/30/计算机基础篇之字符集与字符编码/index.html">
+<meta property="og:site_name" content="JNing+">
+<meta property="og:description" content="记得曾经面试Tencent的时候，被面试官问过字符编码的的知识，恰巧最近看到有篇文章讲解的非常好，该博文详细讲述了常用字符集与字符编码，以及Unicode，最后又讲解了HTTP中涉及字符编码的消息头字段...">
+<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/os20141130-1.png">
+<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/os20141130-2.png">
+<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/os20141130-3.png">
+<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/os20141130-4.png">
+<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/os20141130-5.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机基础篇之字符集与字符编码">
+<meta name="twitter:description" content="记得曾经面试Tencent的时候，被面试官问过字符编码的的知识，恰巧最近看到有篇文章讲解的非常好，该博文详细讲述了常用字符集与字符编码，以及Unicode，最后又讲解了HTTP中涉及字符编码的消息头字段...">
+
+    
+    <link rel="alternative" href="/atom.xml" title="JNing+" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.png">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="JNing+" title="JNing+"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="JNing+">JNing+</a></h1>
+				<h2 class="blog-motto">Stay hungry, Stay foolish...</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:ningban.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/11/30/计算机基础篇之字符集与字符编码/" title="计算机基础篇之字符集与字符编码" itemprop="url">计算机基础篇之字符集与字符编码</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://ningban.github.io/about" title="JNing" target="_blank" itemprop="author">JNing</a>
+		
+  <p class="article-time">
+    <time datetime="2014-11-30T14:08:34.000Z" itemprop="datePublished"> 发表于 2014-11-30</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基础知识"><span class="toc-number">1.</span> <span class="toc-text">基础知识</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常用字符集和字符编码"><span class="toc-number">2.</span> <span class="toc-text">常用字符集和字符编码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ASCII字符集&编码"><span class="toc-number">2.1.</span> <span class="toc-text">ASCII字符集&编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GBXXXX字符集&编码"><span class="toc-number">2.2.</span> <span class="toc-text">GBXXXX字符集&编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BIG5字符集&编码"><span class="toc-number">2.3.</span> <span class="toc-text">BIG5字符集&编码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#伟大的创想Unicode"><span class="toc-number">3.</span> <span class="toc-text">伟大的创想Unicode</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#UCS_&_UNICODE"><span class="toc-number">3.1.</span> <span class="toc-text">UCS & UNICODE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UTF-32"><span class="toc-number">3.2.</span> <span class="toc-text">UTF-32</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UTF-16"><span class="toc-number">3.3.</span> <span class="toc-text">UTF-16</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UTF-8"><span class="toc-number">3.4.</span> <span class="toc-text">UTF-8</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP中的编码"><span class="toc-number">4.</span> <span class="toc-text">HTTP中的编码</span></a></li></ol>
+		
+		</div>
+		
+		<p>　　相信大家一定碰到过，打开某个网页，却显示一堆像乱码，如”бЇЯАзЪСЯ”、”�????????”？还记得HTTP中的Accept-Charset、Accept-Encoding、Accept-Language、Content-Encoding、Content-Language等消息头字段？这些就是接下来我们要探讨的。</p>
+<h1 id="基础知识">基础知识</h1><p>　　计算机中储存的信息都是用二进制数表示的；而我们在屏幕上看到的英文、汉字等字符是二进制数转换之后的结果。通俗的说，按照何种规则将字符存储在计算机中，如’a’用什么表示，称为”编码”；反之，将存储在计算机中的二进制数解析显示出来，称为”解码”，如同密码学中的加密和解密。在解码过程中，如果使用了错误的解码规则，则导致’a’解析成’b’或者乱码。</p>
+<blockquote>
+<ul>
+<li>字符集（Charset）：是一个系统支持的所有抽象字符的集合。字符是各种文字和符号的总称，包括各国家文字、标点符号、图形符号、数字等。</li>
+<li>字符编码（Character Encoding）：是一套法则，使用该法则能够对自然语言的字符的一个集合（如字母表或音节表），与其他东西的一个集合（如号码或电脉冲）进行配对。即在符号集合与数字系统之间建立对应关系，它是信息处理的一项基本技术。通常人们用符号集合（一般情况下就是文字）来表达信息。而以计算机为基础的信息处理系统则是利用元件（硬件）不同状态的组合来存储和处理信息的。元件不同状态的组合能代表数字系统的数字，因此字符编码就是将符号转换为计算机可以接受的数字系统的数，称为数字代码。</li>
+</ul>
+</blockquote>
+<h1 id="常用字符集和字符编码">常用字符集和字符编码</h1><p>　　常见字符集名称：ASCII字符集、GB2312字符集、BIG5字符集、GB18030字符集、Unicode字符集等。计算机要准确的处理各种字符集文字，需要进行字符编码，以便计算机能够识别和存储各种文字。</p>
+<h2 id="ASCII字符集&amp;编码">ASCII字符集&amp;编码</h2><ul>
+<li><code>ASCII</code>（AmericanStandard Code for Information Interchange，美国信息交换标准代码）是基于拉丁字母的一套电脑编码系统。它主要用于显示现代英语，而其扩展版本EASCII则可以勉强显示其他西欧语言。它是现今最通用的单字节编码系统（但是有被Unicode追上的迹象），并等同于国际标准ISO/IEC 646。</li>
+<li><code>ASCII字符集</code>：主要包括控制字符（回车键、退格、换行键等）；可显示字符（英文大小写字符、阿拉伯数字和西文符号）。</li>
+<li><code>ASCII编码</code>：将ASCII字符集转换为计算机可以接受的数字系统的数的规则。使用7位（bits）表示一个字符，共128字符；但是7位编码的字符集只能支持128个字符，为了表示更多的欧洲常用字符对ASCII进行了扩展，ASCII扩展字符集使用8位（bits）表示一个字符，共256字符。ASCII字符集映射到数字编码规则如下图所示：<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os20141130-1.png" alt="ASCII字符代码表1"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/os20141130-2.png" alt="ASCII字符代码表2"></li>
+</ul>
+<p>　　ASCII的最大缺点是只能显示26个基本拉丁字母、阿拉伯数目字和英式标点符号，因此只能用于显示现代美国英语（而且在处理英语当中的外来词如naïve、café、élite等等时，所有重音符号都不得不去掉，即使这样做会违反拼写规则）。而EASCII虽然解决了部份西欧语言的显示问题，但对更多其他语言依然无能为力。因此现在的苹果电脑已经抛弃ASCII而转用Unicode。</p>
+<h2 id="GBXXXX字符集&amp;编码">GBXXXX字符集&amp;编码</h2><p>　　计算机发明之处及后面很长一段时间，只用应用于美国及西方一些发达国家，ASCII能够很好满足用户的需求。但是当天朝也有了计算机之后，为了显示中文，必须设计一套编码规则用于将汉字转换为计算机可以接受的数字系统的数。<br>　　天朝专家把那些127号之后的奇异符号们（即EASCII）取消掉，规定：一个小于127的字符的意义与原来相同，但两个大于127的字符连在一起时，就表示一个汉字，前面的一个字节（他称之为高字节）从0xA1用到 0xF7，后面一个字节（低字节）从0xA1到0xFE，这样我们就可以组合出大约7000多个简体汉字了。在这些编码里，还把数学符号、罗马希腊的字母、日文的假名们都编进去了，连在ASCII里本来就有的数字、标点、字母都统统重新编了两个字节长的编码，这就是常说的”全角”字符，而原来在127号以下的那些就叫”半角”字符了。<br>　　上述编码规则就是<code>GB2312</code>。GB2312或GB2312-80是中国国家标准简体中文字符集，全称《信息交换用汉字编码字符集·基本集》，又称GB0，由中国国家标准总局发布，1981年5月1日实施。GB2312编码通行于中国大陆；新加坡等地也采用此编码。中国大陆几乎所有的中文系统和国际化的软件都支持GB2312。GB2312的出现，基本满足了汉字的计算机处理需要，它所收录的汉字已经覆盖中国大陆99.75%的使用频率。对于人名、古汉语等方面出现的罕用字，GB2312不能处理，这导致了后来GBK及GB18030汉字字符集的出现。下图是GB2312编码的开始部分（由于其非常庞大，只列举开始部分，具体可查看GB2312简体中文编码表）：<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os20141130-3.png" alt="GB2312编码表的开始部分"></p>
+<p>　　由于GB 2312-80只收录6763个汉字，有不少汉字，如部分在GB2312-80推出以后才简化的汉字（如”啰”），部分人名用字（如中国前总理朱镕基的”镕”字），台湾及香港使用的繁体字，日语及朝鲜语汉字等，并未有收录在内。于是厂商微软利用GB2312-80未使用的编码空间，收录GB13000.1-93全部字符制定了GBK编码。根据微软资料，GBK是对GB2312-80的扩展，也就是CP936字码表 (Code Page 936)的扩展（之前CP936和GB 2312-80一模一样），最早实现于Windows 95简体中文版。虽然GBK收录GB 13000.1-93的全部字符，但编码方式并不相同。GBK自身并非国家标准，只是曾由国家技术监督局标准化司、电子工业部科技与质量监督司公布为”技术规范指导性文件”。原始GB13000一直未被业界采用，后续国家标准GB18030技术上兼容GBK而非GB13000。<br>　　<code>GB 18030</code>，全称：国家标准GB 18030-2005《信息技术 中文编码字符集》，是中华人民共和国现时最新的内码字集，是GB 18030-2000《信息技术 信息交换用汉字编码字符集 基本集的扩充》的修订版。与GB 2312-1980完全兼容，与GBK基本兼容，支持GB 13000及Unicode的全部统一汉字，共收录汉字70244个。GB 18030主要有以下特点：<br>与UTF-8相同，采用多字节编码，每个字可以由1个、2个或4个字节组成。</p>
+<ul>
+<li>编码空间庞大，最多可定义161万个字符。</li>
+<li>支持中国国内少数民族的文字，不需要动用造字区。</li>
+<li>汉字收录范围包含繁体汉字以及日韩汉字。<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os20141130-4.png" alt="GB18030编码总体结构"></li>
+</ul>
+<p>　　本规格的初版使中华人民共和国信息产业部电子工业标准化研究所起草，由国家质量技术监督局于2000年3月17日发布。现行版本为国家质量监督检验总局和中国国家标准化管理委员会于2005年11月8日发布，2006年5月1日实施。此规格为在中国境内所有软件产品支持的强制规格。</p>
+<h2 id="BIG5字符集&amp;编码">BIG5字符集&amp;编码</h2><p>　　<code>Big5</code>，又称为大五码或五大码，是使用繁体中文（正体中文）社区中最常用的电脑汉字字符集标准，共收录13,060个汉字。中文码分为内码及交换码两类，Big5属中文内码，知名的中文交换码有CCCII、CNS11643。Big5虽普及于台湾、香港与澳门等繁体中文通行区，但长期以来并非当地的国家标准，而只是业界标准。倚天中文系统、Windows等主要系统的字符集都是以Big5为基准，但厂商又各自增加不同的造字与造字区，派生成多种不同版本。2003年，Big5被收录到CNS11643中文标准交换码的附录当中，取得了较正式的地位。这个最新版本被称为Big5-2003。<br>　　Big5码是一套双字节字符集，使用了双八码存储方法，以两个字节来安放一个字。第一个字节称为”高位字节”，第二个字节称为”低位字节”。”高位字节”使用了0x81-0xFE，”低位字节”使用了0x40-0x7E，及0xA1-0xFE。在Big5的分区中：<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os20141130-5.png" alt="在Big5的分区中"></p>
+<h1 id="伟大的创想Unicode">伟大的创想Unicode</h1><p>　　像天朝一样，当计算机传到世界各个国家时，为了适合当地语言和字符，设计和实现类似GB232/GBK/GB18030/BIG5的编码方案。这样各搞一套，在本地使用没有问题，一旦出现在网络中，由于不兼容，互相访问就出现了乱码现象。<br>　　为了解决这个问题，一个伟大的创想产生了——Unicode。Unicode编码系统为表达任意语言的任意字符而设计。它使用4字节的数字来表达每个字母、符号，或者表意文字(ideograph)。每个数字代表唯一的至少在某种语言中使用的符号。（并不是所有的数字都用上了，但是总数已经超过了65535，所以2个字节的数字是不够用的。）被几种语言共用的字符通常使用相同的数字来编码，除非存在一个在理的语源学(etymological)理由使不这样做。不考虑这种情况的话，每个字符对应一个数字，每个数字对应一个字符。即不存在二义性。不再需要记录”模式”了。U+0041总是代表’A’，即使这种语言没有’A’这个字符。<br>　　在计算机科学领域中，<code>Unicode</code>（统一码、万国码、单一码、标准万国码）是业界的一种标准，它可以使电脑得以体现世界上数十种文字的系统。Unicode是基于通用字符集（Universal Character Set）的标准来发展，并且同时也以书本的形式对外发表。Unicode还不断在扩增，每个新版本插入更多新的字符。直至目前为止的第六版，Unicode就已经包含了超过十万个字符（在2005年，Unicode的第十万个字符被采纳且认可成为标准之一）、一组可用以作为视觉参考的代码图表、一套编码方法与一组标准字符编码、一套包含了上标字、下标字等字符特性的枚举等。Unicode 组织（The Unicode Consortium）是由一个非营利性的机构所运作，并主导Unicode的后续发展，其目标在于：将既有的字符编码方案以Unicode编码方案来加以取代，特别是既有的方案在多语环境下，皆仅有有限的空间以及不兼容的问题。</p>
+<blockquote>
+<p>PS：可以这样理解：Unicode是字符集，UTF-32/ UTF-16/ UTF-8是三种字符编码方案。</p>
+</blockquote>
+<h2 id="UCS_&amp;_UNICODE">UCS &amp; UNICODE</h2><p>　　<code>通用字符集</code>（Universal Character Set，UCS）是由ISO制定的ISO 10646（或称ISO/IEC10646）标准所定义的标准字符集。历史上存在两个独立的尝试创立单一字符集的组织，即国际标准化组织（ISO）和多语言软件制造商组成的统一码联盟。前者开发的 ISO/IEC 10646 项目，后者开发的统一码项目。因此最初制定了不同的标准。<br>　　1991年前后，两个项目的参与者都认识到，世界不需要两个不兼容的字符集。于是，它们开始合并双方的工作成果，并为创立一个单一编码表而协同工作。从Unicode 2.0开始，Unicode采用了与ISO10646-1相同的字库和字码；ISO也承诺，ISO10646将不会替超出U+10FFFF的UCS-4编码赋值，以使得两者保持一致。两个项目仍都存在，并独立地公布各自的标准。但统一码联盟和ISO/IEC JTC1/SC2都同意保持两者标准的码表兼容，并紧密地共同调整任何未来的扩展。在发布的时候，Unicode一般都会采用有关字码最常见的字型，但ISO10646一般都尽可能采用Century字型。</p>
+<h2 id="UTF-32">UTF-32</h2><p>　　上述使用4字节的数字来表达每个字母、符号，或者表意文字(ideograph)，每个数字代表唯一的至少在某种语言中使用的符号的编码方案，称为UTF-32。UTF-32又称UCS-4是一种将Unicode字符编码的协定，对每个字符都使用4字节。就空间而言，是非常没有效率的。<br>　　这种方法有其优点，最重要的一点就是可以在常数时间内定位字符串里的第N个字符，因为第N个字符从第4×Nth个字节开始。虽然每一个码位使用固定长定的字节看似方便，它并不如其它Unicode编码使用得广泛。</p>
+<h2 id="UTF-16">UTF-16</h2><p>　　尽管有Unicode字符非常多，但是实际上大多数人不会用到超过前65535个以外的字符。因此，就有了另外一种Unicode编码方式，叫做UTF-16(因为16位 = 2字节)。UTF-16将0–65535范围内的字符编码成2个字节，如果真的需要表达那些很少使用的”星芒层(astral plane)”内超过这65535范围的Unicode字符，则需要使用一些诡异的技巧来实现。UTF-16编码最明显的优点是它在空间效率上比UTF-32高两倍，因为每个字符只需要2个字节来存储（除去65535范围以外的），而不是UTF-32中的4个字节。并且，如果我们假设某个字符串不包含任何星芒层中的字符，那么我们依然可以在常数时间内找到其中的第N个字符，直到它不成立为止这总是一个不错的推断。其编码方法是：</p>
+<ul>
+<li>如果字符编码U小于0x10000，也就是十进制的0到65535之内，则直接使用两字节表示；</li>
+<li>如果字符编码U大于0x10000，由于UNICODE编码范围最大为0x10FFFF，从0x10000到0x10FFFF之间 共有0xFFFFF个编码，也就是需要20个bit就可以标示这些编码。用U’表示从0-0xFFFFF之间的值，将其前 10 bit作为高位和16 bit的数值0xD800进行 逻辑or 操作，将后10 bit作为低位和0xDC00做 逻辑or 操作，这样组成的 4个byte就构成了U的编码。</li>
+</ul>
+<p>　　对于UTF-32和UTF-16编码方式还有一些其他不明显的缺点。不同的计算机系统会以不同的顺序保存字节。这意味着字符U+4E2D在UTF-16编码方式下可能被保存为4E 2D或者2D 4E，这取决于该系统使用的是大尾端(big-endian)还是小尾端(little-endian)。只要文档没有离开你的计算机，它还是安全的——同一台电脑上的不同程序使用相同的字节顺序(byte order)。但是当我们需要在系统之间传输这个文档的时候，也许在万维网中，我们就需要一种方法来指示当前我们的字节是怎样存储的。不然的话，接收文档的计算机就无法知道这两个字节4E 2D表达的到底是U+4E2D还是U+2D4E。<br>　　为了解决这个问题，多字节的Unicode编码方式定义了一个”字节顺序标记(Byte Order Mark)”，它是一个特殊的非打印字符，你可以把它包含在文档的开头来指示你所使用的字节顺序。对于UTF-16，字节顺序标记是U+FEFF。如果收到一个以字节FF FE开头的UTF-16编码的文档，你就能确定它的字节顺序是单向的(one way)的了；如果它以FE FF开头，则可以确定字节顺序反向了。</p>
+<h2 id="UTF-8">UTF-8</h2><p>　　<code>UTF-8</code>（8-bit Unicode Transformation Format）是一种针对Unicode的可变长度字符编码（定长码），也是一种前缀码。它可以用来表示Unicode标准中的任何字符，且其编码中的第一个字节仍与ASCII兼容，这使得原来处理ASCII字符的软件无须或只须做少部份修改，即可继续使用。因此，它逐渐成为电子邮件、网页及其他存储或传送文字的应用中，优先采用的编码。互联网工程工作小组（IETF）要求所有互联网协议都必须支持UTF-8编码。<br>　　UTF-8使用一至四个字节为每个字符编码：</p>
+<ol>
+<li>128个US-ASCII字符只需一个字节编码（Unicode范围由U+0000至U+007F）。</li>
+<li>带有附加符号的拉丁文、希腊文、西里尔字母、亚美尼亚语、希伯来文、阿拉伯文、叙利亚文及它拿字母则需要二个字节编码（Unicode范围由U+0080至U+07FF）。</li>
+<li>其他基本多文种平面（BMP）中的字符（这包含了大部分常用字）使用三个字节编码。</li>
+<li>其他极少使用的Unicode辅助平面的字符使用四字节编码。<br>　　在处理经常会用到的ASCII字符方面非常有效。在处理扩展的拉丁字符集方面也不比UTF-16差。对于中文字符来说，比UTF-32要好。同时，（在这一条上你得相信我，因为我不打算给你展示它的数学原理。）由位操作的天性使然，使用UTF-8不再存在字节顺序的问题了。一份以utf-8编码的文档在不同的计算机之间是一样的比特流。<br>总体来说，在Unicode字符串中不可能由码点数量决定显示它所需要的长度，或者显示字符串之后在文本缓冲区中光标应该放置的位置；组合字符、变宽字体、不可打印字符和从右至左的文字都是其归因。所以尽管在UTF-8字符串中字符数量与码点数量的关系比UTF-32更为复杂，在实际中很少会遇到有不同的情形。</li>
+</ol>
+<p><strong>优点</strong></p>
+<blockquote>
+<ul>
+<li>UTF-8是ASCII的一个超集。因为一个纯ASCII字符串也是一个合法的UTF-8字符串，所以现存的ASCII文本不需要转换。为传统的扩展ASCII字符集设计的软件通常可以不经修改或很少修改就能与UTF-8一起使用。</li>
+<li>使用标准的面向字节的排序例程对UTF-8排序将产生与基于Unicode代码点排序相同的结果。（尽管这只有有限的有用性，因为在任何特定语言或文化下都不太可能有仍可接受的文字排列顺序。）</li>
+<li>UTF-8和UTF-16都是可扩展标记语言文档的标准编码。所有其它编码都必须通过显式或文本声明来指定。</li>
+<li>任何面向字节的字符串搜索算法都可以用于UTF-8的数据（只要输入仅由完整的UTF-8字符组成）。但是，对于包含字符记数的正则表达式或其它结构必须小心。</li>
+<li>UTF-8字符串可以由一个简单的算法可靠地识别出来。就是，一个字符串在任何其它编码中表现为合法的UTF-8的可能性很低，并随字符串长度增长而减小。举例说，字符值C0,C1,F5至FF从来没有出现。为了更好的可靠性，可以使用正则表达式来统计非法过长和替代值（可以查看W3 FAQ: Multilingual Forms上的验证UTF-8字符串的正则表达式）。</li>
+</ul>
+</blockquote>
+<p><strong>缺点</strong></p>
+<blockquote>
+<ul>
+<li>因为每个字符使用不同数量的字节编码，所以寻找串中第N个字符是一个O(N)复杂度的操作——即，串越长，则需要更多的时间来定位特定的字符。同时，还需要位变换来把字符编码成字节，把字节解码成字符。</li>
+</ul>
+</blockquote>
+<h1 id="HTTP中的编码">HTTP中的编码</h1><p>　　在HTTP中，与字符集和字符编码相关的消息头是Accept-Charset/Content-Type，另外主区区分Accept-Charset/Accept-Encoding/Accept-Language/Content-Type/Content-Encoding/Content-Language：</p>
+<ul>
+<li>Accept-Charset：浏览器申明自己接收的字符集，这就是本文前面介绍的各种字符集和字符编码，如gb2312，utf-8（通常我们说Charset包括了相应的字符编码方案）；</li>
+<li>Accept-Encoding：浏览器申明自己接收的编码方法，通常指定压缩方法，是否支持压缩，支持什么压缩方法（gzip，deflate），（注意：这不是只字符编码）；</li>
+<li>Accept-Language：浏览器申明自己接收的语言。语言跟字符集的区别：中文是语言，中文有多种字符集，比如big5，gb2312，gbk等等；</li>
+<li>Content-Type：WEB服务器告诉浏览器自己响应的对象的类型和字符集。例如：Content-Type: text/html; charset=’gb2312’</li>
+<li>Content-Encoding：WEB服务器表明自己使用了什么压缩方法（gzip，deflate）压缩响应中的对象。例如：Content-Encoding：gzip</li>
+<li>Content-Language：WEB服务器告诉浏览器自己响应的对象的语言。</li>
+</ul>
+<p>[参考资料]</p>
+<ol>
+<li><a href="http://blog.csdn.net/lixshaha/article/details/8274983" target="_blank" rel="external">字符集和字符编码（Charset &amp; Encoding）</a></li>
+<li><a href="http://blog.csdn.net/lixshaha/article/details/8274966" target="_blank" rel="external">字符编码-UTF-8详解</a></li>
+<li><a href="http://blog.csdn.net/lixshaha/article/details/8275005" target="_blank" rel="external">字符编码-ASCII详解</a></li>
+<li><a href="http://www.cnblogs.com/magialmoon/p/unicode-utf-8.html" target="_blank" rel="external">简单聊一下Unicode和utf-8</a></li>
+<li><a href="http://www.guokr.com/blog/83367/" target="_blank" rel="external">为什么UTF-8没有字节序问题？</a></li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/计算机基础/">计算机基础</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/计算机基础/">计算机基础</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://ningban.github.io/2014/11/30/计算机基础篇之字符集与字符编码/" data-title="计算机基础篇之字符集与字符编码 | JNing+" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/12/01/Modern-OS第2章之线程/" title="Modern OS第2章之线程">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Modern OS第2章之线程</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/11/30/计算机基础篇之字符编码/"  title="计算机基础篇之字符编码">
+ <strong>下一篇：</strong><br/> 
+ <span>计算机基础篇之字符编码
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基础知识"><span class="toc-number">1.</span> <span class="toc-text">基础知识</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常用字符集和字符编码"><span class="toc-number">2.</span> <span class="toc-text">常用字符集和字符编码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ASCII字符集&编码"><span class="toc-number">2.1.</span> <span class="toc-text">ASCII字符集&编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GBXXXX字符集&编码"><span class="toc-number">2.2.</span> <span class="toc-text">GBXXXX字符集&编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BIG5字符集&编码"><span class="toc-number">2.3.</span> <span class="toc-text">BIG5字符集&编码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#伟大的创想Unicode"><span class="toc-number">3.</span> <span class="toc-text">伟大的创想Unicode</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#UCS_&_UNICODE"><span class="toc-number">3.1.</span> <span class="toc-text">UCS & UNICODE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UTF-32"><span class="toc-number">3.2.</span> <span class="toc-text">UTF-32</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UTF-16"><span class="toc-number">3.3.</span> <span class="toc-text">UTF-16</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UTF-8"><span class="toc-number">3.4.</span> <span class="toc-text">UTF-8</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP中的编码"><span class="toc-number">4.</span> <span class="toc-text">HTTP中的编码</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life/" title="Life">Life<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Machine-Learning/" title="Machine Learning">Machine Learning<sup>11</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>8</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/分享与发现/" title="分享与发现">分享与发现<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/计算机基础/" title="计算机基础">计算机基础<sup>3</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/机器学习/" title="机器学习">机器学习<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OS/" title="OS">OS<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/计算机基础/" title="计算机基础">计算机基础<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Life/" title="Life">Life<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分享与发现/" title="分享与发现">分享与发现<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://www.v2ex.com/?r=Jning"" target="_blank" title="v2ex">v2ex</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://open.163.com" target="_blank" title="公开课">公开课</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://study.163.com" target="_blank" title="云课堂">云课堂</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.mooc.cn/" target="_blank" title="MOOC">MOOC</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/ningvsban" target="_blank" title="JNing">JNing</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m JNing. <br/>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="https://ningban.github.io/about" target="_blank" title="JNing">JNing</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+  </body>
+</html>

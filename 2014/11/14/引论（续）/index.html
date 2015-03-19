@@ -1,0 +1,520 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Modern OS引论之计算机硬件 | JNing+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="JNing">
+    
+
+    
+    <meta name="description" content="文章是Modern Operating System的读书笔记，这里是引论的读书笔记，主要讲述了I/O设备、总线、启动计算机的过程...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Modern OS引论之计算机硬件">
+<meta property="og:url" content="https://ningban.github.io/2014/11/14/引论（续）/index.html">
+<meta property="og:site_name" content="JNing+">
+<meta property="og:description" content="文章是Modern Operating System的读书笔记，这里是引论的读书笔记，主要讲述了I/O设备、总线、启动计算机的过程...">
+<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/os1-11.png">
+<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/os1-12.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Modern OS引论之计算机硬件">
+<meta name="twitter:description" content="文章是Modern Operating System的读书笔记，这里是引论的读书笔记，主要讲述了I/O设备、总线、启动计算机的过程...">
+
+    
+    <link rel="alternative" href="/atom.xml" title="JNing+" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.png">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="JNing+" title="JNing+"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="JNing+">JNing+</a></h1>
+				<h2 class="blog-motto">Stay hungry, Stay foolish...</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:ningban.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/11/14/引论（续）/" title="Modern OS引论之计算机硬件" itemprop="url">Modern OS引论之计算机硬件</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://ningban.github.io/about" title="JNing" target="_blank" itemprop="author">JNing</a>
+		
+  <p class="article-time">
+    <time datetime="2014-11-14T12:48:14.000Z" itemprop="datePublished"> 发表于 2014-11-14</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#计算机硬件介绍（续）"><span class="toc-number">1.</span> <span class="toc-text">计算机硬件介绍（续）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#I/O设备"><span class="toc-number">1.1.</span> <span class="toc-text">I/O设备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总线"><span class="toc-number">1.2.</span> <span class="toc-text">总线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动计算机"><span class="toc-number">1.3.</span> <span class="toc-text">启动计算机</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="计算机硬件介绍（续）">计算机硬件介绍（续）</h1><h2 id="I/O设备">I/O设备</h2><blockquote>
+<p>　　I/O设备一般包括两个部分：<strong>设备控制器</strong>和<strong>设备本身</strong>。<br>　　控制器是插在电路板上的一块芯片或一组芯片，这块电路板物理地控制设备。它从操作系统接受命令，例如，从设备读数据，并且完成数据的处理。在许多情形下，对这些设备的控制是非常复杂和具体的，所以，控制器的任务是为操作系统提供一个简单的接口（不过还是很复杂的）。<br>　　设备本身有个相对简单的接口，这是因为接口既不能做很多工作，又已经被标准化了。标准化是有必要的，这样任何一个IDE磁盘控制器就可以适应任意一种IDE磁盘，例如，IDE表示集成驱动器电子设备（Integrated Drive Electronics），是许多计算机的磁盘标准。由于实际的设备接口隐藏在控制器中，所以，操作系统看到的是对控制器的接口，这个接口可能和设备接口有很大的差别。<br>　　每类设备控制器都是不同的，所以，需要不同的软件进行控制。专门与控制器对话，发出命令并接收响应的软件，称为设备驱动程序（device driver）。每个控制器厂家必须为所支持的操作系统提供相应的设备驱动程序。<br>　　为了能够使用设备驱动程序，必须把设备驱动程序装入到操作系统中，这样它可在核心态中运行。<strong>要将设备驱动程序装入操作系统</strong>，有三个途径：</p>
+<ol>
+<li>将内核与设备驱动程序重新链接，然后重启系统。许多<code>UNIX</code>系统已这种方式工作；</li>
+<li>在一个操作系统文件中设置一个入口，并通知该文件需要一个设备驱动程序，然后重启系统。在系统启动时，操作系统区寻找所需的设备驱动程序并装载之。<code>Windows</code>就是以这种方式工作。</li>
+<li>操作系统能够在运行时接受新的设备驱动程序并且立即将其安装好，无序重启系统。例如USB等热插拔设备。</li>
+</ol>
+<p>　　每个设备控制器都有少量的用于通信的寄存器。例如，一个最小的磁盘控制器也会有用于指定磁盘地址、内存地址、扇区计数和方向（读或写）的寄存器。要激活控制器，设备驱动程序从操作系统获得一条命令，然后翻译成对应的值，并写进设备寄存器中。所有设备寄存器和集合构成了I/O端口空间。</p>
+<ol>
+<li>在有些计算机中，设备寄存器被映射到操作系统的地址空间（操作系统可使用的地址），这昂，它们就可以像普通存储字一样读出和写入。在这种计算机中，不需要专门的I/O指令，用户程序可以被硬件阻挡在外，防止器接触这些存储器地址（例如，采用基址和界限寄存器）。</li>
+<li>在另外一些计算机中，设备寄存器被放入一个专门的I/O端口空间中，每个寄存器都有一个端口地址。在这些机器中，提供在内核态中可使用的专门IN和OUT指令，供设备驱动程序读写这些寄存器用。<br>　　总之，第一种方式不需要专门的I/O指令，但是占用了一些地址空间。而第二种方式不占用地址空间，但是需要专门的指令。这两种方式的应用都很广泛。</li>
+</ol>
+<p>　　<strong>实现输入和输出的方式有三种</strong>：</p>
+<ol>
+<li>在最简单的方式中，用户程序发出一个系统调用，讷河将其翻译成一个对应设备驱动程序的过程调用。然后设备驱动程序启动I/O并在一个梁旭不断的循环中检查该设备，看该设备是否完成了工作（一般有一些二进制位用来只是设备仍在忙碌中）。当I/O结束后，设备驱动程序把数据送到指定的地方（若由此需要），并返回。然后操作系统将控制返回给调用者。这种方式称为<code>忙等待（busy waiting）</code>，其缺点是要占据CPU，CPU一直轮询设备知道对应的I/O操作完成。</li>
+<li>设备驱动程序启动设备并且让该设备在操作完成时发出一个中断。设备驱动程序在这个时刻返回。操作系统接着在需要时阻塞调用者并安排其他工作进行。当设备驱动程序检测到该设备的操作完毕时，它发出一个中断通知操作完成。<br>　　在操作系统中，中断是非常重要的，所以需要更具体的讨论。在图1-11a中，有一个I/O的三步过程。在第1步，设备驱动程序通过写设备寄存器通知设备控制器做什么。然后，设备控制器启动该设备。当设备控制器传送完毕被告知的要进行读写的字节数量后，它在第2步中使用特定的总线发信号给中断控制器芯片。如果中断控制器已经准备接收中断（如果正忙于一个更高级的中断，也可能不接收），它会在CPU芯片的一个管脚上声明，这就是第3步。在第4步中，中断控制器把该设备的编号放到总线上，这样CPU可以读总线，并且知道哪个设备刚刚完成了操作（可能同时有许多设备在运行）。<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os1-11.png" alt="图1-11"><br>　　一旦CPU决定取中断，通常程序计数器和PSW就被压入当前堆栈中，并且CPU被切换用户态。设备编号可以成为部分内存的一个引用，用于寻找该设备中断处理程序的地址。这部分内存成为<code>中断向量（interrupt vector）</code>。当中断处理程序（中断设备的设备驱动程序的一部分）开始后，它取走已入栈的程序计数器和PSW，并保存之，然后查询设备的状态。在中断处理程序全部完成之后，它返回到先前运行的用户程序中尚未执行的头一条指令。这些步骤如图1-11b所示。</li>
+<li>为I/O使用一种特殊的<code>直接存储器访问（Direct Memory Access，DMA）芯片</code>，它可以控制在内存和某些控制器之间的位流，而无需持续的CPU干预。CPU对DMA芯片进行设置，说明需要传送的字节数、有关的设备和内存地址以及操作方向，接着启动DMA。当DMA芯片完成时，它引发一个中断，其处理方式如前所述。</li>
+</ol>
+</blockquote>
+<h2 id="总线">总线</h2><blockquote>
+<p>　　<a href="http://7vihec.com1.z0.glb.clouddn.com/os1-6.png" target="_blank" rel="external">图1-6</a>中的结构在小型计算机中使用了多年。但是，随着处理器和存储器速度越来越快，到了某个转折点时，单总线就很难处理总线的交通流量了，只有放弃。其结构是导致其他的总线出现，他们处理I/O设备以及CPU到存储器的速度都更快。这种演化的结果是，目前一台较大的Pentium系统的机构如图1-12所示。<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os1-12.png" alt="图1-12"><br>　　图中的系统由8个总线（高速缓存、局部、内存、PCI/SCSI、USB、IDB和ISA），每个总线传输速度和功能都不同。操作系统必须了解所有总线的配置和管理。<br>　　有两个主要的总线，即早期的IBM PC ISA（Industry Standard Architecture）总线和它的后继者PCI（Peripheral Component Interconnect）总线。ISA总线以8.33MHZ的频率运行，可并行传送2字节，最大速率为16.67MB/s。它还可与老师的慢速I/O卡向后兼容。PCI总线作为ISA总线的后继者由Intel公司发布。它可在66MHZ频率运行，可并行传送8字节，数据速率为528MB/s。目前多数告诉I/O设备采用PCI总线。<br>　　在这种配置中，CPU通过局部总线与PCI桥芯片对话，而PCI桥芯片通过专门的存储总线与存储器对话，一般速率为1000MHZ。Pentium系统在芯片上有1级高速缓存，在芯片外有一个非常大的2级高速缓存，它通过告诉缓存总线与CPU连接。<br>　　另外，在这个系统中有三个专门的总线：IDE、USB和SCSI。<code>IDE总线</code>将诸如磁盘和CD-ROM一类的外部设备与系统相连接。<code>通用串行总线（Universal Serial Bus，USB）</code>是用来将所有慢速I/O设备，诸如键盘和鼠标，与计算机连接。USB是一种集中式总线，其根设备每1ms轮询一次I/O设备，看是否有信息收发。USB1.0可以处理总计1.5MB/s的负载，而USB2.0总线可以有60MB/s的速率。所有的USB设备共享一个USB设备驱动器。<code>SCSI（Small Computer System Interface）总线</code>是一种高速总线，用在高速硬盘、扫描仪和其他需要较大带宽的设备上，它最高可达320MB/s。<br>　　稽即插即用所做的工作是，系统自动地收集有关I/O设备的信息，集中赋予中断级别和I/O地址，然后通知每块卡所使用的数值。这项工作与计算机的启动密切相关，所以下面我们开始讨论计算机的启动。</p>
+</blockquote>
+<h2 id="启动计算机">启动计算机</h2><blockquote>
+<p>　　Pentium的简要启动过程如下。在每个Pentium上有一块双亲版，在双亲版上有一个称为基本输入输出的系统（Basic Input Output System，BIOS）的程序。在BIOS内有底层I/O软件，包括读键盘、写屏幕、进行磁盘I/O以及其他过程。现在这个程序存放在一块闪速RAM中，它是非易失性的，但是在发现BIOS中有错时可以通过操作系统对它进行更新。<br>　　在计算机启动时，BIOS开始运行。它首先检查所安装的RAM数量，键盘和其他基本设备是否已安装并正常响应。接着，它开始扫描ISA和PCI总线并找出连在上面的所有设备。其中有些设备是典型的遗留设备（即即插即用发明之前的设计的），并且有固定的中断级别和I/O地址。这些设备被记录下来，即插即用设备也被记录下来。如果现有的设备和系统上一次启动时的设备不同，则配置新的设备。<br>　　然后，BIOS通过尝试存储在CMOS存储器中的设备清单决定启动设备。用户可以在系统刚启动之后进入一个BIOS配置程序，对设备清单进行修改。典型地，如果存在软盘，则系统视图从软盘启动。如果失败则使用CD-ROM，看看是否有可启动CD-ROM存在。如果软盘和CD-ROM都没有，系统从硬盘启动。启动设备上的第一个扇区被读入内存并执行。这个扇面中包含一个对保存在启动扇面末尾的分区表检查的程序，以确定哪个分区是活动的。然后，从该分区读入第二个启动装载模块。来自活动分区的这个装载模块被读入操作系统，并启动之。<br>　　然后，操作系统询问BIOS，一伙的配置信息。对于每种设备，系统检查对应的设备驱动程序是否存在。如果没有，系统要求用户插入含有该设备驱动程序的CD-ROM。一旦有了全部的设备驱动程序，操作系统就将它们调入内核。然后初始化有关表格，创建需要的任何背景进程，并在每个终端上启动登陆程序或GUI。</p>
+</blockquote>
+<p>[参考资料]</p>
+<ol>
+<li><a href="">现代操作系统</a></li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Operating-System/">Operating System</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/OS/">OS</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://ningban.github.io/2014/11/14/引论（续）/" data-title="Modern OS引论之计算机硬件 | JNing+" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/11/15/引论之操作系统概念/" title="Modern OS引论之操作系统概念">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Modern OS引论之操作系统概念</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/11/13/引论/"  title="Modern OS引论之开篇">
+ <strong>下一篇：</strong><br/> 
+ <span>Modern OS引论之开篇
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#计算机硬件介绍（续）"><span class="toc-number">1.</span> <span class="toc-text">计算机硬件介绍（续）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#I/O设备"><span class="toc-number">1.1.</span> <span class="toc-text">I/O设备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总线"><span class="toc-number">1.2.</span> <span class="toc-text">总线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动计算机"><span class="toc-number">1.3.</span> <span class="toc-text">启动计算机</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life/" title="Life">Life<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Machine-Learning/" title="Machine Learning">Machine Learning<sup>11</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>8</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/分享与发现/" title="分享与发现">分享与发现<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/计算机基础/" title="计算机基础">计算机基础<sup>3</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/机器学习/" title="机器学习">机器学习<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OS/" title="OS">OS<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/计算机基础/" title="计算机基础">计算机基础<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Life/" title="Life">Life<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分享与发现/" title="分享与发现">分享与发现<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://www.v2ex.com/?r=Jning"" target="_blank" title="v2ex">v2ex</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://open.163.com" target="_blank" title="公开课">公开课</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://study.163.com" target="_blank" title="云课堂">云课堂</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.mooc.cn/" target="_blank" title="MOOC">MOOC</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/ningvsban" target="_blank" title="JNing">JNing</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m JNing. <br/>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="https://ningban.github.io/about" target="_blank" title="JNing">JNing</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+  </body>
+</html>

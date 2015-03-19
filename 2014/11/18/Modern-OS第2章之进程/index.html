@@ -1,0 +1,524 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Modern OS第2章之进程 | JNing+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="JNing">
+    
+
+    
+    <meta name="description" content="文章是Modern Operating System的读书笔记，这里是第二章进程与线程的读书笔记，本篇主要讲述了进程的一些知识，如进程模型、创建进程、进程的终止、进程的层次结构、进程的状态、进程的实现等...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Modern OS第2章之进程">
+<meta property="og:url" content="https://ningban.github.io/2014/11/18/Modern-OS第2章之进程/index.html">
+<meta property="og:site_name" content="JNing+">
+<meta property="og:description" content="文章是Modern Operating System的读书笔记，这里是第二章进程与线程的读书笔记，本篇主要讲述了进程的一些知识，如进程模型、创建进程、进程的终止、进程的层次结构、进程的状态、进程的实现等...">
+<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/os2-2.png">
+<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/os2-4.png">
+<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/os2-5.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Modern OS第2章之进程">
+<meta name="twitter:description" content="文章是Modern Operating System的读书笔记，这里是第二章进程与线程的读书笔记，本篇主要讲述了进程的一些知识，如进程模型、创建进程、进程的终止、进程的层次结构、进程的状态、进程的实现等...">
+
+    
+    <link rel="alternative" href="/atom.xml" title="JNing+" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.png">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="JNing+" title="JNing+"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="JNing+">JNing+</a></h1>
+				<h2 class="blog-motto">Stay hungry, Stay foolish...</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:ningban.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/11/18/Modern-OS第2章之进程/" title="Modern OS第2章之进程" itemprop="url">Modern OS第2章之进程</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://ningban.github.io/about" title="JNing" target="_blank" itemprop="author">JNing</a>
+		
+  <p class="article-time">
+    <time datetime="2014-11-18T08:27:39.000Z" itemprop="datePublished"> 发表于 2014-11-18</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#进程"><span class="toc-number">1.</span> <span class="toc-text">进程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#进程模型"><span class="toc-number">1.1.</span> <span class="toc-text">进程模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建进程"><span class="toc-number">1.2.</span> <span class="toc-text">创建进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程的终止"><span class="toc-number">1.3.</span> <span class="toc-text">进程的终止</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程的层次结构"><span class="toc-number">1.4.</span> <span class="toc-text">进程的层次结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程的状态"><span class="toc-number">1.5.</span> <span class="toc-text">进程的状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程的实现"><span class="toc-number">1.6.</span> <span class="toc-text">进程的实现</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="进程">进程</h1><p>　　操作系统中最核心的概念是进程：这是对正在运行程序的一个抽象。操作系统的其他所有内容都是围绕着进程的概念展开的。</p>
+<h2 id="进程模型">进程模型</h2><p>　　在进程模型中，计算机中所有可运行的软件，通常也包括操作系统，被组织成若干顺序进程（sequential process），简称进程（process）。一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值。从概念上说，每个进程拥有它自己的虚拟CPU。当然，实际上真正的CPU在个进程之间来回切换。<br>　　理解进程的关键思想是：一个进程是某种类型的一个活动，它有程序、输入、输出以及状态。单个处理器可以被若干进程共享，它使用某种调度算法决定何时停止一个进程的工作，并转而外i另一个进程提供服务。<code>注意</code>：如果一个程序运行了两遍，则算作两个进程。</p>
+<h2 id="创建进程">创建进程</h2><p>　　操作系统需要有一种方式来创建进程。一些非常简单的操作系统，即那种只为运行一个应用程序设计的系统（例如，微波炉中的控制器），可能在系统启动之时，以后所需要的所有进程都已存在。然而在通用系统中，需要有某种方法在运行时按需要创建或撤销进程。有4中主要事件导致进程的创建：</p>
+<ol>
+<li>系统初始化。</li>
+<li>执行了正在运行的进程所调用的进程创建系统调用。</li>
+<li>用户请求创建一个新进程。</li>
+<li>一个批处理作业的初始化。</li>
+</ol>
+<p>　　启动操作系统时，通常会创建若干进程。其中有些是前台进程，也就是同用户交互并且替他们完成工作的哪些进程。其他的是后台进程，这些进程与特定的用户没有关系，相反，却具有某些专门的功能。停留在后台处理诸如电子邮件、web页面、新闻、打印之类活动的进程称为<code>守护进程</code>（daemon）。在大型系统中通常有很多守护进程。在UNIX中，可以用<code>ps</code>程序列出正在运行的进程；在Windows，可以使用任务管理器。<br>　　一个正在运行的进程经常发出系统调用，以便创建一个或多个新进程协助其工作。在所要从事的工作可以容易地划分成若干相关的但没有相互作用的进程时，创建新的进程就特别有效果。例如，如果有大量的数据要通过网络调取并进行顺序处理，那么创建一个进程取数据，并把数据放入共享缓冲区中，而让第二个进程取走数据项并处理之，应该比较容易。在多处理机中，让每个进程在不同的CPU上运行会使整个作业运行的更快。<br>　　在交互式系统中，键入一个命令或者点击一个图标就可以启动一个程序。这两个动作中的任何一个都会开始一个新的进程，并在其中运行所选择的程序。<br>　　最后一种创建进程的情形仅在大型机的批处理系统中应用。用户在这种系统中提交批处理作业。在操作系统任务有资源可运行另一个作业时，它创建一个新的进程，并运行其输入队列中的下一个作业。<br>　　在UNIX系统中，只有一个系统调用可以用来创建新进程：<code>fork</code>。这个系统调用会创建一个与调用进程相同的副本。在调用了fork后，这两个进程拥有相同的存储映像，同样的环境字符串和同样的打开文件，这就是全部情形。通常，子进程接着执行execve或一个类似的系统调用，以修改其存储映像并运行一个新的程序。例如，当一个用户在shell中键入命令sort时，shell就创建一个子进程，然后，这个子进程执行sort。之所以要安排两步建立进程，是为了在fork之后但在execve之前允许该子进程处理其文件描述符，这样可以完成对标准输入、标准输出和标准出错的重定向。<br>　　在Windows中，情形相反，一个Win32函数调用CreateProcess既处理进程的创建，也负责把正确的程序装入新的进程。<br>　　在UNIX和Windows中，进程创建之后，父进程和子进程有各自不同的地址空间。</p>
+<h2 id="进程的终止">进程的终止</h2><p>　　进程在创建之后，它开始运行，完成其工作。但是永恒是不存在的，进程也一样。迟早这个新的进程会终止，通常由下列条件引起：</p>
+<ol>
+<li>正常退出（自愿的）。</li>
+<li>出错退出（自愿的）。</li>
+<li>严重错误（非自愿的）。</li>
+<li>被其他进程杀死（非自愿的）。</li>
+</ol>
+<p>　　 多数进程是由于完成了它们的工作而终止。当编译器完成了所给定程序的编译之后，编译器执行了一个系统调用，通知操作系统它的工作已经完成。在UNIX中该调用是exit，而在Windows中，相关的调用是ExitProcess。<br>　　进程终止的第二个原因是进程发现了严重的错误。例如，如果用户键入命令<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cc foo.c</span><br></pre></td></tr></table></figure></p>
+<p>要编译程序foo.c，但是该文件并不存在，于是编译器就会退出。在给出了错误参数时，面向屏幕的交互式进程通常并不退出。相反，这些程序会弹出一个对话框，并要求用户在试一次。<br>　　进程终止的第三个原因是由进程引起的错误，通常是由于程序中的错误所致。例如，执行了一条非法指令、引用不存在的内存，或除数是零等。<br>　　第四种终止进程的原因是，某个进程执行一个系统调用通知操作系统杀死某个其他进程。在UNIX中在，这个系统调用是kill。在Win32中对应的韩式是TerminateProcess。在有些系统中的，当一个进程终止时，不论是自愿的还是其他原因，由该进程所创建的所有进程也一律立即被杀死。不过，UNIX和Windows都不是这种工作方式。</p>
+<h2 id="进程的层次结构">进程的层次结构</h2><p>　　进程只有一个父进程（但是可以有零个、一个、两个或多个子进程）。<br>　　在UNIX中，进程和它的所有子女以及后裔共同组成一个进程组。当用户从键盘发出一个信号时，该信号被送给当前键盘相关的进程组中的所有成员。每个进程可以分别捕获该信号、忽略该信号或采取默认的动作，即被该信号杀死。<br>　　相反，Windows中没有进程层次的概念，所有的进程都是地位相同的。唯一类似于进程层次的暗示是在创建进程的时候。父进程得到一个特别的令牌（称为句柄），该句柄可以用来控制子进程。但是，它有权把这个令牌传送给某个其他进程，这样就不存在进程层次了。在UNIX中，进程就不能剥夺其子女的“继承权”。</p>
+<h2 id="进程的状态">进程的状态</h2><p>　　在图2-2中可以看到进程的三种状态的状态图。这三种状态是：</p>
+<ol>
+<li>运行态（该时刻进程实际占用CPU）。</li>
+<li>就绪态（可运行，但因为其他进程正在运行而暂时停止）。</li>
+<li>阻塞态（除非某种外部事件发生，否则进程不能运行）。<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os2-2.png" alt="图2-2"></li>
+</ol>
+<p>　　前两种状态在逻辑上是类似的。处于这两种状态的进程都可以运行，只是对于第二种状态暂时没有CPU分配给它。第三中状态与前两种状态不同，处于该状态的进程不能运行，即使CPU空闲也不行。</p>
+<h2 id="进程的实现">进程的实现</h2><p>　　为了实现进程模型，操作系统维护着一张表格（一个结构数组），即进程表（process table）。每个进程占用一个进程表项（有些作者称这些表项为进程控制块）。该表项包含了进程状态的重要信息，包括程序计数器、堆栈指针、内存分配状况、所打开文件的状态、账号和调度信息，以及其他在进程由运行态转换到就绪态阻塞态时必须保存的信息，从而保证该进程随后能再次启动，就像从未被中断过一样。<br>　　图2-4中展示了在一个典型系统中的关键字段。第一列中的字段与进程管理有关。其他两列分别于存储管理和文件管理有关。应该注意到进程表中的字段是与系统密切相关的，不过改图给出了所需要信息的大致介绍。<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os2-4.png" alt="图2-4"><br>　　在了解进程表后，就可以对在单个CPU上如何维护多个顺序进程的错觉做更多的阐述。与每一I/O类关联的是一个称作<code>中断向量</code>（interrupt vector）的位置（靠近内存底部的固定区域），它包含中断服务程序的入口地址。假设当一个磁盘中断发生时，用户进程3正在运行，则中断硬件将程序计数器、程序状态字，有时还有一个或多个寄存器压入堆栈，计算机随机跳转到中断向量所指示的地址。这些是硬件完成的所有操作，然后软件，特别是中断服务例程就接管一切剩余的工作。<br>　　所有的中断都是从保存寄存器开始，对于当前进程而言，通常是在进程表项中。随后，会从堆栈中删除由中断硬件机制存入堆栈的那部分信息，并将堆栈指针指向一个由进程处理程序所使用的临时堆栈。一些诸如保存寄存器值和设置堆栈指针等操作，无法用C语言这一类高级语言描述，所以这些操作通过一个短小的汇编语言例程来完成，通常该例程可以供所有的中断使用，因为无论中断是怎样引起的，有关保存寄存器的工作则是完全一样的。<br>　　当例程结束后，它调用一个C过程处理某个特定的中断类型剩下的工作。在完成所有工作之后，大概就会使某些进程就绪，接着调用调度程序，决定随后该运行哪个进程。随后将控制转给一段汇编语言代码，为当前的进程装入寄存器值以及内存映射并启动该进程进行。图2-5中总结了中断处理和调度的过程。<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os2-5.png" alt="图2-5"><br>　　对于中断，这一节讲的比较晦涩，下面一篇我们将再专门讨论一下中断的具体过程与原理。</p>
+<p>[参考资料]</p>
+<ol>
+<li><a href="">现代操作系统</a></li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Operating-System/">Operating System</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/OS/">OS</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://ningban.github.io/2014/11/18/Modern-OS第2章之进程/" data-title="Modern OS第2章之进程 | JNing+" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/11/18/Modern-OS第二章之中断解析/" title="Modern OS第2章之中断解析">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Modern OS第2章之中断解析</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/11/17/Mondern-OS引论之依靠C的世界/"  title="Mondern OS引论之依靠C的世界">
+ <strong>下一篇：</strong><br/> 
+ <span>Mondern OS引论之依靠C的世界
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#进程"><span class="toc-number">1.</span> <span class="toc-text">进程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#进程模型"><span class="toc-number">1.1.</span> <span class="toc-text">进程模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建进程"><span class="toc-number">1.2.</span> <span class="toc-text">创建进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程的终止"><span class="toc-number">1.3.</span> <span class="toc-text">进程的终止</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程的层次结构"><span class="toc-number">1.4.</span> <span class="toc-text">进程的层次结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程的状态"><span class="toc-number">1.5.</span> <span class="toc-text">进程的状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程的实现"><span class="toc-number">1.6.</span> <span class="toc-text">进程的实现</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life/" title="Life">Life<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Machine-Learning/" title="Machine Learning">Machine Learning<sup>11</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>8</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/分享与发现/" title="分享与发现">分享与发现<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/计算机基础/" title="计算机基础">计算机基础<sup>3</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/机器学习/" title="机器学习">机器学习<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OS/" title="OS">OS<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/计算机基础/" title="计算机基础">计算机基础<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Life/" title="Life">Life<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分享与发现/" title="分享与发现">分享与发现<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://www.v2ex.com/?r=Jning"" target="_blank" title="v2ex">v2ex</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://open.163.com" target="_blank" title="公开课">公开课</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://study.163.com" target="_blank" title="云课堂">云课堂</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.mooc.cn/" target="_blank" title="MOOC">MOOC</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/ningvsban" target="_blank" title="JNing">JNing</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m JNing. <br/>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="https://ningban.github.io/about" target="_blank" title="JNing">JNing</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+  </body>
+</html>

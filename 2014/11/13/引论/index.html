@@ -1,0 +1,515 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Modern OS引论之开篇 | JNing+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="JNing">
+    
+
+    
+    <meta name="description" content="文章是Modern Operating System的读书笔记，这里是引论的读书笔记，主要讲述了计算机的运行模式、操作系统的定义、处理器、存储器、磁盘...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Modern OS引论之开篇">
+<meta property="og:url" content="https://ningban.github.io/2014/11/13/引论/index.html">
+<meta property="og:site_name" content="JNing+">
+<meta property="og:description" content="文章是Modern Operating System的读书笔记，这里是引论的读书笔记，主要讲述了计算机的运行模式、操作系统的定义、处理器、存储器、磁盘...">
+<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/os1-6.png">
+<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/os1-9.png">
+<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/os1-10.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Modern OS引论之开篇">
+<meta name="twitter:description" content="文章是Modern Operating System的读书笔记，这里是引论的读书笔记，主要讲述了计算机的运行模式、操作系统的定义、处理器、存储器、磁盘...">
+
+    
+    <link rel="alternative" href="/atom.xml" title="JNing+" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.png">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="JNing+" title="JNing+"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="JNing+">JNing+</a></h1>
+				<h2 class="blog-motto">Stay hungry, Stay foolish...</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:ningban.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/11/13/引论/" title="Modern OS引论之开篇" itemprop="url">Modern OS引论之开篇</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://ningban.github.io/about" title="JNing" target="_blank" itemprop="author">JNing</a>
+		
+  <p class="article-time">
+    <time datetime="2014-11-13T06:06:32.000Z" itemprop="datePublished"> 发表于 2014-11-13</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#计算机的运行模式"><span class="toc-number">1.</span> <span class="toc-text">计算机的运行模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是操作系统"><span class="toc-number">2.</span> <span class="toc-text">什么是操作系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#计算机硬件介绍"><span class="toc-number">3.</span> <span class="toc-text">计算机硬件介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#处理器"><span class="toc-number">3.1.</span> <span class="toc-text">处理器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储器"><span class="toc-number">3.2.</span> <span class="toc-text">存储器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#磁盘"><span class="toc-number">3.3.</span> <span class="toc-text">磁盘</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="计算机的运行模式">计算机的运行模式</h1><blockquote>
+<p>　　多数计算机有两种运行模式：内核态和用户态。软件中最基础的部分是操作系统，它运行在<strong>内核态</strong>（也成为管态、核心态）。在这个模式中，操作系统具有对所有硬件的完全访问权限，可以执行机器能够运行的任何指令。软件的其余部分在用户态下。在<strong>用户态</strong>下，只使用了机器指令中的一个子集。特别地，那些会影响机器的控制或可进行I/O操作的指令，在用户态中的程序里是禁止的。</p>
+</blockquote>
+<h1 id="什么是操作系统">什么是操作系统</h1><blockquote>
+<p>　　很难给出操作系统的精准定义。操作系统是一种运行在内核态的软件——尽管这个说法并不总是符合事实。部分原因是操作系统执行两个基本上独立的任务，为应用程序员（实际上是应用程序）提供一个资源集的清晰抽象，并管理这些硬件资源，而不仅仅是一堆硬件。<br>　　资源管理包括用以下两种方式实现多路复用（共享）资源：在时间上复用和空间上复用。<br>　　1. 当一种资源在<strong>时间上复用</strong>时，不同的程序或用户轮流使用它。先是第一个获得资源的使用，然后下一个，以此类推。例如打印机的共享，当多个文件打印作业在一台打印机上排队等待打印时，必须决定将轮到打印的是哪个作业。<br>　　2. 另一类复用是<strong>空间复用</strong>，每个客户都得到资源的一部分，从而取代了客户排队。例如，通常在若干运行程序之间分割内存，这样每一个运行程序都可以同时入驻内存（例如，为了轮流使用CPU）。</p>
+</blockquote>
+<h1 id="计算机硬件介绍">计算机硬件介绍</h1><blockquote>
+<p>　　从概念上来讲，一台简单的个人计算机可以抽象为类似图1-6的模型。CPU、内存以及I/O设备都由一条系统总线连接起来并通过总线与其他设备通信。<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os1-6.png" alt="简单个人计算机中的一些部件"></p>
+</blockquote>
+<h2 id="处理器">处理器</h2><blockquote>
+<p>　　计算机的“大脑”是CPU，它从内存中取出指令并执行之。在每个CPU基本周期中，首先从内存中取出指令、解码以确定其类型和操作数，接着执行之，然后取指、解码并执行下一条指令。按照这一方式，程序被执行完成。<br>　　每个CPU都有其一套可执行的专门指令集。所以Pentium不能执行SPARC程序，而SPARC也不能执行Pentium程序。由于用来访问内存以得到指令或数据的时间要比执行指令的花费的时间长的多，因此，所有的CPU内都有一些用来保存关键变量和临时数据的寄存器。这样，通常在指令集中提供一些指令，用以将一个字从内存调入寄存器，以及将一个字从寄存器存入内存。其他的指令可以把来自寄存器、内存的操作数组合，或者用两者产生一个结果，注入将两个字相加并把结果存在寄存器或内存中。<br>　　除了用来保存变量和临时结果的通用寄存器之外，多数计算机还有一些对程序员可见的专门寄存器：<br>　　1. <strong>程序计数器</strong>，它保存了将要取出的下一条指令的内存地址。在指令取出之后，程序计数器就被更新以便指向后继的指令。<br>　　2. <strong>堆栈指针</strong>，它指向内存中当前栈的顶端。该栈含有已经进入但是还没有退出的每个过程的一个框架。在一个过程的推展框架中保存了有关的输入参数、局部变量以及那些没有保存在寄存器中的临时变量。<br>　　3. <strong>程序状态字（Program Status Word，PSW）寄存器</strong>。这个寄存器包含了条件码位（由比较指令设置）、CPU优先级、模式（用户态和内核态），以及各种其他控制位。用户程序通常读入整个PSW，但是，只对其中的少量字段写入。在系统调用和I/O中，PWS的作用很重要。<br>　　操作系统必须知晓所有的寄存器。在时间多路复用（time multiplexing）CPU中，操作系统经常会中止正在运行的某个程序并启动（或再启动）另一个程序。每次停止一个运行着的程序时，操作系统必须保存所有的寄存器。</p>
+</blockquote>
+<h2 id="存储器">存储器</h2><blockquote>
+<p>　　存储器系统采用一种分层次的结构，如图1-9所示。顶层的存储器速度较高，容量较小，与底层的存储器相比每位成本较高，其差别往往十亿数量级。<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os1-9.png" alt="典型的存储层次结构"><br>　　存储器系统的顶层是CPU中的<strong>寄存器</strong>。它们用于CPU相同的材料制成，所以和CPU一样快。显然，访问它们是没有时延的。其典型的存储容量是，在32为CPU中32 X 32位，而在64位CPU中64 X 64位。在这两种情形下，其存储容量都小于1KB。<br>　　下一层是<strong>高速缓存</strong>，，它多数由硬件控制。主存被分割为高速缓存行（cache line），其典型大小为64个字节，地址0至63对应高速缓存行0，地址64至127对应高速缓存行1，以此类推。最常用的高速缓存行放置在CPU内部或者非常接近CPU的高速缓存中。当某个程序需要读一个存储字时，高速缓存硬件检查所需要的高速缓存行是否在高速缓存中。如果是，称为<code>高速缓存命中</code>，缓存满足了请求，就不需要通过总线把访问请求送往主存。高速缓存命中通常需要两个时钟周期。高速缓存未命中就必须访问内存，这要付出大量的时间代价。由于高速缓存的间隔昂贵，所以其大小有限。有些机器具有两级甚至三级高速缓存，每一级高速缓存比前一级慢且容量更大。<br>　　再往下一层是<strong>主存</strong>，这是存储器系统的主力。主存通常称为<em>随机访问存储器</em>（Random Access Memeory，RAM）。<br>　　除了主存外，许多计算机已经在使用少量的非易失性随机访问存储器。它们与RAM不同，在电源切断之后，非易失性随机访问存储器并不丢失其内容。只读存储器（Read Only Memeory，ROM）在工厂中就被编程完毕，然后再也不能被修改。ROM速度快且便宜。在有些计算机中，用户启动计算机的引导加载模块就存放在ROM中。<br>　　<code>EEPROM</code>（Electrically Erasable Programmable ROM，电可擦除可编程ROM）和<code>闪存</code>（flash memory）也是非易失性的，但是与ROM相反，它们可以擦除和重写。不过重写它们需要比写入RAM更高数量级的时间，所以它们的使用方式与ROM相同，而其与众不同的特点使它们有可能通过字段重写的方式纠正所保存程序中的错误。<br>　　还有一类存储器是<code>CMOS</code>，它是易失性的。许多计算机利用CMOS存储器保存当前时间和日期。</p>
+</blockquote>
+<h2 id="磁盘">磁盘</h2><blockquote>
+<p>　　下一个层次是磁盘（硬盘）。磁盘同RAM相比，每个二进制位的成本低了两个数量级，而且经常也两个数量级大的容量。磁盘唯一的问题是随机访问数据时间大约慢了三个数量级。其低速的原因是因为磁盘是一种机械装置，如图1-10所示。<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os1-10.png" alt="磁盘驱动器的构造"><br>　　在任意一个给定臂的位置，每个磁头可以读取一段环形区域，成为<strong>磁道</strong>（track）。把一个给定臂的位置上的所有磁道和并起来，组成了一个<strong>柱面</strong>（cylinder）。<br>　　每个磁道划分为若干扇区，扇区的典型值是512字节。在现代磁盘中，较外面的柱面比较内部的柱面有更多的扇区。机械臂从一个柱面移到相邻的柱面大约需要1ms，而随机移到一个柱面的典型时间为5ms至10ms，其具体时间取决于驱动器。一旦磁臂到达正确的磁道上，驱动器必须等待所需的扇区旋转到磁头之下，这就增加了5ms至10ms的时延，其具体演示取决于驱动器的转速。一旦所需要的扇区移到磁头之下，就开始读写，低端硬盘的速度是5MB/s，而高速磁盘的速率是160MB/s。<br>　　许多计算机支持一种著名的<strong>虚拟内存机制</strong>，这种机制使得期望运行大于物理内存的程序成为可能，其方法是将程序放在磁盘上，而将主存作为一种缓存，用来保存最频繁使用的部分程序。这种机制需要快速地映像内存地址，以便把程序生成的地址转换为有关字节在RAM中的物理地址。这种映像由CPU中的一个部件，称为<strong>存储器管理单元</strong>（Memeory Management Unit，MMU）来完成，如图1-6所示。</p>
+</blockquote>
+<p>to be continued…</p>
+<p>[参考资料]</p>
+<ol>
+<li><a href="">现代操作系统</a></li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Operating-System/">Operating System</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/OS/">OS</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://ningban.github.io/2014/11/13/引论/" data-title="Modern OS引论之开篇 | JNing+" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/11/14/引论（续）/" title="Modern OS引论之计算机硬件">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Modern OS引论之计算机硬件</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/11/13/关于Hexo的两个问题/"  title="关于Hexo的两个问题">
+ <strong>下一篇：</strong><br/> 
+ <span>关于Hexo的两个问题
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#计算机的运行模式"><span class="toc-number">1.</span> <span class="toc-text">计算机的运行模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是操作系统"><span class="toc-number">2.</span> <span class="toc-text">什么是操作系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#计算机硬件介绍"><span class="toc-number">3.</span> <span class="toc-text">计算机硬件介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#处理器"><span class="toc-number">3.1.</span> <span class="toc-text">处理器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储器"><span class="toc-number">3.2.</span> <span class="toc-text">存储器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#磁盘"><span class="toc-number">3.3.</span> <span class="toc-text">磁盘</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life/" title="Life">Life<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Machine-Learning/" title="Machine Learning">Machine Learning<sup>11</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>8</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/分享与发现/" title="分享与发现">分享与发现<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/计算机基础/" title="计算机基础">计算机基础<sup>3</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/机器学习/" title="机器学习">机器学习<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OS/" title="OS">OS<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/计算机基础/" title="计算机基础">计算机基础<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Life/" title="Life">Life<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分享与发现/" title="分享与发现">分享与发现<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://www.v2ex.com/?r=Jning"" target="_blank" title="v2ex">v2ex</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://open.163.com" target="_blank" title="公开课">公开课</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://study.163.com" target="_blank" title="云课堂">云课堂</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.mooc.cn/" target="_blank" title="MOOC">MOOC</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/ningvsban" target="_blank" title="JNing">JNing</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m JNing. <br/>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="https://ningban.github.io/about" target="_blank" title="JNing">JNing</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+  </body>
+</html>
