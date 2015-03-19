@@ -4,30 +4,22 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>[4]牛顿方法 | JNing+</title>
+    <title>升级hexo3遇到的坑 | JNing+</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="JNing">
     
 
     
-    <meta name="description" content="本节首先介绍了牛顿方法，可以替代梯度上升算法用来计算函数的最大值；之后以高斯分布和伯努利分布为例介绍了指数分布函数族；最后一指数分布函数族作为基础，引出了广义线性模型，可以通过指定概率分布直接推导出模型。">
+    <meta name="description" content="最近一直在使用unbuntu系统，但是我的hexo时安装在了windows系统之下，如果想要写一篇博客还需要来回切换系统，太麻烦了（我的是双系统），悲剧就是这样发生的。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[4]牛顿方法">
-<meta property="og:url" content="https://ningban.github.io/2015/01/09/-4-牛顿方法/index.html">
+<meta property="og:title" content="升级hexo3遇到的坑">
+<meta property="og:url" content="https://ningban.github.io/2015/03/19/hexo3-is-awesome/index.html">
 <meta property="og:site_name" content="JNing+">
-<meta property="og:description" content="本节首先介绍了牛顿方法，可以替代梯度上升算法用来计算函数的最大值；之后以高斯分布和伯努利分布为例介绍了指数分布函数族；最后一指数分布函数族作为基础，引出了广义线性模型，可以通过指定概率分布直接推导出模型。">
-<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/ml-4-1.png">
-<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/ml-4-2.jpg">
-<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/ml-4-3.jpg">
-<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/ml-4-4.jpg">
-<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/ml-4-5.jpg">
-<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/ml-4-6.jpg">
-<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/ml-4-7.jpg">
-<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/ml-4-8.jpg">
+<meta property="og:description" content="最近一直在使用unbuntu系统，但是我的hexo时安装在了windows系统之下，如果想要写一篇博客还需要来回切换系统，太麻烦了（我的是双系统），悲剧就是这样发生的。">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[4]牛顿方法">
-<meta name="twitter:description" content="本节首先介绍了牛顿方法，可以替代梯度上升算法用来计算函数的最大值；之后以高斯分布和伯努利分布为例介绍了指数分布函数族；最后一指数分布函数族作为基础，引出了广义线性模型，可以通过指定概率分布直接推导出模型。">
+<meta name="twitter:title" content="升级hexo3遇到的坑">
+<meta name="twitter:description" content="最近一直在使用unbuntu系统，但是我的hexo时安装在了windows系统之下，如果想要写一篇博客还需要来回切换系统，太麻烦了（我的是双系统），悲剧就是这样发生的。">
 
     
     <link rel="alternative" href="/atom.xml" title="JNing+" type="application/atom+xml">
@@ -86,14 +78,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/01/09/-4-牛顿方法/" title="[4]牛顿方法" itemprop="url">[4]牛顿方法</a>
+      <a href="/2015/03/19/hexo3-is-awesome/" title="升级hexo3遇到的坑" itemprop="url">升级hexo3遇到的坑</a>
   </h1>
   <p class="article-author">By
        
 		<a href="https://ningban.github.io/about" title="JNing" target="_blank" itemprop="author">JNing</a>
 		
   <p class="article-time">
-    <time datetime="2015-01-09T05:23:56.000Z" itemprop="datePublished"> 发表于 2015-01-09</time>
+    <time datetime="2015-03-19T04:33:36.000Z" itemprop="datePublished"> 发表于 2015-03-19</time>
     
   </p>
 </header>
@@ -106,10 +98,18 @@
 		
 		</div>
 		
-		<p><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-4-1.png" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-4-2.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-4-3.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-4-4.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-4-5.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-4-6.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-4-7.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-4-8.jpg" alt="图2-18"></p>
+		<p>　　我本来的hexo版本是2.8，现在使用按照<a href="http://hexo.io/docs/" target="_blank" rel="external">官方教程</a>安装的都会默认安装hexo3。too young, too simple的我首先采取了windows和ubuntu共享hexo文件夹的办法，我直接执行hexo generate命令，结果肯定是报错了，傻傻我的搜索了半天，不知所以然，就采取了hexo init，悲剧的事情发生了，hexo文件夹下的_config.yml文件被覆盖掉了，我的网站配置就直接会到了原始版，此时的我只能重新配置（PS：此时我用的主体是pacman），当所有的工作都配置好之后，我发现rss和sitemap不好使，最关键的是python代码的样式都没了，经过长时间的搜索，知道了hexo3是个坑的结论，看样螃蟹确实不是那么好吃的。于是乎，我又想办法把hexo降级，最终来到了<a href="https://coderq.com/t/hexojiang-ji-3-dot-0-to-2-dot-8/1851" target="_blank" rel="external">这里</a>。我尝试了n次之后，发现按照作者的方法对我来说不可行，总是报出关于node中js的错误，此时我以为是node的版本问题，之后我又走向了卸载/重装nodejs的不归路。经过一番折腾，发现即使重新安装nodejs，hexo还是会出现和重装之前一样的错误，好吧，我又走了弯路。最后，终于发现pacman不支持hexo3，至此我已经从下午两点搞到了晚上十一点（PS：出去吃饭/喝水/回宿舍等其他繁杂时间），后来发现jacman支持了hexo3，我果断地选择了jacman主题，这个主题是来源于pacman，开发jacman主题的author貌似进入了他梦寐以求的阿里，这里也恭喜他。好了，回归正体，选择新的主题之后，我选择在ubuntu下新建立一个文件夹用于存放hexo文件，之后的一切还是比较顺利的，可惜今早又折腾了一早，因为我又遇到坑了。<br>　　<code>The first坑：</code>执行hexo deploy命令，报出如下错误：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">Error:</span> Deployer not <span class="string">found :</span> github</span><br></pre></td></tr></table></figure></p>
+<p>解决方法是执行如下命令：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span></span></span><br></pre></td></tr></table></figure></p>
+<p>同时修改_config.yml：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">deploy</span>:</span><br><span class="line">  <span class="attribute">type</span>: git      <span class="comment">//github&gt;&gt;git</span></span><br></pre></td></tr></table></figure></p>
+<p>　　<code>The second坑：</code>部署到github之后，<a href="https://github.com/hexojs/hexo-generator-feed" target="_blank" rel="external">rss</a>和<a href="https://github.com/hexojs/hexo-generator-sitemap" target="_blank" rel="external">sitemap</a>插件没有起到作用，解决方法是执行如下命令：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm <span class="operator"><span class="keyword">install</span> hexo-generator-feed <span class="comment">--save</span></span><br><span class="line">$ npm <span class="keyword">install</span> hexo-generator-sitemap <span class="comment">--save</span></span></span><br></pre></td></tr></table></figure></p>
+<p>　　<code>The third坑：</code>（PS：这个不能算坑，只能算是我的问题）多说无法使用，解决方法就是修改jacman主题的_config.yml，把其中的duoshuo_shortname写上你的shortname就可以了，当然首先你要去多说去注册一个账号才行。<br>　　对了，忘记说了最后一点，以后一定要先把hexo整个文件夹备份一份，或者至少要备份source文件夹/主题文件夹，还有根目录下的_config.yml文件，否则产生的后果你懂的。</p>
 <p>[参考资料]</p>
 <ol>
-<li><a href="http://v.163.com/movie/2008/1/E/D/M6SGF6VB4_M6SGHKAED.html" target="_blank" rel="external">斯坦福大学公开课 ：机器学习课程</a></li>
+<li><a href="https://coderq.com/t/hexojiang-ji-3-dot-0-to-2-dot-8/1851" target="_blank" rel="external">Hexo降级3.0 to 2.8</a></li>
+<li><a href="https://github.com/wuchong/jacman" target="_blank" rel="external">jacman</a></li>
+<li><a href="http://www.cnblogs.com/liulangmao/p/4323064.html" target="_blank" rel="external">使用hexo搭建github.io博客(一)</a></li>
+<li><a href="http://hexo.io/docs/" target="_blank" rel="external">Hexo Docs</a></li>
+<li><a href="https://github.com/hexojs/hexo/wiki/plugins" target="_blank" rel="external">Hexo Plugins</a></li>
 </ol>
   
 	</div>
@@ -118,13 +118,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning</a>
+  <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/机器学习/">机器学习</a>
+  <span></span> <a href="/tags/Hexo/">Hexo</a>
   </div>
 
 </div>
@@ -133,7 +133,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://ningban.github.io/2015/01/09/-4-牛顿方法/" data-title="[4]牛顿方法 | JNing+" data-tsina="null" class="share clearfix">
+	  <div data-url="https://ningban.github.io/2015/03/19/hexo3-is-awesome/" data-title="升级hexo3遇到的坑 | JNing+" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -146,19 +146,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/01/10/洋为中用/" title="洋为中用">
-  <strong>上一篇：</strong><br/>
-  <span>
-  洋为中用</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/01/08/-3-欠拟合与过拟合/"  title="[3]欠拟合与过拟合">
+<a href="/2015/03/08/Chrome插件推荐/"  title="Chrome插件推荐">
  <strong>下一篇：</strong><br/> 
- <span>[3]欠拟合与过拟合
+ <span>Chrome插件推荐
 </span>
 </a>
 </div>
@@ -167,7 +159,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/01/09/-4-牛顿方法/" data-title="[4]牛顿方法" data-url="https://ningban.github.io/2015/01/09/-4-牛顿方法/"></div>
+	<div class="ds-thread" data-thread-key="2015/03/19/hexo3-is-awesome/" data-title="升级hexo3遇到的坑" data-url="https://ningban.github.io/2015/03/19/hexo3-is-awesome/"></div>
 </section>
 
 
