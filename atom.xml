@@ -1,0 +1,770 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[JNing+]]></title>
+  <subtitle><![CDATA[Stay hungry, Stay foolish...]]></subtitle>
+  <link href="/atom.xml" rel="self"/>
+  <link href="https://ningban.github.io/"/>
+  <updated>2015-03-08T12:48:32.000Z</updated>
+  <id>https://ningban.github.io/</id>
+  
+  <author>
+    <name><![CDATA[JNing]]></name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Chrome插件推荐]]></title>
+    <link href="https://ningban.github.io/2015/03/08/Chrome%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90/"/>
+    <id>https://ningban.github.io/2015/03/08/Chrome插件推荐/</id>
+    <published>2015-03-08T11:41:24.000Z</published>
+    <updated>2015-03-08T12:48:32.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7vihec.com1.z0.glb.clouddn.com/chrome.jpg" alt="chrome"><br>　　寒假结束了，好久没有写东西了，最近在v2ex上看到12年发表一个关于<a href="https://www.v2ex.com/t/37709" target="_blank" rel="external">好用的Chrome插件</a>的讨论，看了之后收获挺多的，在这里也把我常用的Chrome插件推荐一下，也当作记录之用。</p>
+<ul>
+<li>SwitchyOmega<blockquote>
+<p>这个插件的名字以前叫做Switch Sharp，作者又重新写了一个并且改成了这个名字，原来的由于扩展性问题，不更新了。至于他的功能的话，你懂的，不懂的话，问Google吧。</p>
+</blockquote>
+</li>
+<li>LastPass<blockquote>
+<p>自从有了它，密码什么的再也不用担心了，不仅可以记录所有的密码，而且可以自动生成密码，所以以往一个密码通天下的时代结束了。</p>
+</blockquote>
+</li>
+<li>Pocket<blockquote>
+<p>这个插件又叫做稍后阅读，就是在浏览网页看到的内容如果没时间看，可以先放在这里，以后可以再在这里看。</p>
+</blockquote>
+</li>
+<li>印象笔记·剪藏<blockquote>
+<p>这个和上面的功能基本是一样的，对于代码的保存也更友好一些。</p>
+</blockquote>
+</li>
+<li>Tampermonkey<blockquote>
+<p>这个插件可是用一个字”厉害”来形容了，自从有了它，所有网站的自动签到神马的，百度云盘上资源的搜索神马的等等都搞定了。<a href="https://greasyfork.org/zh-CN" target="_blank" rel="external">点这里</a>去找到自己想用的用户脚本吧。</p>
+</blockquote>
+</li>
+<li>Google翻译<blockquote>
+<p>这个不用说了吧，就是看英文的时候的划词翻译功能，也支持右键搜索，但是好像需要越过功夫网才可以。</p>
+</blockquote>
+</li>
+<li>Adblock<blockquote>
+<p>这个插件用于屏蔽网页上的广告的，当然有些视频网站的广告也是可以的哦。也有些朋友推荐使用μblock，它们的功能大体是差不多的。</p>
+</blockquote>
+</li>
+<li>Better History<blockquote>
+<p>这个插件用于有条理的查看Chrome的浏览历史。</p>
+</blockquote>
+</li>
+<li>有道云笔记·剪藏<blockquote>
+<p>这个插件和印象笔记的差不多，但是存储空间很大的说。</p>
+</blockquote>
+</li>
+<li>一键管理<blockquote>
+<p>这个插件用于管理Chrome上的所有插件，如果所有的插件都运行可能会卡，所以有了它，想开启哪个开启哪个。</p>
+</blockquote>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[这里推荐我常用并且非常不错的chrome插件。]]>
+    
+    </summary>
+    
+      <category term="分享与发现" scheme="https://ningban.github.io/tags/%E5%88%86%E4%BA%AB%E4%B8%8E%E5%8F%91%E7%8E%B0/"/>
+    
+      <category term="分享与发现" scheme="https://ningban.github.io/categories/%E5%88%86%E4%BA%AB%E4%B8%8E%E5%8F%91%E7%8E%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Python入门笔记]]></title>
+    <link href="https://ningban.github.io/2015/01/21/Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    <id>https://ningban.github.io/2015/01/21/Python入门笔记/</id>
+    <published>2015-01-21T15:05:44.000Z</published>
+    <updated>2015-03-18T12:42:08.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="注释">注释</h1><p> 　　Python至少应当有第一行那样的特殊形式的注释。它被称作 组织行 ——源文件的头两个字符是#!，后面跟着一个程序。这行告诉你的Linux/Unix系统当你执行你的程序的时候，它应该运行哪个解释器。注意，你总是可以通过直接在命令行指定解释器，从而在任何平台上运行你的程序，就如同命令python helloworld.py一样。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ chmod a+x helloworld.py</span><br><span class="line">$ ./helloworld.py</span><br><span class="line">Hello World</span><br></pre></td></tr></table></figure></p>
+<p>　　为了更加有趣一些，你可以把你的文件名改成helloworld，然后运行./helloworld。这样，这个程序仍然可以工作,因为系统知道它必须用源文件第一行指定的那个解释器来运行程序。可以把你的程序保存在PATH环境变量中的目录之一，每当你运行任何程序，系统会查找列在PATH环境变量中的各个目录，然后运行那个程序。</p>
+<h1 id="参数">参数</h1><p>　　只有在形参末尾的那些参数可以有默认参数值，即你不能在声明函数形参的时候，先声明有默认值的形参而后声明没有默认值的形参。这是因为赋给形参的值是根据位置而赋值的，例如：def func(a, b=5)是有效的，但是def func(a=5, b)是无效的。</p>
+<h1 id="文档字符串DocStrings">文档字符串DocStrings</h1><p>　　文档字符串的惯例是一个多行字符串，它的首行以大写字母开始，句号结尾。第二行是空行，从第三行开始是详细的描述。强烈建议你在你的函数中使用文档字符串时遵循这个惯例。自动化工具也可以以同样的方式从你的程序中提取文档。因此,我强烈建议你对你所写的任何正式函数编写文档字符串。随你的Python发行版附带的pydoc命令，与help()类似地使用DocStrings。</p>
+<h1 id="sys模块">sys模块</h1><p>　　sys模块包含了与Python解释器和它的环境有关的函数。<br>　　当Python执行import sys语句的时候，它在sys.path变量所列目录中寻找sys.py模块。如果找到了这个文件，这个模块的主块中的语句将被运行，然后这个模块将能够被你使用。注意，初始化过程仅在我们第一次输入模块的时候进行。<br>　　这里，当我们执行python using_sys.py we are arguments的时候,我们使用python命令运行using_sys.py模块，后面跟着的内容被作为参数传递给程序。Python为我们把它存储在sys.argv变量中。<br>　　<strong>PS：</strong>一般说来，应该避免使用from..import而使用import语句，因为这样可以使你的程序更加易读，也可以避免名称的冲突。</p>
+<h1 id="__name__模块">__name__模块</h1><p>　　例如<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">	<span class="comment">#!/usr/bin/python</span></span><br><span class="line">	<span class="comment"># Filename: using_name.py</span></span><br><span class="line">	<span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">	    <span class="keyword">print</span> <span class="string">'This program is being run by itself'</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">	    <span class="keyword">print</span> <span class="string">'I am being imported from another module'</span></span><br><span class="line">```	</span><br><span class="line">　　这里表示，如果执行python using\_name.py时，则\_\_name\_\_=<span class="string">'\_\_main\_\_'</span>；如果执行<span class="keyword">import</span> using\_name，则\_\_name\_\_=<span class="string">'using\_name'</span>。</span><br><span class="line"></span><br><span class="line"><span class="comment">#dir()函数</span></span><br><span class="line">　　你可以使用内建的dir函数来列出模块定义的标识符，识符有函数、类和变量。当你为dir()提供一个模块名的时候,它返回模块定义的名称列表；如果不提供参数，它返回当前模块中定义的名称列表。</span><br><span class="line"></span><br><span class="line"><span class="comment">#数据结构</span></span><br><span class="line">　　在Python中有三种内建的数据结构——列表list、元组tuple和字典dict。</span><br><span class="line"></span><br><span class="line"><span class="comment">##列表</span></span><br><span class="line">```python</span><br><span class="line">	<span class="comment">#!/usr/bin/python</span></span><br><span class="line">	<span class="comment"># Filename: using_list.py</span></span><br><span class="line">	<span class="comment"># This is my shopping list</span></span><br><span class="line">	shoplist = [<span class="string">'apple'</span>, <span class="string">'mango'</span>, <span class="string">'carrot'</span>, <span class="string">'banana'</span>]</span><br><span class="line">	<span class="keyword">print</span> <span class="string">'I have'</span>, len(shoplist),<span class="string">'items to purchase.'</span></span><br><span class="line">	<span class="keyword">print</span> <span class="string">'These items are:'</span>, <span class="comment"># Notice the comma at end of the line</span></span><br><span class="line">	<span class="keyword">for</span> item <span class="keyword">in</span> shoplist:</span><br><span class="line">	    <span class="keyword">print</span> item,</span><br><span class="line">	<span class="keyword">print</span> <span class="string">'\nI also have to buy rice.'</span></span><br><span class="line">	shoplist.append(<span class="string">'rice'</span>)</span><br><span class="line">	<span class="keyword">print</span> <span class="string">'My shopping list is now'</span>, shoplist</span><br><span class="line">	<span class="keyword">print</span> <span class="string">'I will sort my list now'</span></span><br><span class="line">	shoplist.sort()</span><br><span class="line">	<span class="keyword">print</span> <span class="string">'Sorted shopping list is'</span>, shoplist</span><br><span class="line">	<span class="keyword">print</span> <span class="string">'The first item I will buy is'</span>, shoplist[<span class="number">0</span>]</span><br><span class="line">	olditem = shoplist[<span class="number">0</span>]</span><br><span class="line">	<span class="keyword">del</span> shoplist[<span class="number">0</span>]</span><br><span class="line">	<span class="keyword">print</span> <span class="string">'I bought the'</span>, olditem</span><br><span class="line">	<span class="keyword">print</span> <span class="string">'My shopping list is now'</span>, shoplist</span><br></pre></td></tr></table></figure></p>
+<h2 id="元组">元组</h2><p>　　元组和列表十分类似，只不过元组和字符串一样是不可变的，即你不能修改元组。元组通过圆括号中用逗号分割的项目定义。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># Filename: using_tuple.py</span></span><br><span class="line">zoo = (<span class="string">'wolf'</span>, <span class="string">'elephant'</span>, <span class="string">'penguin'</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Number of animals in the zoo is'</span>, len(zoo)</span><br><span class="line">new_zoo = (<span class="string">'monkey'</span>, <span class="string">'dolphin'</span>, zoo)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Number of animals in the new zoo is'</span>, len(new_zoo)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'All animals in new zoo are'</span>, new_zoo</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Animals brought from old zoo are'</span>, new_zoo[<span class="number">2</span>]</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Last animal brought from old zoo is'</span>, new_zoo[<span class="number">2</span>][<span class="number">2</span>]</span><br></pre></td></tr></table></figure></p>
+<p>　　一个空的元组由一对空的圆括号组成，如myempty = ()。然而，含有单个元素的元组就不那么简单了，你必须在第一个(唯一一个)项目后跟一个逗号,这样Python才能区分元组和表达式中一个带圆括号的对象。即如果你想要的是一个包含项目2的元组的时候，你应该指明singleton = (2 , )。<br>　　元组最通常的用法是用在打印语句中，下面是一个例子:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># Filename: print_tuple.py</span></span><br><span class="line">age = <span class="number">22</span></span><br><span class="line">name = <span class="string">'Swaroop'</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">'%s is %d years old'</span> % (name, age)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Why is %s playing with that python?'</span> % name</span><br></pre></td></tr></table></figure></p>
+<p>　　在第二个print语句中,我们使用了一个定制，后面跟着%符号后的单个项目——没有圆括号，这只在字符串中只有一个定制的时候有效。</p>
+<h2 id="字典">字典</h2><p>　　你只能使用不可变的对象(比如字符串)来作为字典的键，但是你可以把不可变或可变的对象作为字典的值。键值对在字典中以这样的方式标记:d = {key1 : value1, key2 : value2 }。注意，它们的键/值对用冒号分割，而各个对用逗号分割，所有这些都包括在花括号中。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># Filename: using_dict.py</span></span><br><span class="line"><span class="comment"># 'ab' is short for 'a'ddress'b'ook</span></span><br><span class="line">ab = &#123;</span><br><span class="line">    <span class="string">'Swaroop'</span> : <span class="string">'swaroopch@byteofpython.info'</span>,</span><br><span class="line">    <span class="string">'Larry'</span> : <span class="string">'larry@wall.org'</span>,</span><br><span class="line">    <span class="string">'Matsumoto'</span> : <span class="string">'matz@ruby-lang.org'</span>,</span><br><span class="line">    <span class="string">'Spammer'</span> : <span class="string">'spammer@hotmail.com'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Swaroop's address is %s"</span> % ab[<span class="string">'Swaroop'</span>]</span><br><span class="line"><span class="comment"># Adding a key/value pair</span></span><br><span class="line">ab[<span class="string">'Guido'</span>] = <span class="string">'guido@python.org'</span></span><br><span class="line"><span class="comment"># Deleting a key/value pair</span></span><br><span class="line"><span class="keyword">del</span> ab[<span class="string">'Spammer'</span>]</span><br><span class="line"><span class="keyword">print</span> <span class="string">'\nThere are %d contacts in the address-book\n'</span> % len(ab)</span><br><span class="line"><span class="keyword">for</span> name, address <span class="keyword">in</span> ab.items():</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'Contact %s at %s'</span> % (name, address)</span><br><span class="line"><span class="keyword">if</span> <span class="string">'Guido'</span> <span class="keyword">in</span> ab: <span class="comment"># OR ab.has_key('Guido')</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">"\nGuido's address is %s"</span> % ab[<span class="string">'Guido'</span>]</span><br></pre></td></tr></table></figure></p>
+<h1 id="序列">序列</h1><p>　　列表、元组和字符串都是序列，但是序列是什么，它们为什么如此特别呢？序列的两个主要特点是索引操作符和切片操作符。索引操作符让我们可以从序列中抓取一个特定项目。切片操作符让我们能够获取序列的一个切片，即一部分序列。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># Filename: seq.py</span></span><br><span class="line">shoplist = [<span class="string">'apple'</span>, <span class="string">'mango'</span>, <span class="string">'carrot'</span>, <span class="string">'banana'</span>]</span><br><span class="line"><span class="comment"># Indexing or 'Subscription' operation</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">'Item 0 is'</span>, shoplist[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Item 1 is'</span>, shoplist[<span class="number">1</span>]</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Item 2 is'</span>, shoplist[<span class="number">2</span>]</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Item 3 is'</span>, shoplist[<span class="number">3</span>]</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Item -1 is'</span>, shoplist[-<span class="number">1</span>]</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Item -2 is'</span>, shoplist[-<span class="number">2</span>]</span><br><span class="line"><span class="comment"># Slicing on a list</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">'Item 1 to 3 is'</span>, shoplist[<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Item 2 to end is'</span>, shoplist[<span class="number">2</span>:]</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Item 1 to -1 is'</span>, shoplist[<span class="number">1</span>:-<span class="number">1</span>]</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Item start to end is'</span>, shoplist[:]</span><br><span class="line"><span class="comment"># Slicing on a string</span></span><br><span class="line">name = <span class="string">'swaroop'</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">'characters 1 to 3 is'</span>, name[<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line"><span class="keyword">print</span> <span class="string">'characters 2 to end is'</span>, name[<span class="number">2</span>:]</span><br><span class="line"><span class="keyword">print</span> <span class="string">'characters 1 to -1 is'</span>, name[<span class="number">1</span>:-<span class="number">1</span>]</span><br><span class="line"><span class="keyword">print</span> <span class="string">'characters start to end is'</span>, name[:]</span><br></pre></td></tr></table></figure></p>
+<p>　　注意，返回的序列从开始位置开始，刚好在结束位置之前结束。即开始位置是包含在序列切片中的，而结束位置被排斥在切片外。</p>
+<h1 id="引用">引用</h1><p>　　当你创建一个对象并给它赋一个变量的时候，这个变量仅仅引用那个对象，而不是表示这个对象本身！也就是说，变量名指向你计算机中存储那个对象的内存，这被称作名称到对象的绑定。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># Filename: reference.py</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">'Simple Assignment'</span></span><br><span class="line">shoplist = [<span class="string">'apple'</span>, <span class="string">'mango'</span>, <span class="string">'carrot'</span>, <span class="string">'banana'</span>]</span><br><span class="line">mylist = shoplist <span class="comment"># mylist is just another name pointing to the same object!</span></span><br><span class="line"><span class="keyword">del</span> shoplist[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">print</span> <span class="string">'shoplist is'</span>, shoplist</span><br><span class="line"><span class="keyword">print</span> <span class="string">'mylist is'</span>, mylist</span><br><span class="line"><span class="comment"># notice that both shoplist and mylist both print the same list without</span></span><br><span class="line"><span class="comment"># the 'apple' confirming that they point to the same object</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">'Copy by making a full slice'</span></span><br><span class="line">mylist = shoplist[:] <span class="comment"># make a copy by doing a full slice</span></span><br><span class="line"><span class="keyword">del</span> mylist[<span class="number">0</span>] <span class="comment"># remove first item</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">'shoplist is'</span>, shoplist</span><br><span class="line"><span class="keyword">print</span> <span class="string">'mylist is'</span>, mylist</span><br><span class="line"><span class="comment"># notice that now the two lists are different</span></span><br></pre></td></tr></table></figure></p>
+<p>　　记住列表的赋值语句不创建拷贝，你得使用切片操作符来建立序列的拷贝。</p>
+<h1 id="字符串">字符串</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># Filename: str_methods.py</span></span><br><span class="line">name = <span class="string">'Swaroop'</span> <span class="comment"># This is a string object</span></span><br><span class="line"><span class="keyword">if</span> name.startswith(<span class="string">'Swa'</span>):</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'Yes, the string starts with "Swa"'</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">'a'</span> <span class="keyword">in</span> name:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'Yes, it contains the string "a"'</span></span><br><span class="line"><span class="keyword">if</span> name.find(<span class="string">'war'</span>) != -<span class="number">1</span>:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'Yes, it contains the string "war"'</span></span><br><span class="line">delimiter = <span class="string">'_*_'</span></span><br><span class="line">mylist = [<span class="string">'Brazil'</span>, <span class="string">'Russia'</span>, <span class="string">'India'</span>, <span class="string">'China'</span>]</span><br><span class="line"><span class="keyword">print</span> delimiter.join(mylist)</span><br></pre></td></tr></table></figure>
+<h1 id="例子：文件备份">例子：文件备份</h1><p>　　我认为优化之一是采用更好的文件名机制——使用时间作为文件名，而把当前的日期作为目录名，存放在主备份目录中。这样做的一个优势是你的备份会以等级结构存储,因此它就更加容易管理了。另外一个优势是文件名的长度也可以变短。还有一个优势是采用各自独立的文件夹可以帮助你方便地检验你是否在每一天创建了备份，因为只有在你创建了备份，才会出现那天的目录。<br>　　我还希望有的一个优化是使用tar命令替代zip命令。这样做的一个优势是在你结合使用tar和gzip命令的时候，备份会更快更小。<br>　　最理想的创建这些归档的方法是分别使用zipfile和tarfile。它们是Python标准库的一部分，可以供你使用。使用这些库就避免了使用os.system这个不推荐使用的函数，它容易引发严重的错误。</p>
+<h1 id="面向过程与面向对象">面向过程与面向对象</h1><p>　　到目前为止，在我们的程序中，我们都是根据操作数据的函数或语句块来设计程序的。这被称为面向过程的编程。还有一种把数据和功能结合起来，用称为对象的东西包裹起来组织程序的方法。这种方法称为面向对象的编程理念。</p>
+<h1 id="self">self</h1><p>　　假如你有一个类称为MyClass和这个类的一个实例MyObject。当你调用这个对象的方法MyObject.method(arg1, arg2)的时候,这会由Python自动转为MyClass.method(MyObject, arg1,arg2)——这就是self的原理了。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># Filename: method.py</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sayHi</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'Hello, how are you?'</span></span><br><span class="line">p = Person()</span><br><span class="line">p.sayHi()</span><br><span class="line"><span class="comment"># This short example can also be written as Person().sayHi()</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="__init__与__del__">__init__与__del__</h1><p>　　__init__方法类似于C++、C#和Java中的 constructor 。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># Filename: class_init.py</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sayHi</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'Hello, my name is'</span>, self.name</span><br><span class="line">p = Person(<span class="string">'Swaroop'</span>)</span><br><span class="line">p.sayHi()</span><br><span class="line"><span class="comment"># This short example can also be written as Person('Swaroop').sayHi()</span></span><br></pre></td></tr></table></figure></p>
+<p>　　就如同__init__方法一样，还有一个特殊的方法__del__，它在对象消逝的时候被调用。对象消逝即对象不再被使用，它所占用的内存将返回给系统作它用。当对象不再被使用时，__del__方法运行，但是很难保证这个方法究竟在 什么时候运行。</p>
+<h1 id="类与对象的变量">类与对象的变量</h1><p>　　有两种类型的域——类的变量和对象的变量，它们根据是类还是对象拥有这个变量而区分。<br>　　类的变量由一个类的所有对象(实例)共享使用。只有一个类变量的拷贝，所以当某个对象对类的变量做了改动的时候，这个改动会反映到所有其他的实例上。<br>　　对象的变量由类的每个对象/实例拥有。因此每个对象有自己对这个域的一份拷贝，即它们不是共享的，在同一个类的不同实例中，虽然对象的变量有相同的名称，但是是互不相关的。通过一个例子会使这个易于理解。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># Filename: objvar.py</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">    <span class="string">'''Represents a person.'''</span></span><br><span class="line">    population = <span class="number">0</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        <span class="string">'''Initializes the person's data.'''</span></span><br><span class="line">        self.name = name</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'(Initializing %s)'</span> % self.name</span><br><span class="line">        <span class="comment"># When this person is created, he/she</span></span><br><span class="line">        <span class="comment"># adds to the population</span></span><br><span class="line">        Person.population += <span class="number">1</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__del__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''I am dying.'''</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'%s says bye.'</span> % self.name</span><br><span class="line">        Person.population -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> Person.population == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">print</span> <span class="string">'I am the last one.'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">print</span> <span class="string">'There are still %d people left.'</span> % Person.population</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sayHi</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''Greeting by the person.</span><br><span class="line">            Really, that's all it does.'''</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'Hi, my name is %s.'</span> % self.name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">howMany</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''Prints the current population.'''</span></span><br><span class="line">        <span class="keyword">if</span> Person.population == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">print</span> <span class="string">'I am the only person here.'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">print</span> <span class="string">'We have %d persons here.'</span> % Person.population</span><br><span class="line">swaroop = Person(<span class="string">'Swaroop'</span>)</span><br><span class="line">swaroop.sayHi()</span><br><span class="line">swaroop.howMany()</span><br><span class="line">kalam = Person(<span class="string">'Abdul Kalam'</span>)</span><br><span class="line">kalam.sayHi()</span><br><span class="line">kalam.howMany()</span><br><span class="line">swaroop.sayHi()</span><br><span class="line">swaroop.howMany()</span><br></pre></td></tr></table></figure></p>
+<p>　　在这个程序中，我们还看到docstring对于类和方法同样有用。我们可以在运行时使用Person.__doc__和Person.sayHi.__doc__来分别访问类与方法的文档字符串。<br>　　Python中所有的类成员(包括数据成员)都是公共的，所有的方法都是有效的。只有一个例外：如果你使用的数据成员名称以双下划线前缀比如__privatevar，Python的名称管理体系会有效地把它作为私有变量。</p>
+<h1 id="继承">继承</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># Filename: inherit.py</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SchoolMember</span>:</span></span><br><span class="line">    <span class="string">'''Represents any school member.'''</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, age)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.age = age</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'(Initialized SchoolMember: %s)'</span> % self.name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tell</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''Tell my details.'''</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'Name:"%s" Age:"%s"'</span> % (self.name, self.age),</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Teacher</span><span class="params">(SchoolMember)</span>:</span></span><br><span class="line">    <span class="string">'''Represents a teacher.'''</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, age, salary)</span>:</span></span><br><span class="line">        SchoolMember.__init__(self, name, age)</span><br><span class="line">        self.salary = salary</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'(Initialized Teacher: %s)'</span> % self.name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tell</span><span class="params">(self)</span>:</span></span><br><span class="line">        SchoolMember.tell(self)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'Salary: "%d"'</span> % self.salary</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(SchoolMember)</span>:</span></span><br><span class="line">    <span class="string">'''Represents a student.'''</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, age, marks)</span>:</span></span><br><span class="line">        SchoolMember.__init__(self, name, age)</span><br><span class="line">        self.marks = marks</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'(Initialized Student: %s)'</span> % self.name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tell</span><span class="params">(self)</span>:</span></span><br><span class="line">        SchoolMember.tell(self)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'Marks: "%d"'</span> % self.marks</span><br><span class="line">t = Teacher(<span class="string">'Mrs. Shrividya'</span>, <span class="number">40</span>, <span class="number">30000</span>)</span><br><span class="line">s = Student(<span class="string">'Swaroop'</span>, <span class="number">22</span>, <span class="number">75</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="comment"># prints a blank line</span></span><br><span class="line">members = [t, s]</span><br><span class="line"><span class="keyword">for</span> member <span class="keyword">in</span> members:</span><br><span class="line">    member.tell() <span class="comment"># works for both Teachers and Students</span></span><br></pre></td></tr></table></figure>
+<p>　　为了使用继承，我们把基本类的名称作为一个元组跟在定义类时的类名称之后。如果在继承元组中列了一个以上的类，那么它就被称作多重继承 。</p>
+<h1 id="文件">文件</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># Filename: using_file.py</span></span><br><span class="line">poem = <span class="string">'''\</span><br><span class="line">Programming is fun</span><br><span class="line">When the work is done</span><br><span class="line">if you wanna make your work also fun:</span><br><span class="line">use Python!</span><br><span class="line">'''</span></span><br><span class="line">f = file(<span class="string">'poem.txt'</span>, <span class="string">'w'</span>) <span class="comment"># open for 'w'riting</span></span><br><span class="line">f.write(poem) <span class="comment"># write text to file</span></span><br><span class="line">f.close() <span class="comment"># close the file</span></span><br><span class="line">f = file(<span class="string">'poem.txt'</span>)</span><br><span class="line"><span class="comment"># if no mode is specified, 'r'ead mode is assumed by default</span></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    line = f.readline()</span><br><span class="line">    <span class="keyword">if</span> len(line) == <span class="number">0</span>: <span class="comment"># Zero length indicates EOF</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">print</span> line,</span><br><span class="line"><span class="comment"># Notice comma to avoid automatic newline added by Python</span></span><br><span class="line">f.close() <span class="comment"># close the file</span></span><br></pre></td></tr></table></figure>
+<p>　　在一个循环中，我们使用readline方法读文件的每一行。这个方法返回包括行末换行符的一个完整行。所以，当一个空的字符串被返回的时候，即表示文件末已经到达了，于是我们停止循环。<br>　　<strong>注意：</strong>因为从文件读到的内容已经以换行符结尾，所以我们在print语句上使用逗号来消除自动换行。最后，我们用close关闭这个文件。</p>
+<h1 id="持久地储存对象">持久地储存对象</h1><p>　　Python提供一个标准的模块，称为pickle。使用它你可以在一个文件中储存任何Python对象，之后你又可以把它完整无缺地取出来。这被称为持久地储存对象。<br>　　还有另一个模块称为cPickle，它的功能和pickle模块完全相同，只不过它是用C语言编写的，因此要快得多(比pickle快1000倍)。你可以使用它们中的任一个，而我们在这里将使用cPickle模块。记住，我们把这两个模块都简称为pickle模块。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># Filename: pickling.py</span></span><br><span class="line"><span class="keyword">import</span> cPickle <span class="keyword">as</span> p</span><br><span class="line"><span class="comment">#import pickle as p</span></span><br><span class="line">shoplistfile = <span class="string">'shoplist.data'</span></span><br><span class="line"><span class="comment"># the name of the file where we will store the object</span></span><br><span class="line">shoplist = [<span class="string">'apple'</span>, <span class="string">'mango'</span>, <span class="string">'carrot'</span>]</span><br><span class="line"><span class="comment"># Write to the file</span></span><br><span class="line">f = file(shoplistfile, <span class="string">'w'</span>)</span><br><span class="line">p.dump(shoplist, f) <span class="comment"># dump the object to a file</span></span><br><span class="line">f.close()</span><br><span class="line"><span class="keyword">del</span> shoplist <span class="comment"># remove the shoplist</span></span><br><span class="line"><span class="comment"># Read back from the storage</span></span><br><span class="line">f = file(shoplistfile)</span><br><span class="line">storedlist = p.load(f)</span><br><span class="line"><span class="keyword">print</span> storedlist</span><br></pre></td></tr></table></figure></p>
+<p>　　为了在文件里储存一个对象，首先以写模式打开一个file对象，然后调用储存器模块的dump函数，把对象储存到打开的文件中，这个过程称为储存。接下来，我们使用pickle模块的load函数的返回来取回对象，这个过程称为 取储存 。</p>
+<h1 id="异常">异常</h1><h2 id="处理异常">处理异常</h2><p>　　我们可以使用try..except语句来处理异常。我们把通常的语句放在try-块中，而把我们的错误处理语句放在except-块中。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># Filename: try_except.py</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    s = raw_input(<span class="string">'Enter something --&gt; '</span>)</span><br><span class="line"><span class="keyword">except</span> EOFError:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'\nWhy did you do an EOF on me?'</span></span><br><span class="line">    sys.exit() <span class="comment"># exit the program</span></span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'\nSome error/exception occurred.'</span></span><br><span class="line">    <span class="comment"># here, we are not exiting the program</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">'Done'</span></span><br></pre></td></tr></table></figure></p>
+<p>　　你还可以让try..catch块关联上一个else从句，当没有异常发生的时候，else从句将被执行。</p>
+<h2 id="引发异常">引发异常</h2><p>　　你可以使用raise语句引发异常，你还得指明错误/异常的名称和伴随异常触发的异常对象。你可以引发的错误或异常应该分别是一个Error或Exception类的直接或间接导出类。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># Filename: raising.py</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ShortInputException</span><span class="params">(Exception)</span>:</span></span><br><span class="line">    <span class="string">'''A user-defined exception class.'''</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, length, atleast)</span>:</span></span><br><span class="line">        Exception.__init__(self)</span><br><span class="line">        self.length = length</span><br><span class="line">        self.atleast = atleast</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    s = raw_input(<span class="string">'Enter something --&gt; '</span>)</span><br><span class="line">    <span class="keyword">if</span> len(s) &lt; <span class="number">3</span>:</span><br><span class="line">        <span class="keyword">raise</span> ShortInputException(len(s), <span class="number">3</span>)</span><br><span class="line">    <span class="comment"># Other work can continue as usual here</span></span><br><span class="line"><span class="keyword">except</span> EOFError:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'\nWhy did you do an EOF on me?'</span></span><br><span class="line"><span class="keyword">except</span> ShortInputException, x:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'ShortInputException: The input was of length %d, \</span><br><span class="line">was expecting at least %d'</span> % (x.length, x.atleast)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'No exception was raised.'</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="try-finally">try..finally</h2><p>　　假如你在读一个文件的时候，希望在无论异常发生与否的情况下都关闭文件，该怎么做呢？这可以使用finally块来完成。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># Filename: finally.py</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    f = file(<span class="string">'poem.txt'</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>: <span class="comment"># our usual file-reading idiom</span></span><br><span class="line">        line = f.readline()</span><br><span class="line">        <span class="keyword">if</span> len(line) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        time.sleep(<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">print</span> line,</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">f.close()</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Cleaning up...closed the file'</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="Python标准库">Python标准库</h1><h2 id="sys模块-1">sys模块</h2><p>　　命令行参数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># Filename: cat.py</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readfile</span><span class="params">(filename)</span>:</span></span><br><span class="line">    <span class="string">'''Print a file to the standard output.'''</span></span><br><span class="line">    f = file(filename)</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        line = f.readline()</span><br><span class="line">        <span class="keyword">if</span> len(line) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">print</span> line, <span class="comment"># notice comma</span></span><br><span class="line">    f.close()</span><br><span class="line"><span class="comment"># Script starts from here</span></span><br><span class="line"><span class="keyword">if</span> len(sys.argv) &lt; <span class="number">2</span>:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'No action specified.'</span></span><br><span class="line">    sys.exit()</span><br><span class="line"><span class="keyword">if</span> sys.argv[<span class="number">1</span>].startswith(<span class="string">'--'</span>):</span><br><span class="line">    option = sys.argv[<span class="number">1</span>][<span class="number">2</span>:]</span><br><span class="line">    <span class="comment"># fetch sys.argv[1] but without the first two characters</span></span><br><span class="line">    <span class="keyword">if</span> option == <span class="string">'version'</span>:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'Version 1.2'</span></span><br><span class="line">    <span class="keyword">elif</span> option == <span class="string">'help'</span>:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'''\</span><br><span class="line">This program prints files to the standard output.</span><br><span class="line">Any number of files can be specified.</span><br><span class="line">Options include:</span><br><span class="line">--version : Prints the version number</span><br><span class="line">--help : Display this help'''</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'Unknown option.'</span></span><br><span class="line">        sys.exit()</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">for</span> filename <span class="keyword">in</span> sys.argv[<span class="number">1</span>:]:</span><br><span class="line">        readfile(filename)</span><br></pre></td></tr></table></figure></p>
+<h2 id="os模块">os模块</h2><p>　　使用os.sep可以取代操作系统特定的路径分割符。<br>　　os.name字符串指示你正在使用的平台。比如对于Windows,它是’nt’，而对于Linux/Unix用户，它是’posix’。<br>　　os.getcwd()函数得到当前工作目录，即当前Python脚本工作的目录路径。<br>　　os.getenv()和os.putenv()函数分别用来读取和设置环境变量。<br>　　os.listdir()返回指定目录下的所有文件和目录名。<br>　　os.remove()函数用来删除一个文件。<br>　　os.system()函数用来运行shell命令。<br>　　os.linesep字符串给出当前平台使用的行终止符。例如，Windows使用’\r\n’，Linux使用’\n’而Mac使用’\r’。<br>　　os.path.split()函数返回一个路径的目录名和文件名。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span>os.path.split(<span class="string">'/home/swaroop/byte/code/poem.txt'</span>)</span><br><span class="line">(<span class="string">'/home/swaroop/byte/code'</span>, <span class="string">'poem.txt'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>　　os.path.isfile()和os.path.isdir()函数分别检验给出的路径是一个文件还是目录。类似地，os.<br>　　path.exists()函数用来检验给出的路径是否真地存在。</p>
+<h1 id="更多Python知识">更多Python知识</h1><h2 id="列表综合">列表综合</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">	<span class="comment">#!/usr/bin/python</span></span><br><span class="line">	<span class="comment"># Filename: list_comprehension.py</span></span><br><span class="line">	listone = [<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">	listtwo = [<span class="number">2</span>*i <span class="keyword">for</span> i <span class="keyword">in</span> listone <span class="keyword">if</span> i &gt; <span class="number">2</span>]</span><br><span class="line">	<span class="keyword">print</span> listtwo</span><br><span class="line">```   </span><br><span class="line">　　当要使函数接收元组或字典形式的参数的时候，有一种特殊的方法，它分别使用\*和\*\*前缀。这种方法在函数需要获取可变数量的参数的时候特别有用。</span><br><span class="line">```python	</span><br><span class="line">	&gt;&gt;&gt; <span class="function"><span class="keyword">def</span> <span class="title">powersum</span><span class="params">(power, *args)</span>:</span></span><br><span class="line">	... <span class="string">'''Return the sum of each argument raised to specified power.'''</span></span><br><span class="line">	... total = <span class="number">0</span></span><br><span class="line">	... <span class="keyword">for</span> i <span class="keyword">in</span> args:</span><br><span class="line">	...</span><br><span class="line">	total += pow(i, power)</span><br><span class="line">	... <span class="keyword">return</span> total</span><br><span class="line">	...</span><br><span class="line">	&gt;&gt;&gt; powersum(<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">	<span class="number">25</span></span><br><span class="line">	&gt;&gt;&gt; powersum(<span class="number">2</span>, <span class="number">10</span>)</span><br><span class="line">	<span class="number">100</span></span><br><span class="line">```	</span><br><span class="line">　　由于在args变量前有\*前缀，所有多余的函数参数都会作为一个元组存储在args中。如果使用的是\*\*前缀，多余的参数则会被认为是一个字典的键/值对。</span><br><span class="line"></span><br><span class="line"><span class="comment">##lamda表达式</span></span><br><span class="line">　　<span class="keyword">lambda</span>语句被用来创建新的函数对象，并且在运行时返回它们。</span><br><span class="line">```python</span><br><span class="line">	<span class="comment">#!/usr/bin/python</span></span><br><span class="line">	<span class="comment"># Filename: lambda.py</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">make_repeater</span><span class="params">(n)</span>:</span></span><br><span class="line">	    <span class="keyword">return</span> <span class="keyword">lambda</span> s: s*n</span><br><span class="line">	twice = make_repeater(<span class="number">2</span>)</span><br><span class="line">	<span class="keyword">print</span> twice(<span class="string">'word'</span>)</span><br><span class="line">	<span class="keyword">print</span> twice(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p>　　这里，我们使用了make_repeater函数在运行时创建新的函数对象，并且返回它。lambda语句用来创建函数对象。本质上，lambda需要一个参数，后面仅跟单个表达式作为函数体，而表达式的值被这个新建的函数返回。注意，即便是print语句也不能用在lambda形式中，只能使用表达式。</p>
+<h2 id="exec和eval语句">exec和eval语句</h2><p>　　exec语句用来执行储存在字符串或文件中的Python语句。例如，我们可以在运行时生成一个包含Python代码的字符串，然后使用exec语句执行这些语句。eval语句用来计算存储在字符串中的有效Python表达式。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">exec</span> <span class="string">'print "Hello World"'</span></span><br><span class="line">Hello World</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>eval(<span class="string">'2*3'</span>)</span><br><span class="line"><span class="number">6</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="assert语句">assert语句</h2><p>　　assert语句用来声明某个条件是真的。例如，如果你非常确信某个你使用的列表中至少有一个元素，而你想要检验这一点，并且在它非真的时候引发一个错误，那么assert语句是应用在这种情形下的理想语句。当assert语句失败的时候，会引发一个AssertionError。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; mylist = ['item']</span><br><span class="line">&gt;&gt;&gt; assert len(mylist) &gt;= 1</span><br><span class="line">&gt;&gt;&gt; mylist.pop()</span><br><span class="line">'item'</span><br><span class="line">&gt;&gt;&gt; assert len(mylist) &gt;= 1</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">File "&lt;stdin&gt;", line 1, in ?</span><br><span class="line">AssertionError</span><br></pre></td></tr></table></figure></p>
+<h2 id="repr函数">repr函数</h2><p>　　repr函数用来取得对象的规范字符串表示。反引号(也称转换符，键盘左上角esc下面的那个键)可以完成相同的功能。注意，在大多数时候有eval(repr(object)) == object。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span>i = []</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>i.append(<span class="string">'item'</span>)</span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>`i`</span><br><span class="line"><span class="string">"['item']"</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>repr(i)</span><br><span class="line"><span class="string">"['item']"</span></span><br></pre></td></tr></table></figure></p>
+<p>[参考资料]</p>
+<ol>
+<li><a href="http://woodpecker.org.cn/abyteofpython_cn/chinese/" target="_blank" rel="external">简明Python教程</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[前段时间看到v2和segment上有人谈论Django，就去查了一下，原来是基于Python的开源框架，再加上我早就想学习Python了，最近比较闲，正好就开始了Python的学习，最近看了一个比较入门级别的教程，名为：简明Python教程，学习之余就把一些知识点记录了下来以便复习只用。还有，我发现云课堂上的有一个Python视频课就是按照这本教程来讲解的。]]>
+    
+    </summary>
+    
+      <category term="Python" scheme="https://ningban.github.io/tags/Python/"/>
+    
+      <category term="Python" scheme="https://ningban.github.io/categories/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[[11]贝叶斯统计正则化]]></title>
+    <link href="https://ningban.github.io/2015/01/21/-11-%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BB%9F%E8%AE%A1%E6%AD%A3%E5%88%99%E5%8C%96/"/>
+    <id>https://ningban.github.io/2015/01/21/-11-贝叶斯统计正则化/</id>
+    <published>2015-01-21T07:51:52.000Z</published>
+    <updated>2015-03-08T13:23:32.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-11-1.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-11-2.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-11-3.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-11-4.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-11-5.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-11-6.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-11-7.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-11-8.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-11-9.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-11-10.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-11-11.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-11-12.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-11-13.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-11-14.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-11-15.jpg" alt="图2-18"></p>
+<p>[参考资料]</p>
+<ol>
+<li><a href="http://v.163.com/movie/2008/1/L/M/M6SGF6VB4_M6SGKG5LM.html" target="_blank" rel="external">斯坦福大学公开课 ：机器学习课程</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[本节首先介绍了贝叶斯统计和规范化；之后简单介绍了在线学习的概念；之后介绍了机器学习算法设计中的问题诊断技巧；之后介绍了两种分析技巧：误差分析与销蚀分析；最后介绍了两种应用机器学习算法的方式与使用。]]>
+    
+    </summary>
+    
+      <category term="机器学习" scheme="https://ningban.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Machine Learning" scheme="https://ningban.github.io/categories/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[[10]特征选择]]></title>
+    <link href="https://ningban.github.io/2015/01/18/-10-%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9/"/>
+    <id>https://ningban.github.io/2015/01/18/-10-特征选择/</id>
+    <published>2015-01-18T08:12:56.000Z</published>
+    <updated>2015-03-08T13:23:19.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-10-1.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-10-2.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-10-3.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-10-4.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-10-5.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-10-6.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-10-7.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-10-8.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-10-9.jpg" alt="图2-18"></p>
+<p>[参考资料]</p>
+<ol>
+<li><a href="http://v.163.com/movie/2008/1/U/O/M6SGF6VB4_M6SGJURUO.html" target="_blank" rel="external">斯坦福大学公开课 ：机器学习课程</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[本节首先介绍了VC维的概念——该概念能够将关于ERM一般误差的界的结论推广到无限假设类的情形；之后介绍了模型选择问题——具体介绍了交叉验证方法以及几种变形；最后介绍了特征选择问题——具体介绍了两类方法：封装特征选择和过滤特征选择。]]>
+    
+    </summary>
+    
+      <category term="机器学习" scheme="https://ningban.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Machine Learning" scheme="https://ningban.github.io/categories/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[[9]经验风险最小化ERM]]></title>
+    <link href="https://ningban.github.io/2015/01/17/-9-%E7%BB%8F%E9%AA%8C%E9%A3%8E%E9%99%A9%E6%9C%80%E5%B0%8F%E5%8C%96ERM/"/>
+    <id>https://ningban.github.io/2015/01/17/-9-经验风险最小化ERM/</id>
+    <published>2015-01-17T07:18:16.000Z</published>
+    <updated>2015-03-08T13:22:43.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-9-1.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-9-2.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-9-3.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-9-4.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-9-5.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-9-6.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-9-7.jpg" alt="图2-18"></p>
+<p>[参考资料]</p>
+<ol>
+<li><a href="http://v.163.com/movie/2008/1/F/H/M6SGF6VB4_M6SGJV3FH.html" target="_blank" rel="external">斯坦福大学公开课 ：机器学习课程</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[本节主要介绍了模型选择中的一种常见现象——偏差方差权衡。为了解释该概念，首先介绍了两个重要的引理——联合届引理和Hoeffding不等式，之后定义了两个重要的概念——训练误差和一般误差，并提出了一种简化的机器学习算法模型——经验风险最小化ERM。最后基于这些该你那对ERM结果的理论上界进行了证明，并基于上界分析对偏差方差权衡进行了解释。]]>
+    
+    </summary>
+    
+      <category term="机器学习" scheme="https://ningban.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Machine Learning" scheme="https://ningban.github.io/categories/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[[8]顺序最小优化算法]]></title>
+    <link href="https://ningban.github.io/2015/01/16/-8-%E9%A1%BA%E5%BA%8F%E6%9C%80%E5%B0%8F%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/"/>
+    <id>https://ningban.github.io/2015/01/16/-8-顺序最小优化算法/</id>
+    <published>2015-01-16T05:52:14.000Z</published>
+    <updated>2015-03-08T13:22:29.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-8-1.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-8-2.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-8-3.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-8-4.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-8-5.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-8-6.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-8-7.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-8-8.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-8-9.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-8-10.jpg" alt="图2-18"></p>
+<p>[参考资料]</p>
+<ol>
+<li><a href="http://v.163.com/movie/2008/1/9/3/M6SGF6VB4_M6SGJVA93.html" target="_blank" rel="external">斯坦福大学公开课 ：机器学习课程</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[本节首先介绍了核的概念——它在SVM以及许多学习算法中都有重要的应用，之后介绍了L1 norm软间隔SVM——它使用SVM的变化形式，可以处理非线性可分隔的数据，最后介绍了SMO算法——一种高效的可以解决SVM优化问题的算法。]]>
+    
+    </summary>
+    
+      <category term="机器学习" scheme="https://ningban.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Machine Learning" scheme="https://ningban.github.io/categories/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[闲中作画]]></title>
+    <link href="https://ningban.github.io/2015/01/16/%E9%97%B2%E4%B8%AD%E6%B6%82%E9%B8%A6/"/>
+    <id>https://ningban.github.io/2015/01/16/闲中涂鸦/</id>
+    <published>2015-01-16T05:44:05.000Z</published>
+    <updated>2015-03-08T12:58:29.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7vihec.com1.z0.glb.clouddn.com/yiqiko.png" alt="黑崎一护"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[一护参上]]>
+    
+    </summary>
+    
+      <category term="Life" scheme="https://ningban.github.io/tags/Life/"/>
+    
+      <category term="Life" scheme="https://ningban.github.io/categories/Life/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[[7]最优间隔分类器]]></title>
+    <link href="https://ningban.github.io/2015/01/15/-7-%E6%9C%80%E4%BC%98%E9%97%B4%E9%9A%94%E5%88%86%E7%B1%BB%E5%99%A8/"/>
+    <id>https://ningban.github.io/2015/01/15/-7-最优间隔分类器/</id>
+    <published>2015-01-15T10:00:03.000Z</published>
+    <updated>2015-03-08T13:22:10.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-7-1.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-7-2.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-7-3.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-7-4.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-7-5.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-7-6.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-7-7.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-7-8.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-7-9.jpg" alt="图2-18"></p>
+<p>[参考资料]</p>
+<ol>
+<li><a href="http://v.163.com/movie/2008/1/C/6/M6SGF6VB4_M6SGJVMC6.html" target="_blank" rel="external">斯坦福大学公开课 ：机器学习课程</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[本节首先提出了原始的最优化问题：最优间隔分类器问题，之后介绍了对偶问题的概念和KKT条件，之后基于原始优化问题的对偶问题的分析，介绍了SVM算法。课程的最后对SVM算法进行了评价，以引出下节课对核方法的介绍。]]>
+    
+    </summary>
+    
+      <category term="机器学习" scheme="https://ningban.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Machine Learning" scheme="https://ningban.github.io/categories/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[打发悲伤的涂鸦]]></title>
+    <link href="https://ningban.github.io/2015/01/15/%E6%89%93%E5%8F%91%E6%82%B2%E4%BC%A4%E7%9A%84%E6%B6%82%E9%B8%A6/"/>
+    <id>https://ningban.github.io/2015/01/15/打发悲伤的涂鸦/</id>
+    <published>2015-01-15T09:31:31.000Z</published>
+    <updated>2015-03-08T13:01:06.000Z</updated>
+    <content type="html"><![CDATA[<p>　　人生不如意十有八九，最近我不小心误入八九之中，现在终于出来了。虽然我们都挺讨厌八九的，但是我挺感谢它的，因为它让我领悟到了“命中注定”（失败者的托词），领悟到了“行百里者半九十”，领悟到了“好了伤疤忘了疼”，领悟到了“书读太少，想太多”，领悟到了“受尽苦难而不厌，此乃修罗之道”。来，看下阴转悲伤的天气：<br><img src="http://7vihec.com1.z0.glb.clouddn.com/sad.png" alt="阴转sadness的心情"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[命运（日语叫unmei）、行百里者半九十]]>
+    
+    </summary>
+    
+      <category term="Life" scheme="https://ningban.github.io/tags/Life/"/>
+    
+      <category term="Life" scheme="https://ningban.github.io/categories/Life/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[[6]朴素贝叶斯算法]]></title>
+    <link href="https://ningban.github.io/2015/01/12/-6-%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/"/>
+    <id>https://ningban.github.io/2015/01/12/-6-朴素贝叶斯算法/</id>
+    <published>2015-01-12T12:17:50.000Z</published>
+    <updated>2015-03-08T13:21:48.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-6-1.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-6-2.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-6-3.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-6-4.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-6-5.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-6-6.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-6-7.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-6-8.jpg" alt="图2-18"></p>
+<p>[参考资料]</p>
+<ol>
+<li><a href="http://v.163.com/movie/2008/1/7/H/M6SGF6VB4_M6SGJVV7H.html" target="_blank" rel="external">斯坦福大学公开课 ：机器学习课程</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[本节首先介绍了两种朴素贝叶斯算法的时间模型，之后介绍了神经网络算法，并在最后介绍了两个重要的概念：函数间隔和几何间隔，基于这两个概念提出了一个线性分类算法：最大间隔分类器算法。该算法用于引出一个非常重要的非线性分类算法：支持向量机SVM。]]>
+    
+    </summary>
+    
+      <category term="机器学习" scheme="https://ningban.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Machine Learning" scheme="https://ningban.github.io/categories/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[[5]生成学习算法]]></title>
+    <link href="https://ningban.github.io/2015/01/11/-5-%E7%94%9F%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/"/>
+    <id>https://ningban.github.io/2015/01/11/-5-生成学习算法/</id>
+    <published>2015-01-11T10:43:31.000Z</published>
+    <updated>2015-03-08T13:21:25.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-5-1.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-5-2.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-5-3.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-5-4.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-5-5.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-5-6.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-5-7.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-5-8.jpg" alt="图2-18"></p>
+<p>[参考资料]</p>
+<ol>
+<li><a href="http://v.163.com/movie/2008/1/A/R/M6SGF6VB4_M6SGHMFAR.html" target="_blank" rel="external">斯坦福大学公开课 ：机器学习课程</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[本课首先介绍了一类新的学习算法——生成学习算法，并详细介绍了该算法的一个例子：高斯判别分析；之后对生成学习算法与之前的判别学习算法进行对比；最后介绍了一个合适对文本进行分类的算法——朴素贝叶斯算法，并结合该算法介绍了一种常用的平滑技术——Lapace平滑。]]>
+    
+    </summary>
+    
+      <category term="机器学习" scheme="https://ningban.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Machine Learning" scheme="https://ningban.github.io/categories/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[洋为中用]]></title>
+    <link href="https://ningban.github.io/2015/01/10/%E6%B4%8B%E4%B8%BA%E4%B8%AD%E7%94%A8/"/>
+    <id>https://ningban.github.io/2015/01/10/洋为中用/</id>
+    <published>2015-01-10T03:49:16.000Z</published>
+    <updated>2015-03-08T12:53:07.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7vihec.com1.z0.glb.clouddn.com/thinking.jpeg" alt="浩瀚的宇宙"><br>　　昨天老师关于论文开了一个会，会上的一句话令我颇为震撼。“不管是做学术还是其他，老外基本上总是走在最前方，国内都是copy其思想或者模式，继而找到适合中国特色的道路。如百度与Google，阿里巴巴与亚马逊等。同样，在学术方面基本也是如此，所以要习惯看英文文章，这样才可以接触最前沿的东西。”其实却是是这样，现在国内的互联网公司的模式大多是都是从国外借鉴过来的，比如最近的打车应用就是师从Uber，在线教育就是师从Coursera。我对老师的话语产生共鸣的原因有二：一是我虽然也有同样的想法，但是我从来没有像他这样总结成章，所以平常的我缺乏思考（ps：学而不思则罔，思而不学则殆）；二，即使我也像老师那样总结成章，但我也不会把这套理论应用于学术方面，所以平常的我思维不够发散与活跃，不懂得举一反三。<br>　　在会上，当我提到Stanford的机器学习视频的时候，老师也赞同现在的在线教育之火热，并且建议我们到<a href="http://www.mooc.cn/" target="_blank" rel="external">MOOC</a>上去学习。MOOC这个课程网站之前我再<a href="https://www.v2ex.com/?r=Jning" target="_blank" rel="external">v2ex</a>上看到过，知道它是一个公开课平台，这次之后特地查了一下，确实不错，有很多国内外名校的课程都放在了上面，我们可以自行去学习，以后我也会经常去逛一逛。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://7vihec.com1.z0.glb.clouddn.com/thinking.jpeg" alt="浩瀚的宇宙"><br>　　昨天老师关于论文开了一个会，会上的一句话令我颇为震撼。“不管是做学术还是其他，老外基本上总是走在最前方，国内都是]]>
+    </summary>
+    
+      <category term="分享与发现" scheme="https://ningban.github.io/tags/%E5%88%86%E4%BA%AB%E4%B8%8E%E5%8F%91%E7%8E%B0/"/>
+    
+      <category term="分享与发现" scheme="https://ningban.github.io/categories/%E5%88%86%E4%BA%AB%E4%B8%8E%E5%8F%91%E7%8E%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[[4]牛顿方法]]></title>
+    <link href="https://ningban.github.io/2015/01/09/-4-%E7%89%9B%E9%A1%BF%E6%96%B9%E6%B3%95/"/>
+    <id>https://ningban.github.io/2015/01/09/-4-牛顿方法/</id>
+    <published>2015-01-09T05:23:56.000Z</published>
+    <updated>2015-03-08T13:20:58.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-4-1.png" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-4-2.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-4-3.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-4-4.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-4-5.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-4-6.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-4-7.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-4-8.jpg" alt="图2-18"></p>
+<p>[参考资料]</p>
+<ol>
+<li><a href="http://v.163.com/movie/2008/1/E/D/M6SGF6VB4_M6SGHKAED.html" target="_blank" rel="external">斯坦福大学公开课 ：机器学习课程</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[本节首先介绍了牛顿方法，可以替代梯度上升算法用来计算函数的最大值；之后以高斯分布和伯努利分布为例介绍了指数分布函数族；最后一指数分布函数族作为基础，引出了广义线性模型，可以通过指定概率分布直接推导出模型。]]>
+    
+    </summary>
+    
+      <category term="机器学习" scheme="https://ningban.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Machine Learning" scheme="https://ningban.github.io/categories/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[[3]欠拟合与过拟合]]></title>
+    <link href="https://ningban.github.io/2015/01/08/-3-%E6%AC%A0%E6%8B%9F%E5%90%88%E4%B8%8E%E8%BF%87%E6%8B%9F%E5%90%88/"/>
+    <id>https://ningban.github.io/2015/01/08/-3-欠拟合与过拟合/</id>
+    <published>2015-01-08T12:12:45.000Z</published>
+    <updated>2015-03-08T13:20:28.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-3-1.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-3-2.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-3-3.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-3-4.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-3-5.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-3-6.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-3-7.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-3-8.jpg" alt="图2-18"></p>
+<p>[参考资料]</p>
+<ol>
+<li><a href="http://v.163.com/movie/2008/1/E/B/M6SGF6VB4_M6SGHM4EB.html" target="_blank" rel="external">斯坦福大学公开课 ：机器学习课程</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[欠拟合与过拟合的概念，参数化即非参数化算法概念，局部加权回归，对于线性模型的概率解释，Logistic回归，感知器...]]>
+    
+    </summary>
+    
+      <category term="机器学习" scheme="https://ningban.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Machine Learning" scheme="https://ningban.github.io/categories/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[[2]监督学习应用.梯度下降]]></title>
+    <link href="https://ningban.github.io/2015/01/08/-2-%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/"/>
+    <id>https://ningban.github.io/2015/01/08/-2-监督学习应用-梯度下降/</id>
+    <published>2015-01-08T05:23:54.000Z</published>
+    <updated>2015-03-08T13:17:22.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-2-1.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-2-2.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-2-3.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-2-4.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-2-5.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-2-6.jpg" alt="图2-18"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/ml-2-7.jpg" alt="图2-18"></p>
+<p>[参考资料]</p>
+<ol>
+<li><a href="http://v.163.com/movie/2008/1/B/O/M6SGF6VB4_M6SGHJ9BO.html" target="_blank" rel="external">斯坦福大学公开课 ：机器学习课程</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[监督学习应用——自助推导，ALVNN系统，线性回归，梯度下降，批梯度下降，随机梯度下降...]]>
+    
+    </summary>
+    
+      <category term="机器学习" scheme="https://ningban.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Machine Learning" scheme="https://ningban.github.io/categories/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[随笔于20150108]]></title>
+    <link href="https://ningban.github.io/2015/01/08/%E9%9A%8F%E7%AC%94%E4%BA%8E20150108/"/>
+    <id>https://ningban.github.io/2015/01/08/随笔于20150108/</id>
+    <published>2015-01-08T04:28:58.000Z</published>
+    <updated>2015-01-10T04:16:33.000Z</updated>
+    <content type="html"><![CDATA[<p>　　好久没有写博客了，有几方面的原因：首先，就是自己没有坚持写博客，也就是自己毅力不给力啊；然后，就是最近有点别的事情在忙，当然既有正事也有玩的事情。<br>　　一晃一年就这样过去了，好快（ps：日语叫做哈压抑）啊！看到很多人都在写自己的2014年终总结，还有2015年计划，自己也有点小激动，虽然一年也没有什么作为，但是还是写了，只不过是没有公开。昨天练完车回来之后，突然意识到我好久没有写什么东西了，但是又没有什么可以写的，就开始看Stanford的机器学习教学视频，这个视频讲的非常好，虽然我也没听太懂，也是云里雾里的，但是还在坚持看。视频里的老师就是上一年加入百度的牛人Andrew NG，现在加入百度，负责“百度大脑”，以前在google，同时他也是在线教育Coursera的创始人哦。他不仅学术做的好，课讲的也相当不错哦，所以视频相当值得一看！在看视频的过程中，当然我也做了一些笔记（ps:所谓的笔记，也不过是把他写在黑板上的东西copy了一遍而已），于是乎，我就想我过年回家的是时候怎么看我做过的笔记啊，难道要把note拿回家，估计拿了也不会看吧。所以，我就想是不是可以把这些笔记拍成照片放在我的博客里呢，这样的话，只要有网络我就可以看看笔记了，于是我就来这里瞎写来了。对于我学习机器学习的原因呢，大约有这几个原因：首先，这不，快要毕业了嘛，论文是关于机器学习的，所以就开始学习机器学习喽；其次呢，就是我曾经发表过一篇关于信息抽取的文章（ps：很水的文章啦，无视吧），里面用到机器学习的算法，所以我想再更深入的了解一下机器学习，说不定未来的工作会用到机器学习，或者自己一下子会喜欢上了这个高大上的方向呢。好了，废话就不说太多了，接下来的n多篇文章应该都是视频里的笔记，我可能会在看完这个视频之后，还是看一下加州理工的机器学习视频，笔记也会一并发布在这里吧。他们都是网易公开课里面的视频，我会把视频链接地址写在接下来的参考文献里面。</p>
+<p>[参考资料]</p>
+<ol>
+<li><a href="http://v.163.com/special/opencourse/machinelearning.html" target="_blank" rel="external">斯坦福大学公开课 ：机器学习课程</a></li>
+<li><a href="http://v.163.com/special/opencourse/learningfromdata.html9" target="_blank" rel="external">加州理工学院公开课：机器学习与数据挖掘</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>　　好久没有写博客了，有几方面的原因：首先，就是自己没有坚持写博客，也就是自己毅力不给力啊；然后，就是最近有点别的事情在忙，当然既有正事也有玩的事情。<br>　　一晃一年就这样过去了，好快（ps：日语叫做哈压抑）啊！看到很多人都在写自己的2014年终总结，还有2015年计划]]>
+    </summary>
+    
+      <category term="机器学习" scheme="https://ningban.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Machine Learning" scheme="https://ningban.github.io/categories/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Modern OS第2章之线程]]></title>
+    <link href="https://ningban.github.io/2014/12/01/Modern-OS%E7%AC%AC2%E7%AB%A0%E4%B9%8B%E7%BA%BF%E7%A8%8B/"/>
+    <id>https://ningban.github.io/2014/12/01/Modern-OS第2章之线程/</id>
+    <published>2014-12-01T06:33:07.000Z</published>
+    <updated>2015-03-08T13:12:46.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="线程的使用">线程的使用</h1><p>　　为什么人们需要在一个进程中再有一类进程？有若干理由说明产生这些mini进程（称为线程）的必要性。下面我们来讨论其中一些理由。</p>
+<blockquote>
+<ul>
+<li>人们需要多线程的主要原因是，在许多应用中同时发生着多种活动。其中某些活动随着时间的推移会被阻塞。通过将这些应用程序分解成可以准并行运行的多个顺序线程，程序设计模型会变得更简单。</li>
+<li>由于线程比进程更轻量级，所以它们比进程更容易（即更快）创建，也更容易撤销。在许多系统中，创建一个线程叫创建一个进程要快10-100倍。在有大量线程需要动态和快速修改时，具有这一特性是很有用的。</li>
+<li>需要多线程的第三个原因涉及性能方面的讨论。若多线程都是CPU密集型的，那么并不能获得性能上的增强，但是如果存在着大量的计算和大量的I/O处理，拥有多个线程允许这些活动彼此重叠进行，从而会加快应用程序执行的速度。</li>
+<li>最后，在多CPU系统中，多线程是有益的，在这样的系统中，真正的并行有了实现的可能。</li>
+</ul>
+</blockquote>
+<h1 id="经典的线程模型">经典的线程模型</h1><p>　　进程模型基于两个独立的概念：资源分组处理与执行。<br>　　理解进程的一个角度是，用某种方法把相关的资源集中在一起。进程有存放程序正文和数据以及其他资源的地址空间。这些资源中包括打开的文件、子进程、即将发生的警报、信号处理程序、账号信息等。把它们都放到进程中可以更容易管理。</p>
+<h2 id="进程与线程">进程与线程</h2><p>　　另一个概念是，进程拥有一个执行的线程，通常简写为线程（thread）。在线程中有一个程序计数器，用来记录接着要执行哪一条指令。线程拥有寄存器，用来保存线程当前的工作变量。线程还拥有一个堆栈，用来记录执行历史，其中每一帧保存了一个已调用的但是还没有从中返回的过程。尽管线程必须在某个进程中执行，但是线程和它的进程是不同的概念，并且可以分别处理。进程用于把资源集中到一起，而线程则是在CPU上被调度执行的实体。<br>　　线程给进程模型增加了一项内容，即在同一个进程环境中，允许彼此之间有较大独立性的线程执行。在同一个进程中并行运行多个线程，是对在同一台计算机上并行运行多个进程的模拟。在前一种情形下，多个线程共享同一个地址空间和其他资源。而在后一种情形中，多个进程共享物理内存、磁盘、打印机和其他资源。由于线程具有进程的某些性质，所以有时被称为<code>轻量级进程</code>（lightweight process）。多线程这个术语，也用来描述在同一个进程中允许多个线程的情形。<br>　　在图2-11a中，可以看到三个传统的进程。每个进程有自己的地址空间和单个控制线程。相反，在图2-11b中，可以看到一个进程带有三个传统的进程。尽管在两种情形中都有三个线程，但是在图2-11a中每个线程都在不同的地址空间中运行，而在图2-11b中，这三个线程全部在相同的地址空间中运行。<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os20141202-1.png" alt="图2-11"></p>
+<p>　　当多线程进程在单CPU系统中运行时，线程轮流运行。在图2-1中，我们已经看到了进程的多道程序设计师如何工作的。通过在多个进程之间来回切换，系统制造了不同的顺序进程并行运行的假象。多线程的工作方式也是类似的。CPU在线程之间的快速切换，制造了线程并行运行的假象，好似他们在一个比实际CPU慢一些的CPU上同时运行。在一个有三个计算密集型线程的进程中，线程以并行方式运行，每个线程在一个CPU上得到了真实CPU速度的三分之一。<br>　　进程中的不同线程不像不同进程之间那样存在很大的独立性。所有的线程都有完全一样的地址空间，这意味着它们也共享同样的全局变量。由于各个线程都可以访问进程地址空间中的每个内存地址，所以一个线程可以读、写或甚至清除另一个线程的堆栈。线程之间是没有保护的，原因是1）不可能，2）也没必要。这与不同进程是有差别的。不同的进程会来自不同的用户，他们彼此之间可能有敌意。一个进程总是由某个用户拥有，该用户创建多个线程应该是为了它们之间的合作而不是彼此间争斗。除了共享地址空间之外，所有线程还共享同一个打开文件集、子进程、报警以及相关信号等，如图2-12所示。这样，对于三个没有关系的进程而言，应该是用图2-11a的结构，而在三个线程实际完成同一个作业，并彼此积极密切合作的情形中，图2-11b则比较合适。<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os20141202-2.png" alt="图2-12"></p>
+<p>　　图2-12中，第一列表项是进程的属性，而不是线程的属性。例如，如果一个线程打开了一个文件，该文件对该进程中的其他线程都可见，这些线程可以对该文件进行读写。由于资源管理的单位是进程而非线程，所以这种情形是合理的。如果每个线程都有其自己的地址空间、打开文件、即将发生的报警等，那么它们就应该是不同的进程了。线程概念视图实现的是，共享一组资源的多个线程的执行能力，以便这些线程可以为完成某一任务而共同工作。<br>　　和传统进程一样，线程可以处于若干种状态的任何一个：运行、阻塞、就绪或终止。正在运行的线程拥有CPU并且是活跃的。被阻塞的线程正在等待某个释放它的事件。例如，当一个线程执行从键盘读入数据的系统调用时，该线程就被阻塞直到键入了输入为止。线程可以被阻塞，以便等待某个外部事件的发生或者等待其他线程来释放它。就绪线程可被调度运行，并且只要轮到它就很快可以运行。线程状态之间的转换和进程状态之间的转换是一样的。<br>　　认识到每个线程都有其自己的堆栈很重要，如图2-13所示。每个线程的堆栈有一帧，供各个被调用但是还没有从中返回的过程使用。在该帧中存放了相应的过程的局部变量以及过程调用完成之后使用的返回地址。例如，如果过程X调用过程Y，而Y又调用Z，那么当Z执行时，供X、Y和Z使用的帧会全部存在堆栈中。通常每个线程会调用不同的过程，从而有一个各自不同的执行理事。这就是为什么每个线程需要有自己的堆栈的原因。<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os20141202-3.png" alt="图2-12"></p>
+<blockquote>
+<p>　　<code>简而言之，一个程序至少有一个进程，一个进程至少有一个线程。</code></p>
+</blockquote>
+<h2 id="多线程">多线程</h2><p>　　在多线程的情况下，进程通常会从当前的单个线程开始。这个线程有能力通过调用一个库函数（如thread_create）创建新的线程。thread_create的参数专门指定了新线程要运行的过程名。这里，没有必要对新线程的地址空间加以规定，因为新线程会自动在创建线程的地址空间中运行。有时，线程是有层次的，它们具有一种父子关系，但是，通常不存在这样一种关系，所有的线程都是平等的。不论有无层次关系，创建线程通常都返回一个线程的标识符，该标识符就是新线程的名字。<br>　　当一个线程完成工作后，可以通过调用一个库过程（如thrad_exit）退出，该线程接着消失，不再可调度。在某些线程系统中，通过调用一个过程，例如thread_join，一个线程可以等待一个（特定）线程退出。这个过程阻塞调用线程直到那个（特定）线程退出。在这种情况下，线程的创建和终止非常类似于进程的创建和终止，并且也有着同样的选项。<br>　　另外一个常见的线程调用是thread_yield，它允许线程自动放弃CPU从而让另一个线程运行。这样一个调用是很重要的，因为不同于进程，（线程库）无法利用时钟中单强制线程染出CPU。所以设法使线程行为“高尚”起来，并且随着时间的推移自动交出CPU，以便让其他线程有机会运行，就变得非常重要。有的调用允许某个线程等待另一个线程完成某些任务，或等待一个线程宣城它已经完成了有关的工作等。</p>
+<h2 id="多线程带来的问题">多线程带来的问题</h2><p>　　通常而言，线程是有益的，但是线程也在程序设计模式中引入了某种程度的复杂性。考虑一下UNIX中fork系统调用，如果父进程有多个线程，那么它的子进程也应该拥有这些线程吗？如果不是，则改子进程可能会工作不正常，因为在该子进程中的线程都是绝对必要的。<br>　　然而，如果子进程拥有了与父进程一样的多个线程，如果父进程在read系统调用（比如键盘）上被阻塞了会发生什么情况？是两个线程被阻塞在键盘上（一个属于父进程，另一个属于子进程）吗？在键入一行输入之后，这两个进程都得到该输入的副本吗？还是仅有父进程得到该输入的副本？或是仅有子进程得到？类似的问题在进行网络连接时也会出现。<br>　　另一类问题和线程共享许多数据结构的事实有关。如果一个线程关闭了某个文件，而另一个线程还在该文件上进行读操作时会怎样？假设有一个线程注意到几乎没有内存了，并且也开始分配更多的内存。在工作一半的时候，发生线程切换，新线程也注意到几乎没有内存了，并且也开始分配更多的内存。这样，内存可能会分配两次。不过这些问题通过努力是可以解决的。总之，要使多线程的程序正确工作，就需要仔细思考和设计。</p>
+<h1 id="POSIX线程">POSIX线程</h1><p>　　为了实现可一直的线程程序，IEEE在IEEE标砖1003.1c中定义了线程的标准。它定义的线程包叫做Pthread。大部分UNIX系统都支持该标准。这个标准定义了超过60个函数调用，如果在这里列举一遍就太多了。取而代之，我们将仅仅描述一些主要的函数，以说明它是如何工作的。图2-14中列举了这些函数调用。<br>　　所有Pthread线程都有某些特性。每一个都含有一个标识符、一组寄存器（包括程序计数器）和一组存储在结构中的属性。这些属性包括堆栈大小、调度参数以及使用线程需要的其他项目。<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os20141202-4.png" alt="图2-14"></p>
+<p>　　这里有两个线程调用是处理属性的。Pthread_attr_init建立关联一个线程的属性结构并初始化为默认值。这些值（例如优先级）可以通过修改属性结构中的值域来改变。pthread_attr_destroy删除一个线程的属性结构，释放它占用的内存。它不会影响调用它的线程。这些线程会继续存在。</p>
+<h1 id="线程的实现">线程的实现</h1><p>　　有两种主要的方法实现线程包：在用户空间中和在内核中。这两种方法互有利弊，不过混合实现方式也是可能的。我们现在介绍这些方法并分析它们的优缺点。</p>
+<h2 id="在用户空间中实现线程">在用户空间中实现线程</h2><p>　　第一种方式是把整个线程包放在用户空间中，内核对线程包一无所知。从内核角度考虑，就是按正常的方式管理，即单线程进程。这种方法第一个，也是最明显的优点是，用户级线程包可以在不支持线程的操作系统上实现。<br>　　所有的这类实现都有同样的通用结构，如图2-16a所示。线程在一个运行时系统的顶部运行，这个<code>运行时系统</code>是一个管理线程的过程的集合。我们已经见过其中的四个过程：pthread_create、pthread_exit、pthread_join和pthread_yield。不过一般还会有更多的过程。<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os20141202-5.png" alt="图2-16"></p>
+<p>　　在用户空间管理线程时，每个进程需要有其专用的线程表（thread table），用来跟踪该进程中的线程。这些表和内核中的进程表类似，不过它仅仅记录各个线程的属性，每个线程的程序计数器、堆栈指针、寄存器和状态。该线程表由运行时系统管理。当一个线程转换到就绪状态或阻塞状态时，在该线程表中存放重新启动该线程所需要的信息，与内核在进程表中存放进程的信息完全一样。<br>　　当某个线程做了一些会引起在本地阻塞的事情之后，例如，等待进程中另一个线程完成某项工作，它调用一个运行时系统的过程，这个过程检查该线程是否必须进入阻塞状态。如果是，它在线程表中保存该线程的寄存器（即它本身的），查看表中可运行的就绪线程，并把新线程的保存值重新装入机器的寄存器中。只要堆栈指针和程序计数器一被切换，新的吸纳成就又自动投入运行。如果机器有一条保存所有寄存器的指令和另一条装入全部寄存器的指令，那么整个线程的切换可以再几条指令内完成。进行类似于这样的线程切换至少必陷入内核要快一个数量级（或许更多），这是使用用户级线程包的极大的优点。<br>　　不过，线程与进程有一个关键的差别。在线程完成运行时，例如，在它调用thread_yield时，pthread_yield代码可以把该线程的信息保存在线程表中，进而，它可以调用<code>线程调度程序</code>来选择另一个要运行的线程。保存该线程状态的过程和调度程序都只是本地过程，所以启动它们比进行讷河调用效率更高。另一方面，不需要陷阱，不需要上下文切换，也不需要对内存高速缓存刷新，这就是使得线程调度非常快捷。<br>　　用户级线程还有另一个优点。它允许每个进程有自己定制的调度算法。例如，在某些应用程序中，那些有垃圾手机线程的应用程序就不用担心会在不合适的时刻停止，这是一个长处。用户级线程还具有较好的可扩展性，这是因为在内核空间中内核线程需要一些固定表格空间和堆栈空间，如果内核线程的数量非常大，就会出现问题。<br>　　尽管用户级线程包邮更好的性能，但它也存在一些明显的问题。其中第一个问题就是如何实现阻塞系统调用？假设在还没有任何击键之前，一个线程读取键盘。让该线程实际进行该系统调用是不可接受的，因为这会停止所有的线程。<br>　　有一种可能的替代方案，就是如果某个调用会阻塞，就提前通知。在某些UNIX版本中，有一个系统调用select可以允许调用者通知预期的read是否会阻塞。若有这个调用，那么库过程read就可以被新的操作替代，首先进行select调用，然后只有在安全的情形下（即不会阻塞）才进行read调用。如果read调用会被阻塞，有关的调用就不进行，代之以运行另一个线程。在系统调用从事检察的这类代码称为<code>包装器</code>（jacket或wrapper）。<br>　　与阻塞系统调用问题有些类似的是页面故障问题。如果某个程序调用或者跳转到了一条不在内存的指令上，就会发生页面故障，而操作系统降到磁盘上取回这个丢失的指令，这就称为<code>页面故障</code>。在对所需要的指令进行定位和读入时，相关的进程就被阻塞。如果有一个线程引起页面故障，内核由于甚至不知道有线程存在，通常把整个进程阻塞直到硬盘I/O完成为止，尽管其他的线程是可以运行的。<br>　　用户级线程包的另一个问题是，如果一个线程开始运行，那么在该进程中的其他线程就不能运行，除非第一个线程自动放弃CPU。在一个单独的进程内部，没有时钟中断，所以不可能用轮转调度的方式调度线程。除非某个线程能够按照自己的意志进入运行时系统，否则调度程序就没有任何机会。<br>　　对线程永久运行问题的一个可能的解决方案是让运行时系统请求每秒一次的时钟信号（中断），但是这样对程序也是生硬和无序的。不可能总是高频率地发生周期性的时钟中断，即使可能，总的开销也是可观的。而且，线程可能也需要时钟中断，这就会扰乱运行时系统使用的时钟。</p>
+<h2 id="在内核中实现线程">在内核中实现线程</h2><p>　　现在我们学习内核了解和管理线程的情形。如图2-16b所示，此时不在需要运行系统了。另外，每个进程中也没有线程表。相反，在内核中用来记录系统中所有线程的线程表。当某个线程希望创建一个新线程或撤销一个已有线程时，它进行一个系统调用，这个系统调用通过对线程表的更新完成线程创建或撤销工作。<br>　　内核的线程表保存了每个线程的寄存器、状态和其他信息。这些信息和在用户空间中（运行时系统中）的线程是一样的，但是现在保存在内核中。这些信息是传统内核所维护的每个单线程进程信息（即进程状态）的子集。另外，内核还维护了传统的进程表，以便跟踪进程的状态。<br>　　所有能够阻塞线程的调用都以系统调用的形式出现，这与运行时系统过程相比，代价是相当可观的。当一个线程阻塞时，内核根据其选择，可以运行同一个进程中的另一个线程（若有一个就绪线程）或者运行另一个进程中的线程。而在用户级线程中，运行时系统始终运行自己进程中的线程，知道内核暴多它的CPU（或者没有可运行的线程存在了）为止。<br>　　由于在内核中创建或撤销线程的代价比较大，某些系统采取“环保”的处理方式，回收其线程。当某个线程被撤销时，就把它标志位不可运行的，但是其内核数据结构没有收到影响。稍后，在必须创建一个新线程时，就重新启动某个旧线程，从而节省了某些开销。在用户级线程中线程回收也是可能的，但是由于其线程管理的代价小，所以没有必要。<br>　　内核线程不需要任何新的，非阻塞系统调用。另外，如果某个进程中的线程引起了页面故障，内核可以很方便地检查该进程是否有任何其他可运行的线程，如果有，在等待所需要的页面从磁盘读入时，就选择一个可运行的线程运行。这样做的主要缺点是系统调用的代价比较大，所以如果线程的操作（创建、终止等）比较多，就会带来很大的开销。<br>　　虽然使用内核线程可以解决许多问题，但是不会解决任何所有的问题。例如，当一个多线程进程创建新的进程时，会发生什么？新进程是拥有与原进程相同数量的线程，还是只有一个线程？在很多情况下，最好的选择是取决于进程计划下一步做什么。如果它要调用exec来启动一个新的程序，或许一个线程是正确的选择；如果它继续执行，则应该复制所有额线程。</p>
+<h2 id="混合实现">混合实现</h2><p>　　一种方法是使用内核级线程，然后将用户级线程与某些或者全部内核线程多路复用起来，如图2-17所示。<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os20141202-6.png" alt="图2-17"></p>
+<p>　　采用这种方法，内核只识别内核级线程，并对其进行调度。其中一些内核级线程会被多个用户级线程多路复用。如同在没有多线程能力操作系统中某个进程中的用户级线程一样，可以创建、撤销和调度这些用户级线程。在这种模型中，每个内核级线程有一个可以轮流使用的用户级线程集合。</p>
+<h2 id="调度程序激活机制">调度程序激活机制</h2><p>　　尽管内核级线程在一些关键点上优于用户级线程，但无可争议的是内核级线程的速度慢。调度程序激活工作的目标是模拟内核线程的功能。<br>　　是该机制工作的基本思路是，当内核了解到一个线程被阻塞之后（例如，由于执行了一个阻塞系统调用或者产生了一个页面故障），讷河通知该进程的运行时系统，并且在堆栈中以参数形式传递有问题的线程编号和所发生事件的一个描述。内核通过在一个已知的起始地址启动运行系统，从而发出了通知，这是对UNIX中信号的一种粗略模拟。这个机制称为<code>上行调用</code>（upcall）。<br>　　调度程序激活机制的一个目标是作为上行调用的信赖基础，这是一种违反分层次系统内在结构的概念。通常，第n层提供第n+1层可调用的特殊服务，但是第n层不能调用第n+1层的过程。上行调用并不遵守这个基本原理。</p>
+<h2 id="弹出式线程">弹出式线程</h2><p>　　一个消息的到达导致系统创建一个处理该消息的线程，这种线程称为<code>弹出式线程</code>，如图2-18所示。使用弹出式线程的结果是，消息到达与处理开始之间的时间非常短。<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os20141202-7.png" alt="图2-18"></p>
+<p>　　在使用太初式线程之前，需要提前进行计划。例如，哪个进程中的线程先运行？在内核空间中运行弹出式线程通常比在用户空间中容易且快捷，而且内核空间中的弹出式线程可以很容易访问所有的表格和I/O设备，这些也许在中断处理时有用。而另一方面，出错的内核线程比出错的用户线程造成更大的损害。</p>
+<h2 id="使单线程代码多线程化">使单线程代码多线程化</h2><p>　　许多已有的程序是为单线程进程编写的。把这些程序改写成多线程需要比直接写多线程程序更高的技巧。</p>
+<p>[参考资料]</p>
+<ol>
+<li><a href="">现代操作系统</a></li>
+<li><a href="http://blog.csdn.net/peter_teng/article/details/9329329" target="_blank" rel="external">进程与线程</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[文章是Modern Operating System的读书笔记，这里是第二章进程与线程的读书笔记，本篇主要讲述了线程的一些知识，如使用线程的原因、经典的线程模型、POSIX线程以及线程的多重实现方式等...]]>
+    
+    </summary>
+    
+      <category term="OS" scheme="https://ningban.github.io/tags/OS/"/>
+    
+      <category term="Operating System" scheme="https://ningban.github.io/categories/Operating-System/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[计算机基础篇之字符集与字符编码]]></title>
+    <link href="https://ningban.github.io/2014/11/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%AF%87%E4%B9%8B%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/"/>
+    <id>https://ningban.github.io/2014/11/30/计算机基础篇之字符集与字符编码/</id>
+    <published>2014-11-30T14:08:34.000Z</published>
+    <updated>2015-03-08T13:08:53.000Z</updated>
+    <content type="html"><![CDATA[<p>　　相信大家一定碰到过，打开某个网页，却显示一堆像乱码，如”бЇЯАзЪСЯ”、”�????????”？还记得HTTP中的Accept-Charset、Accept-Encoding、Accept-Language、Content-Encoding、Content-Language等消息头字段？这些就是接下来我们要探讨的。</p>
+<h1 id="基础知识">基础知识</h1><p>　　计算机中储存的信息都是用二进制数表示的；而我们在屏幕上看到的英文、汉字等字符是二进制数转换之后的结果。通俗的说，按照何种规则将字符存储在计算机中，如’a’用什么表示，称为”编码”；反之，将存储在计算机中的二进制数解析显示出来，称为”解码”，如同密码学中的加密和解密。在解码过程中，如果使用了错误的解码规则，则导致’a’解析成’b’或者乱码。</p>
+<blockquote>
+<ul>
+<li>字符集（Charset）：是一个系统支持的所有抽象字符的集合。字符是各种文字和符号的总称，包括各国家文字、标点符号、图形符号、数字等。</li>
+<li>字符编码（Character Encoding）：是一套法则，使用该法则能够对自然语言的字符的一个集合（如字母表或音节表），与其他东西的一个集合（如号码或电脉冲）进行配对。即在符号集合与数字系统之间建立对应关系，它是信息处理的一项基本技术。通常人们用符号集合（一般情况下就是文字）来表达信息。而以计算机为基础的信息处理系统则是利用元件（硬件）不同状态的组合来存储和处理信息的。元件不同状态的组合能代表数字系统的数字，因此字符编码就是将符号转换为计算机可以接受的数字系统的数，称为数字代码。</li>
+</ul>
+</blockquote>
+<h1 id="常用字符集和字符编码">常用字符集和字符编码</h1><p>　　常见字符集名称：ASCII字符集、GB2312字符集、BIG5字符集、GB18030字符集、Unicode字符集等。计算机要准确的处理各种字符集文字，需要进行字符编码，以便计算机能够识别和存储各种文字。</p>
+<h2 id="ASCII字符集&amp;编码">ASCII字符集&amp;编码</h2><ul>
+<li><code>ASCII</code>（AmericanStandard Code for Information Interchange，美国信息交换标准代码）是基于拉丁字母的一套电脑编码系统。它主要用于显示现代英语，而其扩展版本EASCII则可以勉强显示其他西欧语言。它是现今最通用的单字节编码系统（但是有被Unicode追上的迹象），并等同于国际标准ISO/IEC 646。</li>
+<li><code>ASCII字符集</code>：主要包括控制字符（回车键、退格、换行键等）；可显示字符（英文大小写字符、阿拉伯数字和西文符号）。</li>
+<li><code>ASCII编码</code>：将ASCII字符集转换为计算机可以接受的数字系统的数的规则。使用7位（bits）表示一个字符，共128字符；但是7位编码的字符集只能支持128个字符，为了表示更多的欧洲常用字符对ASCII进行了扩展，ASCII扩展字符集使用8位（bits）表示一个字符，共256字符。ASCII字符集映射到数字编码规则如下图所示：<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os20141130-1.png" alt="ASCII字符代码表1"><br><img src="http://7vihec.com1.z0.glb.clouddn.com/os20141130-2.png" alt="ASCII字符代码表2"></li>
+</ul>
+<p>　　ASCII的最大缺点是只能显示26个基本拉丁字母、阿拉伯数目字和英式标点符号，因此只能用于显示现代美国英语（而且在处理英语当中的外来词如naïve、café、élite等等时，所有重音符号都不得不去掉，即使这样做会违反拼写规则）。而EASCII虽然解决了部份西欧语言的显示问题，但对更多其他语言依然无能为力。因此现在的苹果电脑已经抛弃ASCII而转用Unicode。</p>
+<h2 id="GBXXXX字符集&amp;编码">GBXXXX字符集&amp;编码</h2><p>　　计算机发明之处及后面很长一段时间，只用应用于美国及西方一些发达国家，ASCII能够很好满足用户的需求。但是当天朝也有了计算机之后，为了显示中文，必须设计一套编码规则用于将汉字转换为计算机可以接受的数字系统的数。<br>　　天朝专家把那些127号之后的奇异符号们（即EASCII）取消掉，规定：一个小于127的字符的意义与原来相同，但两个大于127的字符连在一起时，就表示一个汉字，前面的一个字节（他称之为高字节）从0xA1用到 0xF7，后面一个字节（低字节）从0xA1到0xFE，这样我们就可以组合出大约7000多个简体汉字了。在这些编码里，还把数学符号、罗马希腊的字母、日文的假名们都编进去了，连在ASCII里本来就有的数字、标点、字母都统统重新编了两个字节长的编码，这就是常说的”全角”字符，而原来在127号以下的那些就叫”半角”字符了。<br>　　上述编码规则就是<code>GB2312</code>。GB2312或GB2312-80是中国国家标准简体中文字符集，全称《信息交换用汉字编码字符集·基本集》，又称GB0，由中国国家标准总局发布，1981年5月1日实施。GB2312编码通行于中国大陆；新加坡等地也采用此编码。中国大陆几乎所有的中文系统和国际化的软件都支持GB2312。GB2312的出现，基本满足了汉字的计算机处理需要，它所收录的汉字已经覆盖中国大陆99.75%的使用频率。对于人名、古汉语等方面出现的罕用字，GB2312不能处理，这导致了后来GBK及GB18030汉字字符集的出现。下图是GB2312编码的开始部分（由于其非常庞大，只列举开始部分，具体可查看GB2312简体中文编码表）：<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os20141130-3.png" alt="GB2312编码表的开始部分"></p>
+<p>　　由于GB 2312-80只收录6763个汉字，有不少汉字，如部分在GB2312-80推出以后才简化的汉字（如”啰”），部分人名用字（如中国前总理朱镕基的”镕”字），台湾及香港使用的繁体字，日语及朝鲜语汉字等，并未有收录在内。于是厂商微软利用GB2312-80未使用的编码空间，收录GB13000.1-93全部字符制定了GBK编码。根据微软资料，GBK是对GB2312-80的扩展，也就是CP936字码表 (Code Page 936)的扩展（之前CP936和GB 2312-80一模一样），最早实现于Windows 95简体中文版。虽然GBK收录GB 13000.1-93的全部字符，但编码方式并不相同。GBK自身并非国家标准，只是曾由国家技术监督局标准化司、电子工业部科技与质量监督司公布为”技术规范指导性文件”。原始GB13000一直未被业界采用，后续国家标准GB18030技术上兼容GBK而非GB13000。<br>　　<code>GB 18030</code>，全称：国家标准GB 18030-2005《信息技术 中文编码字符集》，是中华人民共和国现时最新的内码字集，是GB 18030-2000《信息技术 信息交换用汉字编码字符集 基本集的扩充》的修订版。与GB 2312-1980完全兼容，与GBK基本兼容，支持GB 13000及Unicode的全部统一汉字，共收录汉字70244个。GB 18030主要有以下特点：<br>与UTF-8相同，采用多字节编码，每个字可以由1个、2个或4个字节组成。</p>
+<ul>
+<li>编码空间庞大，最多可定义161万个字符。</li>
+<li>支持中国国内少数民族的文字，不需要动用造字区。</li>
+<li>汉字收录范围包含繁体汉字以及日韩汉字。<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os20141130-4.png" alt="GB18030编码总体结构"></li>
+</ul>
+<p>　　本规格的初版使中华人民共和国信息产业部电子工业标准化研究所起草，由国家质量技术监督局于2000年3月17日发布。现行版本为国家质量监督检验总局和中国国家标准化管理委员会于2005年11月8日发布，2006年5月1日实施。此规格为在中国境内所有软件产品支持的强制规格。</p>
+<h2 id="BIG5字符集&amp;编码">BIG5字符集&amp;编码</h2><p>　　<code>Big5</code>，又称为大五码或五大码，是使用繁体中文（正体中文）社区中最常用的电脑汉字字符集标准，共收录13,060个汉字。中文码分为内码及交换码两类，Big5属中文内码，知名的中文交换码有CCCII、CNS11643。Big5虽普及于台湾、香港与澳门等繁体中文通行区，但长期以来并非当地的国家标准，而只是业界标准。倚天中文系统、Windows等主要系统的字符集都是以Big5为基准，但厂商又各自增加不同的造字与造字区，派生成多种不同版本。2003年，Big5被收录到CNS11643中文标准交换码的附录当中，取得了较正式的地位。这个最新版本被称为Big5-2003。<br>　　Big5码是一套双字节字符集，使用了双八码存储方法，以两个字节来安放一个字。第一个字节称为”高位字节”，第二个字节称为”低位字节”。”高位字节”使用了0x81-0xFE，”低位字节”使用了0x40-0x7E，及0xA1-0xFE。在Big5的分区中：<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os20141130-5.png" alt="在Big5的分区中"></p>
+<h1 id="伟大的创想Unicode">伟大的创想Unicode</h1><p>　　像天朝一样，当计算机传到世界各个国家时，为了适合当地语言和字符，设计和实现类似GB232/GBK/GB18030/BIG5的编码方案。这样各搞一套，在本地使用没有问题，一旦出现在网络中，由于不兼容，互相访问就出现了乱码现象。<br>　　为了解决这个问题，一个伟大的创想产生了——Unicode。Unicode编码系统为表达任意语言的任意字符而设计。它使用4字节的数字来表达每个字母、符号，或者表意文字(ideograph)。每个数字代表唯一的至少在某种语言中使用的符号。（并不是所有的数字都用上了，但是总数已经超过了65535，所以2个字节的数字是不够用的。）被几种语言共用的字符通常使用相同的数字来编码，除非存在一个在理的语源学(etymological)理由使不这样做。不考虑这种情况的话，每个字符对应一个数字，每个数字对应一个字符。即不存在二义性。不再需要记录”模式”了。U+0041总是代表’A’，即使这种语言没有’A’这个字符。<br>　　在计算机科学领域中，<code>Unicode</code>（统一码、万国码、单一码、标准万国码）是业界的一种标准，它可以使电脑得以体现世界上数十种文字的系统。Unicode是基于通用字符集（Universal Character Set）的标准来发展，并且同时也以书本的形式对外发表。Unicode还不断在扩增，每个新版本插入更多新的字符。直至目前为止的第六版，Unicode就已经包含了超过十万个字符（在2005年，Unicode的第十万个字符被采纳且认可成为标准之一）、一组可用以作为视觉参考的代码图表、一套编码方法与一组标准字符编码、一套包含了上标字、下标字等字符特性的枚举等。Unicode 组织（The Unicode Consortium）是由一个非营利性的机构所运作，并主导Unicode的后续发展，其目标在于：将既有的字符编码方案以Unicode编码方案来加以取代，特别是既有的方案在多语环境下，皆仅有有限的空间以及不兼容的问题。</p>
+<blockquote>
+<p>PS：可以这样理解：Unicode是字符集，UTF-32/ UTF-16/ UTF-8是三种字符编码方案。</p>
+</blockquote>
+<h2 id="UCS_&amp;_UNICODE">UCS &amp; UNICODE</h2><p>　　<code>通用字符集</code>（Universal Character Set，UCS）是由ISO制定的ISO 10646（或称ISO/IEC10646）标准所定义的标准字符集。历史上存在两个独立的尝试创立单一字符集的组织，即国际标准化组织（ISO）和多语言软件制造商组成的统一码联盟。前者开发的 ISO/IEC 10646 项目，后者开发的统一码项目。因此最初制定了不同的标准。<br>　　1991年前后，两个项目的参与者都认识到，世界不需要两个不兼容的字符集。于是，它们开始合并双方的工作成果，并为创立一个单一编码表而协同工作。从Unicode 2.0开始，Unicode采用了与ISO10646-1相同的字库和字码；ISO也承诺，ISO10646将不会替超出U+10FFFF的UCS-4编码赋值，以使得两者保持一致。两个项目仍都存在，并独立地公布各自的标准。但统一码联盟和ISO/IEC JTC1/SC2都同意保持两者标准的码表兼容，并紧密地共同调整任何未来的扩展。在发布的时候，Unicode一般都会采用有关字码最常见的字型，但ISO10646一般都尽可能采用Century字型。</p>
+<h2 id="UTF-32">UTF-32</h2><p>　　上述使用4字节的数字来表达每个字母、符号，或者表意文字(ideograph)，每个数字代表唯一的至少在某种语言中使用的符号的编码方案，称为UTF-32。UTF-32又称UCS-4是一种将Unicode字符编码的协定，对每个字符都使用4字节。就空间而言，是非常没有效率的。<br>　　这种方法有其优点，最重要的一点就是可以在常数时间内定位字符串里的第N个字符，因为第N个字符从第4×Nth个字节开始。虽然每一个码位使用固定长定的字节看似方便，它并不如其它Unicode编码使用得广泛。</p>
+<h2 id="UTF-16">UTF-16</h2><p>　　尽管有Unicode字符非常多，但是实际上大多数人不会用到超过前65535个以外的字符。因此，就有了另外一种Unicode编码方式，叫做UTF-16(因为16位 = 2字节)。UTF-16将0–65535范围内的字符编码成2个字节，如果真的需要表达那些很少使用的”星芒层(astral plane)”内超过这65535范围的Unicode字符，则需要使用一些诡异的技巧来实现。UTF-16编码最明显的优点是它在空间效率上比UTF-32高两倍，因为每个字符只需要2个字节来存储（除去65535范围以外的），而不是UTF-32中的4个字节。并且，如果我们假设某个字符串不包含任何星芒层中的字符，那么我们依然可以在常数时间内找到其中的第N个字符，直到它不成立为止这总是一个不错的推断。其编码方法是：</p>
+<ul>
+<li>如果字符编码U小于0x10000，也就是十进制的0到65535之内，则直接使用两字节表示；</li>
+<li>如果字符编码U大于0x10000，由于UNICODE编码范围最大为0x10FFFF，从0x10000到0x10FFFF之间 共有0xFFFFF个编码，也就是需要20个bit就可以标示这些编码。用U’表示从0-0xFFFFF之间的值，将其前 10 bit作为高位和16 bit的数值0xD800进行 逻辑or 操作，将后10 bit作为低位和0xDC00做 逻辑or 操作，这样组成的 4个byte就构成了U的编码。</li>
+</ul>
+<p>　　对于UTF-32和UTF-16编码方式还有一些其他不明显的缺点。不同的计算机系统会以不同的顺序保存字节。这意味着字符U+4E2D在UTF-16编码方式下可能被保存为4E 2D或者2D 4E，这取决于该系统使用的是大尾端(big-endian)还是小尾端(little-endian)。只要文档没有离开你的计算机，它还是安全的——同一台电脑上的不同程序使用相同的字节顺序(byte order)。但是当我们需要在系统之间传输这个文档的时候，也许在万维网中，我们就需要一种方法来指示当前我们的字节是怎样存储的。不然的话，接收文档的计算机就无法知道这两个字节4E 2D表达的到底是U+4E2D还是U+2D4E。<br>　　为了解决这个问题，多字节的Unicode编码方式定义了一个”字节顺序标记(Byte Order Mark)”，它是一个特殊的非打印字符，你可以把它包含在文档的开头来指示你所使用的字节顺序。对于UTF-16，字节顺序标记是U+FEFF。如果收到一个以字节FF FE开头的UTF-16编码的文档，你就能确定它的字节顺序是单向的(one way)的了；如果它以FE FF开头，则可以确定字节顺序反向了。</p>
+<h2 id="UTF-8">UTF-8</h2><p>　　<code>UTF-8</code>（8-bit Unicode Transformation Format）是一种针对Unicode的可变长度字符编码（定长码），也是一种前缀码。它可以用来表示Unicode标准中的任何字符，且其编码中的第一个字节仍与ASCII兼容，这使得原来处理ASCII字符的软件无须或只须做少部份修改，即可继续使用。因此，它逐渐成为电子邮件、网页及其他存储或传送文字的应用中，优先采用的编码。互联网工程工作小组（IETF）要求所有互联网协议都必须支持UTF-8编码。<br>　　UTF-8使用一至四个字节为每个字符编码：</p>
+<ol>
+<li>128个US-ASCII字符只需一个字节编码（Unicode范围由U+0000至U+007F）。</li>
+<li>带有附加符号的拉丁文、希腊文、西里尔字母、亚美尼亚语、希伯来文、阿拉伯文、叙利亚文及它拿字母则需要二个字节编码（Unicode范围由U+0080至U+07FF）。</li>
+<li>其他基本多文种平面（BMP）中的字符（这包含了大部分常用字）使用三个字节编码。</li>
+<li>其他极少使用的Unicode辅助平面的字符使用四字节编码。<br>　　在处理经常会用到的ASCII字符方面非常有效。在处理扩展的拉丁字符集方面也不比UTF-16差。对于中文字符来说，比UTF-32要好。同时，（在这一条上你得相信我，因为我不打算给你展示它的数学原理。）由位操作的天性使然，使用UTF-8不再存在字节顺序的问题了。一份以utf-8编码的文档在不同的计算机之间是一样的比特流。<br>总体来说，在Unicode字符串中不可能由码点数量决定显示它所需要的长度，或者显示字符串之后在文本缓冲区中光标应该放置的位置；组合字符、变宽字体、不可打印字符和从右至左的文字都是其归因。所以尽管在UTF-8字符串中字符数量与码点数量的关系比UTF-32更为复杂，在实际中很少会遇到有不同的情形。</li>
+</ol>
+<p><strong>优点</strong></p>
+<blockquote>
+<ul>
+<li>UTF-8是ASCII的一个超集。因为一个纯ASCII字符串也是一个合法的UTF-8字符串，所以现存的ASCII文本不需要转换。为传统的扩展ASCII字符集设计的软件通常可以不经修改或很少修改就能与UTF-8一起使用。</li>
+<li>使用标准的面向字节的排序例程对UTF-8排序将产生与基于Unicode代码点排序相同的结果。（尽管这只有有限的有用性，因为在任何特定语言或文化下都不太可能有仍可接受的文字排列顺序。）</li>
+<li>UTF-8和UTF-16都是可扩展标记语言文档的标准编码。所有其它编码都必须通过显式或文本声明来指定。</li>
+<li>任何面向字节的字符串搜索算法都可以用于UTF-8的数据（只要输入仅由完整的UTF-8字符组成）。但是，对于包含字符记数的正则表达式或其它结构必须小心。</li>
+<li>UTF-8字符串可以由一个简单的算法可靠地识别出来。就是，一个字符串在任何其它编码中表现为合法的UTF-8的可能性很低，并随字符串长度增长而减小。举例说，字符值C0,C1,F5至FF从来没有出现。为了更好的可靠性，可以使用正则表达式来统计非法过长和替代值（可以查看W3 FAQ: Multilingual Forms上的验证UTF-8字符串的正则表达式）。</li>
+</ul>
+</blockquote>
+<p><strong>缺点</strong></p>
+<blockquote>
+<ul>
+<li>因为每个字符使用不同数量的字节编码，所以寻找串中第N个字符是一个O(N)复杂度的操作——即，串越长，则需要更多的时间来定位特定的字符。同时，还需要位变换来把字符编码成字节，把字节解码成字符。</li>
+</ul>
+</blockquote>
+<h1 id="HTTP中的编码">HTTP中的编码</h1><p>　　在HTTP中，与字符集和字符编码相关的消息头是Accept-Charset/Content-Type，另外主区区分Accept-Charset/Accept-Encoding/Accept-Language/Content-Type/Content-Encoding/Content-Language：</p>
+<ul>
+<li>Accept-Charset：浏览器申明自己接收的字符集，这就是本文前面介绍的各种字符集和字符编码，如gb2312，utf-8（通常我们说Charset包括了相应的字符编码方案）；</li>
+<li>Accept-Encoding：浏览器申明自己接收的编码方法，通常指定压缩方法，是否支持压缩，支持什么压缩方法（gzip，deflate），（注意：这不是只字符编码）；</li>
+<li>Accept-Language：浏览器申明自己接收的语言。语言跟字符集的区别：中文是语言，中文有多种字符集，比如big5，gb2312，gbk等等；</li>
+<li>Content-Type：WEB服务器告诉浏览器自己响应的对象的类型和字符集。例如：Content-Type: text/html; charset=’gb2312’</li>
+<li>Content-Encoding：WEB服务器表明自己使用了什么压缩方法（gzip，deflate）压缩响应中的对象。例如：Content-Encoding：gzip</li>
+<li>Content-Language：WEB服务器告诉浏览器自己响应的对象的语言。</li>
+</ul>
+<p>[参考资料]</p>
+<ol>
+<li><a href="http://blog.csdn.net/lixshaha/article/details/8274983" target="_blank" rel="external">字符集和字符编码（Charset &amp; Encoding）</a></li>
+<li><a href="http://blog.csdn.net/lixshaha/article/details/8274966" target="_blank" rel="external">字符编码-UTF-8详解</a></li>
+<li><a href="http://blog.csdn.net/lixshaha/article/details/8275005" target="_blank" rel="external">字符编码-ASCII详解</a></li>
+<li><a href="http://www.cnblogs.com/magialmoon/p/unicode-utf-8.html" target="_blank" rel="external">简单聊一下Unicode和utf-8</a></li>
+<li><a href="http://www.guokr.com/blog/83367/" target="_blank" rel="external">为什么UTF-8没有字节序问题？</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[记得曾经面试Tencent的时候，被面试官问过字符编码的的知识，恰巧最近看到有篇文章讲解的非常好，该博文详细讲述了常用字符集与字符编码，以及Unicode，最后又讲解了HTTP中涉及字符编码的消息头字段...]]>
+    
+    </summary>
+    
+      <category term="计算机基础" scheme="https://ningban.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="计算机基础" scheme="https://ningban.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[计算机基础篇之字符编码]]></title>
+    <link href="https://ningban.github.io/2014/11/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%AF%87%E4%B9%8B%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/"/>
+    <id>https://ningban.github.io/2014/11/30/计算机基础篇之字符编码/</id>
+    <published>2014-11-30T13:03:26.000Z</published>
+    <updated>2014-12-01T01:33:43.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="令人头疼的编码问题">令人头疼的编码问题</h1><p>　　字符编码问题, 对于一个在伟大天朝的程序员来说, 几乎不可能遇不到, 从我刚开始接触Coding到现在, 乱码, 编码转换问题就好像一直没有停息过。从最初的数据库到客户端乱码,到后来不同浏览器Url编码习惯不同,再到服务器和脚本编码不同的问题等等。记得曾经面试Tencent的时候，被面试官问过字符编码的的知识，恰巧最近又看到有篇文章讲解的非常好，该博文中从字符编码的历史讲起，之后又从一个例子说明理论的应用，最后说明数据库中以n开头的字符串类型的意义，下面我们来看看吧。</p>
+<h1 id="字符编码的历史">字符编码的历史</h1><p>　　很久很久以前，有一群人，他们决定用8个可以开合的晶体管来组合成不同的状态，以表示世界上的万物。他们看到8个开关状态是好的，于是他们把这称为”字节”。再后来，他们又做了一些可以处理这些字节的机器，机器开动了，可以用字节来组合出很多状态，状态开始变来变去。他们看到这样是好的，于是它们就这机器称为”计算机”。</p>
+<h2 id="Ascii的出现">Ascii的出现</h2><p>　　开始计算机只在美国用。八位的字节一共可以组合出256(2的8次方)种不同的状态。<br>　　他们把其中的编号从0开始的32种状态分别规定了特殊的用途，一但终端、打印机遇上约定好的这些字节被传过来时，就要做一些约定的动作。遇上00×10, 终端就换行，遇上0×07, 终端就向人们嘟嘟叫，例如遇上0x1b, 打印机就打印反白的字，或者终端就用彩色显示字母。他们看到这样很好，于是就把这些0×20以下的字节状态称为”控制码”。<br>　　他们又把所有的空格、标点符号、数字、大小写字母分别用连续的字节状态表示，一直编到了第127号，这样计算机就可以用不同字节来存储英语的文字了。大家看到这样，都感觉很好，于是大家都把这个方案叫做 ANSI 的”Ascii”编码（American Standard Code for Information Interchange，美国信息互换标准代码）。当时世界上所有的计算机都用同样的ASCII方案来保存英文文字。<br>　　后来，就像建造巴比伦塔一样，世界各地的都开始使用计算机，但是很多国家用的不是英文，他们的字母里有许多是ASCII里没有的，为了可以在计算机保存他们的文字，他们决定采用127号之后的空位来表示这些新的字母、符号，还加入了很多画表格时需要用下到的横线、竖线、交叉等形状，一直把序号编到了最后一个状态255。从128到255这一页的字符集被称”扩展字符集”。从此之后，贪婪的人类再没有新的状态可以用了，美帝国主义可能没有想到还有第三世界国 家的人们也希望可以用到计算机吧！<br>　　等中国人们得到计算机时，已经没有可以利用的字节状态来表示汉字，况且有6000多个常用汉字需要保存呢。但是这难不倒智慧的中国人民，我们不客气地把那些127号之后的奇异符号们直接取消掉,规定：一个小于127的字符的意义与原来相同，但两个大于127的字符连在一起时，就表示一个汉字，前面的一个字节（他称之为高字节）从0xA1用到0xF7，后面一个字节（低字节）从0xA1到0xFE，这样我们就可以组合出大约7000多个简体汉字了。在这些编码里，我们还把数学符号、罗马希腊的字母、日文的假名们都编进去了，连在ASCII里本来就有的数字、标点、字母都统统重新编了两个字节长的编码，这就是常说的”全角”字符，而原来在127号以下的那些就叫”半角”字符了。<br>　　中国人民看到这样很不错，于是就把这种汉字方案叫做 “GB2312″。GB2312 是对 ASCII 的中文扩展。<br>　　但是中国的汉字太多了，我们很快就就发现有许多人的人名没有办法在这里打出来，特别是某些很会麻烦别人的国家领导人。于是我们不得不继续把 GB2312 没有用到的码位找出来老实不客气地用上。<br>　　后来还是不够用，于是干脆不再要求低字节一定是127号之后的内码，只要第一个字节是大于127就固定表示这是一个汉字的开始，不管后面跟的是不是扩展字 符集里的内容。结果扩展之后的编码方案被称为GBK标准，GBK包括了GB2312的所有内容，同时又增加了近20000个新的汉字（包括繁体字）和符号。后来少数民族也要用电脑了，于是我们再扩展，又加了几千个新的少数民族的字，GBK 扩成了GB18030。从此之后，中华民族的文化就可以在计算机时代中传承了。<br>　　中国的程序员们看到这一系列汉字编码的标准是好的，于是通称他们叫做 “DBCS”（Double Byte Charecter Set 双字节字符集）。在DBCS系列标准里，最大的特点是两字节长的汉字字符和一字节长的英文字符并存于同一套编码方案里，因此他们写的程序为了支持中文处理，必须要注意字串里的每一个字节的值，如果这个值是大于127的，那么就认为一个双字节字符集里的字符出现了。那时候凡是受过加持，会编程的计算机僧侣 们都要每天念下面这个咒语数百遍：<br>　　“一个汉字算两个英文字符！一个汉字算两个英文字符……”<br>　　因为当时各个国家都像中国这样搞出一套自己的编码标准，结果互相之间谁也不懂谁的编码，谁也不支持别人的编码，连大陆和台湾这样只相隔了150海里，使用着同一种语言的兄弟地区，也分别采用了不同的DBCS编码方案——当时的中国人想让电脑显示汉字，就必须装上一个”汉字系统”，专门用来处理汉字的显示、输入的问题，但是那个台湾的愚昧封建人士写的算命程序 就必须加装另一套支持BIG5编码的什么”倚天汉字系统”才可以用，装错了字符系统，显示就会乱了套！这怎么办？而且世界民族之林中还有那些一时用不上电脑的穷苦人民，他们的文字又怎么办？<br>　　真是计算机的巴比伦塔命题啊！</p>
+<h2 id="UTF-8的出现">UTF-8的出现</h2><p>　　正在这时，大天使加百列及时出现了——一个叫ISO（国际标谁化组织）的国际组织决定着手解决这个问题。他们采用的方法很简单：废了所有的地区性编码方案，重新搞一个包括了地球上所有文化、所有字母 和符号的编码！他们打算叫它”Universal Multiple-Octet Coded Character Set”，简称 UCS, 俗称 “UNICODE”。<br>　　UNICODE 开始制订时，计算机的存储器容量极大地发展了，空间再也不成为问题了。于是ISO就直接规定必须用两个字节，也就是16位来统一表示所有的字符，对于ascii里的那些“半角”字符，UNICODE 包持其原编码不变，只是将其长度由原来的8位扩展为16位，而其他文化和语言的字符则全部重新统一编码。由于”半角”英文符号只需要用到低8位，所以其高8位永远是0，因此这种大气的方案在保存英文文本时会多浪费一倍的空间。<br>　　这时候，从旧社会里走过来的程序员开始发现一个奇怪的现象：他们的strlen函数靠不住了，一个汉字不再是相当于两个字符了，而是一个！是的，从UNICODE开始，无论是半角的英文字母，还是全角的汉字，它们都是统一的”一个字符”！同时，也都是统一的”两个字节”，请注意”字符”和”字节”两个术语的不同，“字节”是一个8位的物理存贮单元，而“字符”则是一个文化相关的符号。在UNICODE 中，一个字符就是两个字节。一个汉字算两个英文字符的时代已经快过去了。<br>　　从前多种字符集存在时，那些做多语言软件的公司遇上过很大麻烦，他们为了在不同的国家销售同一套软件，就不得不在区域化软件时也加持那个双字节字符集咒语，不仅要处处小心不要搞错，还要把软件中的文字在不同的字符集中转来转去。UNICODE 对于他们来说是一个很好的一揽子解决方案，于是从 Windows NT 开始，MS 趁机把它们的操作系统改了一遍，把所有的核心代码都改成了用UNICODE方式工作的版本，从这时开始，WINDOWS系统终于无需要加装各种本土语言系统，就可以显示全世界上所有文化的字符了。<br>　　但是，UNICODE 在制订时没有考虑与任何一种现有的编码方案保持兼容，这使得GBK与UNICODE在汉字的内码编排上完全是不一样的，没有一种简单的算术方法可以把文本内容从UNICODE编码和另一种编码进行转换，这种转换必须通过查表来进行。<br>　　如前所述，UNICODE 是用两个字节来表示为一个字符，他总共可以组合出65535不同的字符，这大概已经可以覆盖世界上所有文化的符号。如果还不够也没有关系，ISO已经准备 了UCS-4方案，说简单了就是四个字节来表示一个字符，这样我们就可以组合出21亿个不同的字符出来（最高位有其他用途），这大概可以用到银河联邦成立 那一天吧！<br>　　UNICODE 来到时，一起到来的还有计算机网络的兴起，UNICODE 如何在网络上传输也是一个必须考虑的问题，于是面向传输的众多 UTF（UCS Transfer Format）标准出现了，顾名思义，UTF8就是每次8个位传输数据，而UTF16就是每次16个位，只不过为了传输时的可靠性，从UNICODE到UTF时并不是直接的对应，而是要过一些算法和规则来转换。<br>　　受到过网络编程加持的计算机僧侣们都知道，在网络里传递信息时有一个很重要的问题，就是对于数据高低位的解读方式，一些计算机是采用低位先发送的方法，例 如我们PC机采用的INTEL架构，而另一些是采用高位先发送的方式，在网络中交换数据时，为了核对双方对于高低位的认识是否是一致的，采用了一种很简便的方法，就是在文本流的开始时向对方发送一个标志符——如果之后的文本是高位在位，那就发送”FEFF”，反之，则发送”FFFE”。不信你可以用二进制方式打开一个UTF-X格式的 文件，看看开头两个字节是不是这两个字节？</p>
+<h1 id="奇怪的“联通”">奇怪的“联通”</h1><p>　　讲到这里，我们再顺便说说一个很著名的奇怪现象：当你在windows的记事本里新建一个文件，输入”联通”两个字之后，保存，关闭，然后再次打开，你会发现这两个字已经消失了，代之的是几个乱码！呵呵，有人说这就是联通之所以拼不过移动的原因。<br>　　其实这是因为GB2312编码与UTF8编码产生了编码冲撞的原因。<br>　　从网上引来一段从UNICODE到UTF8的转换规则：</p>
+<pre><code>Unicode
+UTF-<span class="number">8</span>
+<span class="number">0000</span> - <span class="number">007F</span>
+<span class="number">0</span>xxxxxxx
+<span class="number">0080</span> - <span class="number">07F</span>F
+<span class="number">110</span>xxxxx <span class="number">10</span>xxxxxx
+<span class="number">0800</span> - FFFF
+<span class="number">1110</span>xxxx <span class="number">10</span>xxxxxx <span class="number">10</span>xxxxxx
+</code></pre><p>　　例如”汉”字的Unicode编码是6C49。6C49在0800-FFFF之间，所以要用3字节模板：1110xxxx 10xxxxxx 10xxxxxx。将6C49写成二进制是：0110 1100 0100 1001，将这个比特流按三字节模板的分段方法分为0110 110001 001001，依次代替模板中的x，得到：1110-0110 10-110001 10-001001，即E6 B1 89，这就是其UTF8的编码。<br>　　而当你新建一个文本文件时，记事本的编码默认是ANSI,如果你在ANSI的编码输入汉字，那么他实际就是GB系列的编码方式，在这种编码下，”联通”的内码是：</p>
+<pre><code>c1 <span class="number">1100</span> <span class="number">0001</span>
+aa <span class="number">1010</span> <span class="number">1010</span>
+<span class="built_in">cd</span> <span class="number">1100</span> <span class="number">1101</span>
+a8 <span class="number">1010</span> <span class="number">1000</span>
+</code></pre><p>　　注意到了吗？第一二个字节、第三四个字节的起始部分的都是”110″和”10″，正好与UTF8规则里的两字节模板是一致的，于是再次打开记事本时，记事 本就误认为这是一个UTF8编码的文件，让我们把第一个字节的110和第二个字节的10去掉，我们就得到了”00001 101010″，再把各位对齐，补上前导的0，就得到了”0000 0000 0110 1010″，不好意思，这是UNICODE的006A，也就是小写的字母”j”，而之后的两字节用UTF8解码之后是0368，这个字符什么也不是。这就 是只有”联通”两个字的文件没有办法在记事本里正常显示的原因。<br>　　而如果你在”联通”之后多输入几个字，其他的字的编码不见得又恰好是110和10开始的字节，这样再次打开时，记事本就不会坚持这是一个utf8编码的文件，而会用ANSI的方式解读之，这时乱码又不出现了。</p>
+<h1 id="DB中n前缀的字串类型">DB中n前缀的字串类型</h1><p>　　在数据库里，有n前缀的字串类型就是UNICODE类型，这种类型中，固定用两个字节来表示一个字符，无论这个字符是汉字还是英文字母，或是别的什么。<br>　　如果你要测试”abc汉字”这个串的长度，在没有n前缀的数据类型里，这个字串是7个字符的长度，因为一个汉字相当于两个字符。而在有n前缀的数据类型里，同样的测试串长度的函数将会告诉你是5个字符，因为一个汉字就是一个字符。</p>
+<p>[参考资料]</p>
+<ol>
+<li><a href="http://www.laruence.com/2009/08/22/1059.html" target="_blank" rel="external">字符编码详解(基础)</a></li>
+<li><a href="http://blog.csdn.net/lixshaha/article/details/8274983" target="_blank" rel="external">字符集和字符编码（Charset &amp; Encoding）</a></li>
+<li><a href="http://blog.csdn.net/lixshaha/article/details/8274966" target="_blank" rel="external">字符编码-UTF-8详解</a></li>
+<li><a href="http://www.cnblogs.com/magialmoon/p/unicode-utf-8.html" target="_blank" rel="external">简单聊一下Unicode和utf-8</a></li>
+<li><a href="http://www.guokr.com/blog/83367/" target="_blank" rel="external">为什么UTF-8没有字节序问题？</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[记得曾经面试Tencent的时候，被面试官问过字符编码的的知识，恰巧最近看到有篇文章讲解的非常好，该博文中从字符编码的历史讲起，之后又从一个例子说明理论的应用，最后说明数据库中以n开头的字符串类型的意义...]]>
+    
+    </summary>
+    
+      <category term="计算机基础" scheme="https://ningban.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="计算机基础" scheme="https://ningban.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[计算机基础篇之大端与小端]]></title>
+    <link href="https://ningban.github.io/2014/11/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%AF%87%E4%B9%8B%E5%A4%A7%E7%AB%AF%E4%B8%8E%E5%B0%8F%E7%AB%AF/"/>
+    <id>https://ningban.github.io/2014/11/27/计算机基础篇之大端与小端/</id>
+    <published>2014-11-27T15:11:40.000Z</published>
+    <updated>2014-11-30T13:06:07.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="端模式的起源">端模式的起源</h1><p>　　端模式（Endian）的这个词出自Jonathan Swift书写的《格列佛游记》。这本书根据将鸡蛋敲开的方法不同将所有的人分为两类，从圆头开始将鸡蛋敲开的人被归为Big Endian，从尖头开始将鸡蛋敲开的人被归为Littile Endian。小人国的内战就源于吃鸡蛋时是究竟从大头（Big-Endian）敲开还是从小头（Little-Endian）敲开。在计算机业Big Endian和Little Endian也几乎引起一场战争。在计算机业界，Endian表示数据在存储器中的存放顺序。</p>
+<h1 id="大端与小端">大端与小端</h1><p>Big-Endian和Little-Endian的定义如下：</p>
+<blockquote>
+<ul>
+<li>Little-Endian就是低位字节排放在内存的低地址端，高位字节排放在内存的高地址端。</li>
+<li>Big-Endian就是高位字节排放在内存的低地址端，低位字节排放在内存的高地址端。</li>
+</ul>
+</blockquote>
+<p>　　举一个例子，比如数字0x12 34 56 78在内存中的表示形式为：<br><strong>（1）</strong>大端模式：<br>低地址 ————————-&gt; 高地址<br>0x12  |  0x34  |  0x56  |  0x78<br><strong>（2）</strong>小端模式：<br>低地址 —————————&gt; 高地址<br>0x78  |  0x56  |  0x34  |  0x12<br>可见，大端模式和字符串的存储模式类似。<br><strong>（3）</strong>下面是两个具体例子：<br>　　16bit宽的数0x1234在Little-endian模式（以及Big-endian模式）CPU内存中的存放方式（假设从地址0x4000开始存放）为：</p>
+<table>
+<thead>
+<tr>
+<th>内存地址</th>
+<th style="text-align:right">小段模式存放内容</th>
+<th style="text-align:center">大端模式存放内从容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x4000</td>
+<td style="text-align:right">0x34</td>
+<td style="text-align:center">0x12</td>
+</tr>
+<tr>
+<td>0x4001</td>
+<td style="text-align:right">0x12</td>
+<td style="text-align:center">0x34</td>
+</tr>
+</tbody>
+</table>
+<p>　　32bit宽的数0x12345678在Little-endian模式以及Big-endian模式）CPU内存中的存放方式（假设从地址0x4000开始存放）为：</p>
+<table>
+<thead>
+<tr>
+<th>内存地址</th>
+<th style="text-align:right">小段模式存放内容</th>
+<th style="text-align:center">大端模式存放内从容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x4000</td>
+<td style="text-align:right">0x78</td>
+<td style="text-align:center">0x12</td>
+</tr>
+<tr>
+<td>0x4001</td>
+<td style="text-align:right">0x56</td>
+<td style="text-align:center">0x34</td>
+</tr>
+<tr>
+<td>0x4002</td>
+<td style="text-align:right">0x34</td>
+<td style="text-align:center">0x56</td>
+</tr>
+<tr>
+<td>0x4003</td>
+<td style="text-align:right">0x12</td>
+<td style="text-align:center">0x78</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（4）</strong>大端小端没有谁优谁劣，各自优势便是对方劣势：</p>
+<blockquote>
+<ul>
+<li>小端模式 ：强制转换数据不需要调整字节内容，1、2、4字节的存储方式一样。</li>
+<li>大端模式 ：符号位的判定固定为第一个字节，容易判断正负。</li>
+</ul>
+</blockquote>
+<h1 id="数组在端模式下的存储">数组在端模式下的存储</h1><p>　　以unsigned int value = 0x12345678为例，分别看看在两种字节序下其存储情况，我们可以用unsigned char buf[4]来表示value：<br>　　Big-Endian: 低地址存放高位，如下：</p>
+<pre><code><span class="header">高地址
+---------------</span>
+buf[3] (0x78) -- 低位
+buf[2] (0x56)
+buf[1] (0x34)
+buf[0] (0x12) -- 高位
+<span class="code">---------------
+低地址</span>
+</code></pre><p>　　Little-Endian: 低地址存放低位，如下：</p>
+<pre><code><span class="header">高地址
+---------------</span>
+buf[3] (0x12) -- 高位
+buf[2] (0x34)
+buf[1] (0x56)
+buf[0] (0x78) -- 低位
+<span class="code">--------------
+低地址</span>
+</code></pre><h1 id="为什么会有大小端模式之分">为什么会有大小端模式之分</h1><p> 　　这是因为在计算机系统中，我们是以字节为单位的，每个地址单元都对应着一个字节，一个字节为8bit。但是在C语言中除了8bit的char之外，还有16bit的short型，32bit的long型（要看具体的编译器），另外，对于位数大于8位的处理器，例如16位或者32位的处理器，由于寄存器宽度大于一个字节，那么必然存在着一个如果将多个字节安排的问题。因此就导致了大端存储模式和小端存储模式。例如一个16bit的short型x，在内存中的地址为0x0010，x的值为0x1122，那么0x11为高字节，0x22为低字节。对于大端模式，就将0x11放在低地址中，即0x0010中，0x22放在高地址中，即0x0011中。小端模式，刚好相反。我们常用的X86结构是小端模式，而KEIL C51则为大端模式。很多的ARM，DSP都为小端模式。有些ARM处理器还可以由硬件来选择是大端模式还是小端模式。</p>
+<h1 id="判断机器的字节序">判断机器的字节序</h1><p>　　1) 可以编写一个小的测试程序来判断机器的字节序：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL <span class="title">IsBigEndian</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">0x1234</span>;</span><br><span class="line">	<span class="keyword">char</span> b =  *(<span class="keyword">char</span> *)&amp;a;  <span class="comment">//通过将int强制类型转换成char单字节，通过判断起始存储位置。即等于 取b等于a的低地址部分</span></span><br><span class="line">	<span class="keyword">if</span>( b == <span class="number">0x12</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> TRUE;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> FALSE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>　　2) 联合体union的存放顺序是所有成员都从低地址开始存放，利用该特性可以轻松地获得了CPU对内存采用Little-endian还是Big-endian模式读写：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL <span class="title">IsBigEndian</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">union</span> NUM</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> a;</span><br><span class="line">		<span class="keyword">char</span> b;</span><br><span class="line">	&#125;num;</span><br><span class="line">	num.a = <span class="number">0x1234</span>;</span><br><span class="line">	<span class="keyword">if</span>( num.b == <span class="number">0x12</span> )</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> TRUE;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> FALSE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="常见的字节序">常见的字节序</h1><p>一般操作系统都是小端，而通讯协议是大端的。</p>
+<h2 id="常见CPU的字节序">常见CPU的字节序</h2><p>Big Endian : PowerPC、IBM、Sun<br>Little Endian : x86、DEC<br>ARM既可以工作在大端模式，也可以工作在小端模式。</p>
+<h2 id="常见文件的字节序">常见文件的字节序</h2><p>Adobe PS – Big Endian<br>BMP – Little Endian<br>DXF(AutoCAD) – Variable<br>GIF – Little Endian<br>JPEG – Big Endian<br>MacPaint – Big Endian<br>RTF – Little Endian<br>另外，Java和所有的网络通讯协议都是使用Big-Endian的编码。</p>
+<h1 id="端模式的转换">端模式的转换</h1><p>　　1）对于字数据（16位）：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">define</span> BigtoLittle16(A)   (( ((uint16)(A) &amp; 0xff00) &gt;&gt; 8)    |  </span></span><br><span class="line">                                       (( (uint16)(A) &amp; <span class="number">0x00ff</span>) &lt;&lt; <span class="number">8</span>))</span><br></pre></td></tr></table></figure></p>
+<p>　　2）对于双字数据（32位）：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">define</span> BigtoLittle32(A)   ((( (uint32)(A) &amp; 0xff000000) &gt;&gt; 24) |   </span></span><br><span class="line">                                       (( (uint32)(A) &amp; <span class="number">0x00ff0000</span>) &gt;&gt; <span class="number">8</span>)   |   </span><br><span class="line">                                       (( (uint32)(A) &amp; <span class="number">0x0000ff00</span>) &lt;&lt; <span class="number">8</span>)   |   </span><br><span class="line">                                       (( (uint32)(A) &amp; <span class="number">0x000000ff</span>) &lt;&lt; <span class="number">24</span>))</span><br></pre></td></tr></table></figure></p>
+<h1 id="从软件的角度理解端模式">从软件的角度理解端模式</h1><p>　　从软件的角度上，不同端模式的处理器进行数据传递时必须要考虑端模式的不同。如进行网络数据传递时，必须要考虑端模式的转换。在Socket接口编程中，以下几个函数用于大小端字节序的转换。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">define</span> ntohs(n)     <span class="comment">//16位数据类型网络字节顺序到主机字节顺序的转换  </span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> htons(n)     <span class="comment">//16位数据类型主机字节顺序到网络字节顺序的转换  </span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> ntohl(n)      <span class="comment">//32位数据类型网络字节顺序到主机字节顺序的转换  </span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> htonl(n)      <span class="comment">//32位数据类型主机字节顺序到网络字节顺序的转换</span></span></span><br></pre></td></tr></table></figure></p>
+<p>其中互联网使用的网络字节顺序采用大端模式进行编址，而主机字节顺序根据处理器的不同而不同，如PowerPC处理器使用大端模式，而Pentuim处理器使用小端模式。<br>　　大端模式处理器的字节序到网络字节序不需要转换，此时ntohs(n)=n，ntohl = n；而小端模式处理器的字节序到网络字节必须要进行转换，此时ntohs(n) = <strong>swab16(n)，ntohl = </strong>swab32(n)。<strong>swab16与</strong>swab32函数定义如下所示。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">define</span> ___swab16(x)  </span></span><br><span class="line">&#123;  </span><br><span class="line">            __u16 __x = (x);  </span><br><span class="line">            ((__u16)(  </span><br><span class="line">                        (((__u16)(__x) &amp; (__u16)<span class="number">0x00ff</span>U) &lt;&lt; <span class="number">8</span>) |  </span><br><span class="line">                        (((__u16)(__x) &amp; (__u16)<span class="number">0xff00</span>U) &gt;&gt; <span class="number">8</span>) ));  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> ___swab32(x)  </span></span><br><span class="line">&#123;  </span><br><span class="line">            __u32 __x = (x);  </span><br><span class="line">            ((__u32)(  </span><br><span class="line">                        (((__u32)(__x) &amp; (__u32)<span class="number">0x000000ff</span>UL) &lt;&lt; <span class="number">24</span>) |  </span><br><span class="line">                        (((__u32)(__x) &amp; (__u32)<span class="number">0x0000ff00</span>UL) &lt;&lt; <span class="number">8</span>) |  </span><br><span class="line">                        (((__u32)(__x) &amp; (__u32)<span class="number">0x00ff0000</span>UL) &gt;&gt; <span class="number">8</span>) |  </span><br><span class="line">                        (((__u32)(__x) &amp; (__u32)<span class="number">0xff000000</span>UL) &gt;&gt; <span class="number">24</span>) ));  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>　　PowerPC处理器提供了lwbrx，lhbrx，stwbrx，sthbrx四条指令用于处理字节序的转换以优化<strong>swab16和</strong>swap32这类函数。此外PowerPC处理器中的rlwimi指令也可以用来实现<strong>swab16和</strong>swap32这类函数。<br>　　在对普通文件进行处理也需要考虑端模式问题。在大端模式的处理器下对文件的32，16位读写操作所得到的结果与小端模式的处理器不同。单纯从软件的角度理解上远远不能真正理解大小端模式的区别。事实上，真正的理解大小端模式的区别，必须要从系统的角度，从指令集，寄存器和数据总线上深入理解，大小端模式的区别。</p>
+<h1 id="从系统的角度理解端模式">从系统的角度理解端模式</h1><p>先补充两个关键词，MSB和LSB：</p>
+<blockquote>
+<p>MSB:Most Significant Bit ———- 最高有效位<br>  LSB:Least Significant Bit ———- 最低有效位</p>
+</blockquote>
+<p>　　处理器在硬件上由于端模式问题在设计中有所不同。从系统的角度上看，端模式问题对软件和硬件的设计带来了不同的影响，当一个处理器系统中大小端模式同时存在时，必须要对这些不同端模式的访问进行特殊的处理。<br>　　PowerPC处理器主导网络市场，可以说绝大多数的通信设备都使用PowerPC处理器进行协议处理和其他控制信息的处理，这也可能也是在网络上的绝大多数协议都采用大端编址方式的原因。因此在有关网络协议的软件设计中，使用小端方式的处理器需要在软件中处理端模式的转变。而Pentium主导个人机市场，因此多数用于个人机的外设都采用小端模式，包括一些在网络设备中使用的PCI总线，Flash等设备，这也要求在硬件设计中注意端模式的转换。<br>　　本文提到的小端外设是指这种外设中的寄存器以小端方式进行存储，如PCI设备的配置空间，NOR FLASH中的寄存器等等。对于有些设备，如DDR颗粒，没有以小端方式存储的寄存器，因此从逻辑上讲并不需要对端模式进行转换。在设计中，只需要将双方数据总线进行一一对应的互连，而不需要进行数据总线的转换。<br>　　如果从实际应用的角度说，采用小端模式的处理器需要在软件中处理端模式的转换，因为采用小端模式的处理器在与小端外设互连时，不需要任何转换。而采用大端模式的处理器需要在硬件设计时处理端模式的转换。大端模式处理器需要在寄存器，指令集，数据总线及数据总线与小端外设的连接等等多个方面进行处理，以解决与小端外设连接时的端模式转换问题。在寄存器和数据总线的位序定义上，基于大小端模式的处理器有所不同。<br>　　一个采用大端模式的32位处理器，如基于E500内核的MPC8541，将其寄存器的最高位msb（most significant bit）定义为0，最低位lsb（lease significant bit）定义为31；而小端模式的32位处理器，将其寄存器的最高位定义为31，低位地址定义为0。与此向对应，采用大端模式的32位处理器数据总线的最高位为0，最高位为31；采用小端模式的32位处理器的数据总线的最高位为31，最低位为0。<br>　　大小端模式处理器外部总线的位序也遵循着同样的规律，根据所采用的数据总线是32位，16位和8位，大小端处理器外部总线的位序有所不同。大端模式下32位数据总线的msb是第0位，MSB是数据总线的第0~7的字段；而lsb是第31位，LSB是第24~31字段。小端模式下32位总线的msb是第31位，MSB是数据总线的第31~24位，lsb是第0位，LSB是7~0字段。大端模式下16位数据总线的msb是第0位，MSB是数据总线的第0~7的字段；而lsb是第15位，LSB是第8~15字段。小端模式下16位总线的msb是第15位，MSB是数据总线的第15~7位，lsb是第0位，LSB是7~0字段。大端模式下8位数据总线的msb是第0位，MSB是数据总线的第0~7的字段；而lsb是第7位，LSB是第0~7字段。小端模式下8位总线的msb是第7位，MSB是数据总线的第7~0位，lsb是第0位，LSB是7~0字段。<br>　　由上分析，我们可以得知对于8位，16位和32位宽度的数据总线，采用大端模式时数据总线的msb和MSB的位置都不会发生变化，而采用小端模式时数据总线的lsb和LSB位置也不会发生变化。<br>　　为此，大端模式的处理器对8位，16位和32位的内存访问（包括外设的访问）一般都包含第0~7字段，即MSB。小端模式的处理器对8位，16位和32位的内存访问都包含第7~0位，小端方式的第7~0字段，即LSB。由于大小端处理器的数据总线其8位，16位和32位宽度的数据总线的定义不同，因此需要分别进行讨论在系统级别上如何处理端模式转换。在一个大端处理器系统中，需要处理大端处理器对小端外设的访问。</p>
+<h1 id="实际中的例子">实际中的例子</h1><p>　　虽然很多时候，字节序的工作已由编译器完成了，但是在一些小的细节上，仍然需要去仔细揣摩考虑，尤其是在以太网通讯、MODBUS通讯、软件移植性方面。这里，举一个MODBUS通讯的例子。在MODBUS中，数据需要组织成数据报文，该报文中的数据都是大端模式，即低地址存高位，高地址存低位。假设有一16位缓冲区m_RegMW[256]，因为是在x86平台上，所以内存中的数据为小端模式：m_RegMW[0].low、m_RegMW[0].high、m_RegMW[1].low、m_RegMW[1].high……<br>　　为了方便讨论，假设m_RegMW[0] = 0x3456; 在内存中为0x56、0x34。<br>　　现要将该数据发出，如果不进行数据转换直接发送，此时发送的数据为0x56,0x34。而Modbus是大端的，会将该数据解释为0x5634而非原数据0x3456，此时就会发生灾难性的错误。所以，在此之前，需要将小端数据转换成大端的，即进行高字节和低字节的交换，此时可以调用步骤五中的函数BigtoLittle16(m_RegMW[0])，之后再进行发送才可以得到正确的数据。</p>
+<p>[参考资料]</p>
+<ol>
+<li><a href="http://blog.csdn.net/ce123_zhouwei/article/details/6971544" target="_blank" rel="external">详解大端模式和小端模式</a></li>
+<li><a href="http://blog.chinaunix.net/uid-25367385-id-188322.html" target="_blank" rel="external">如何判断大端小端 </a></li>
+<li><a href="http://blog.csdn.net/chen825919148/article/details/8041633" target="_blank" rel="external">union联合 数据类型 详细说明</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[最近在看博文的时候，偶然看到了大端与小端的知识，发现有篇文章讲解的非常好，该博文中从端模式的起源讲起，之后讲到了端模式的存储、端模式的转换，并从软件角度和系统角度来理解端模式，最后用一个例子来结束全文，...]]>
+    
+    </summary>
+    
+      <category term="计算机基础" scheme="https://ningban.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="计算机基础" scheme="https://ningban.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
+  
+</feed>
