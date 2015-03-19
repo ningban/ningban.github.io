@@ -1,0 +1,503 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>knn algorithm | JNing+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="JNing">
+    
+
+    
+    <meta name="description" content="最近在看一本叫做机器学习实战的书，感觉写的不错，因为它里面不仅仅将一些算法的原理，而且最关键的是用python代码实现了其中的应用场景，这里就是一些读书笔记。这次记录的是k邻近算法kNN，简单地说，k-近邻算法采用测量不同特征值之间的距离的方法进行分类。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="knn algorithm">
+<meta property="og:url" content="https://ningban.github.io/2015/03/19/knn-algorithm/index.html">
+<meta property="og:site_name" content="JNing+">
+<meta property="og:description" content="最近在看一本叫做机器学习实战的书，感觉写的不错，因为它里面不仅仅将一些算法的原理，而且最关键的是用python代码实现了其中的应用场景，这里就是一些读书笔记。这次记录的是k邻近算法kNN，简单地说，k-近邻算法采用测量不同特征值之间的距离的方法进行分类。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="knn algorithm">
+<meta name="twitter:description" content="最近在看一本叫做机器学习实战的书，感觉写的不错，因为它里面不仅仅将一些算法的原理，而且最关键的是用python代码实现了其中的应用场景，这里就是一些读书笔记。这次记录的是k邻近算法kNN，简单地说，k-近邻算法采用测量不同特征值之间的距离的方法进行分类。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="JNing+" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.png">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="JNing+" title="JNing+"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="JNing+">JNing+</a></h1>
+				<h2 class="blog-motto">Stay hungry, Stay foolish...</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//glgoo.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:ningban.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/03/19/knn-algorithm/" title="knn algorithm" itemprop="url">knn algorithm</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://ningban.github.io/about" title="JNing" target="_blank" itemprop="author">JNing</a>
+		
+  <p class="article-time">
+    <time datetime="2015-03-19T06:20:16.000Z" itemprop="datePublished"> 发表于 2015-03-19</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			
+		
+		</div>
+		
+		<p>　　最近在看一本叫做机器学习实战的书，感觉写的不错，因为它里面不仅仅将一些算法的原理，而且最关键的是用python代码实现了其中的应用场景，这里就是一些读书笔记。这次记录的是k邻近算法kNN，简单地说，k-近邻算法采用测量不同特征值之间的距离的方法进行分类。<br> 　　<code>它的工作原理</code>是：存在一个样本数据集合，也称作训练样本集，并且样本集中每个数据都存在标签，即我们知道样本集中每一数据与所属分类的对应关系。输入没有标签的数据后，将新数据的每个特征与样本集中数据对应的特征进行比较，然后算法提取样本集中特征最相似数据（最近邻）的分类标签。一般来说，我们只选择样本数据集中前k个最相似的数据，这就是k-近邻算法中k的出处，通常k是不大于20的整数。最后，选择k个最相似数据中出现次数最多的分类，作为新数据的分类。<br> 　　<code>k-近邻算法的一般流程</code>：<br> 　　1. 收集数据：可以使用任何方法；<br> 　　2. 准备数据：距离计算所需要的数值，最好是结构化的数据格式；<br> 　　3. 分析数据：可以使用任何方法；<br> 　　4. 训练算法：此步骤不是用于k-近邻算法；<br> 　　5. 测试算法：计算错误率；<br> 　　6. 使用算法：首先需要输入样本数据和结构化的输出结果，然后运行k-临近算法判定输入数据分别属于哪个分类，最后应用对计算出的分类执行后续的处理。<br> 　　<code>程序代码如下</code>：<br> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment">#FileName:KNN.py</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="string">'''</span><br><span class="line">k近邻算法（kNN: k Nearest Neighbors）</span><br><span class="line">Input:      inX: vector to compare to existing dataset (1xN)</span><br><span class="line">            dataSet: size m data set of known vectors (NxM)</span><br><span class="line">            labels: data set labels (1xM vector)</span><br><span class="line">            k: number of neighbors to use for comparison (should be an odd number)</span><br><span class="line">            </span><br><span class="line">Output:     the most popular class label</span><br><span class="line"></span><br><span class="line">'''</span></span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> operator</span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> listdir</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建数据集</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createDataSet</span><span class="params">()</span>:</span></span><br><span class="line">    group = array([[<span class="number">1.0</span>,<span class="number">1.1</span>],[<span class="number">1.0</span>,<span class="number">1.0</span>],[<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0.1</span>]])</span><br><span class="line">    labels = [<span class="string">'A'</span>,<span class="string">'A'</span>,<span class="string">'B'</span>,<span class="string">'B'</span>]</span><br><span class="line">    <span class="keyword">return</span> group,labels</span><br><span class="line"></span><br><span class="line"><span class="comment">#kNN算法具体实现</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">classify0</span><span class="params">(inX, dataSet, labels, k)</span>:</span></span><br><span class="line">    dataSetSize = dataSet.shape[<span class="number">0</span>]</span><br><span class="line">    diffMat = tile(inX, (dataSetSize,<span class="number">1</span>)) - dataSet</span><br><span class="line">    sqDiffMat = diffMat**<span class="number">2</span></span><br><span class="line">    sqDistance = sqDiffMat.sum(axis=<span class="number">1</span>)</span><br><span class="line">    distances = sqDistance**<span class="number">0.5</span></span><br><span class="line">    sortedDistIndicies = distances.argsort()</span><br><span class="line">    classCount=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">	voteIlabel = labels[sortedDistIndicies[i]]</span><br><span class="line">	classCount[voteIlabel] = classCount.get(voteIlabel,<span class="number">0</span>) + <span class="number">1</span></span><br><span class="line">	sortedClassCount = sorted(classCount.iteritems(),</span><br><span class="line">	 key= operator.itemgetter(<span class="number">1</span>), reverse=<span class="keyword">True</span>)</span><br><span class="line">    <span class="keyword">return</span> sortedClassCount[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#将文本文档转换为矩阵</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">file2matrix</span><span class="params">(filename)</span>:</span></span><br><span class="line">    fr = open(filename)</span><br><span class="line">    arrayOLines = fr.readlines()</span><br><span class="line">    numberofLines = len(arrayOLines)</span><br><span class="line">    returnMat = zeros((numberofLines, <span class="number">3</span>))</span><br><span class="line">    classLabelVector = []</span><br><span class="line">    index = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> arrayOLines:</span><br><span class="line">	line = line.strip()</span><br><span class="line">	listFromLine = line.split(<span class="string">'\t'</span>)</span><br><span class="line">	returnMat[index,:]=listFromLine[<span class="number">0</span>:<span class="number">3</span>]</span><br><span class="line">	classLabelVector.append(int(listFromLine[-<span class="number">1</span>]))</span><br><span class="line">	index += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> returnMat,classLabelVector</span><br><span class="line"></span><br><span class="line"><span class="comment">#为了解决每个因素影响结果的权重问题，对数据集进行归一化处理</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">autoNorm</span><span class="params">(dataSet)</span>:</span></span><br><span class="line">  minVals = dataSet.min(<span class="number">0</span>)</span><br><span class="line">  maxVals = dataSet.max(<span class="number">0</span>)</span><br><span class="line">  ranges = maxVals - minVals</span><br><span class="line">  normDataSet = zeros(shape(dataSet))</span><br><span class="line">  m = dataSet.shape[<span class="number">0</span>]</span><br><span class="line">  normDataSet = dataSet -tile(minVals, (m,<span class="number">1</span>))</span><br><span class="line">  normDataSet = normDataSet/tile(ranges, (m,<span class="number">1</span>))</span><br><span class="line">  <span class="keyword">return</span> normDataSet, ranges, minVals</span><br><span class="line"></span><br><span class="line"><span class="comment">#================将KNN用于约会网站=============================================================</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">#例1：从数据集合中选择10%作为测试数据集，使用KNN进行预测，并计算算法的错误率</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">datingClassTest</span><span class="params">()</span>:</span></span><br><span class="line">  hoRatio = <span class="number">0.10</span> </span><br><span class="line">  datingDataMat, datingLabels = file2matrix(<span class="string">'datingTestSet.txt'</span>)</span><br><span class="line">  normMat, ranges, minVals = autoNorm(datingDataMat)</span><br><span class="line">  m = normMat.shape[<span class="number">0</span>]</span><br><span class="line">  numTestVecs = int(m*hoRatio)</span><br><span class="line">  errorCount = <span class="number">0.0</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(numTestVecs):</span><br><span class="line">  	classifierResult = classify0(normMat[i,:], normMat[numTestVecs:m],\</span><br><span class="line">  		datingLabels[numTestVecs:m],<span class="number">3</span>)</span><br><span class="line">  	<span class="keyword">print</span> <span class="string">'the classifier came back with: %d, the real answer is :%d'</span>\</span><br><span class="line">  		%(classifierResult, datingLabels[i])</span><br><span class="line">  	<span class="keyword">if</span>(classifierResult != datingLabels[i]):</span><br><span class="line">  		errorCount += <span class="number">1.0</span></span><br><span class="line">  <span class="keyword">print</span> <span class="string">'the total error rate is : %f'</span> %(errorCount/float(numTestVecs))</span><br><span class="line"></span><br><span class="line"><span class="comment">#例2：给定一个人的所需信息，使用KNN进行预测</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">classifyPerson</span><span class="params">()</span>:</span></span><br><span class="line">  resultList = [<span class="string">'not at all'</span>, <span class="string">'in samll doses'</span>, <span class="string">'in large doses'</span>]</span><br><span class="line">  percentTats = float(raw_input(\</span><br><span class="line">  	<span class="string">'percetage of time spent playing video games?'</span>))</span><br><span class="line">  ffMiles = float(raw_input(\</span><br><span class="line">  	<span class="string">'frequent fier miles earned per year?'</span>))</span><br><span class="line">  iceCream = float(raw_input(\</span><br><span class="line">  	<span class="string">'liters of ice cream consumed per year?'</span>))</span><br><span class="line">  datingDataMat, datingLabels = file2matrix(<span class="string">'datingTestSet.txt'</span>)</span><br><span class="line">  normMat, ranges, minVals = autoNorm(datingDataMat)</span><br><span class="line">  inArr = array([ffMiles, percentTats, iceCream])</span><br><span class="line">  classifierResult = classify0((inArr-minVals)/ranges, normMat, datingLabels,<span class="number">3</span>)</span><br><span class="line">  <span class="keyword">print</span> <span class="string">'You will probably like this person:'</span>,\</span><br><span class="line">  	resultList[classifierResult-<span class="number">1</span>]   <span class="comment">#index start from 0, data start from 1, so minus 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#==============将KNN用于图像识别======================================================</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#将32*32的二进制文本格式的图像转换为1*1024的向量</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">img2vector</span><span class="params">(filename)</span>:</span></span><br><span class="line">  returnVect = zeros((<span class="number">1</span>, <span class="number">1024</span>))</span><br><span class="line">  fr = open(filename)</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">32</span>):</span><br><span class="line">	lineStr = fr.readline()</span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">32</span>):</span><br><span class="line">		returnVect[<span class="number">0</span>, <span class="number">32</span>*i+j] = int(lineStr[j]) </span><br><span class="line">  <span class="keyword">return</span> returnVect</span><br><span class="line"></span><br><span class="line"><span class="comment">#手写识别例子</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">handwritingClassTest</span><span class="params">()</span>:</span></span><br><span class="line">  hwLabels = []</span><br><span class="line">  trainingFileList = listdir(<span class="string">'trainingDigits'</span>)</span><br><span class="line">  m = len(trainingFileList)</span><br><span class="line">  trainingMat = zeros((m, <span class="number">1024</span>))</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(m):</span><br><span class="line">  	fileNameStr = trainingFileList[i]</span><br><span class="line">  	fileStr = fileNameStr.split(<span class="string">'.'</span>)[<span class="number">0</span>]</span><br><span class="line">  	classNumStr = int(fileStr.split(<span class="string">'_'</span>)[<span class="number">0</span>])</span><br><span class="line">  	hwLabels.append(classNumStr)</span><br><span class="line">  	trainingMat[i, :] = img2vector(<span class="string">'trainingDigits/%s'</span> %fileNameStr)</span><br><span class="line">  testFileList = listdir(<span class="string">'testDigits'</span>)</span><br><span class="line">  errorCount = <span class="number">0.0</span></span><br><span class="line">  mTest = len(testFileList)</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(mTest):</span><br><span class="line">  	fileNameStr = testFileList[i]</span><br><span class="line">  	fileStr = fileNameStr.split(<span class="string">'.'</span>)[<span class="number">0</span>]</span><br><span class="line">  	classNumStr = int(fileStr.split(<span class="string">'_'</span>)[<span class="number">0</span>])</span><br><span class="line">  	vectorUnderTest = img2vector(<span class="string">'testDigits/%s'</span> %fileNameStr)</span><br><span class="line">  	classifierResult = classify0(vectorUnderTest, \</span><br><span class="line">  		trainingMat, hwLabels, <span class="number">3</span>)</span><br><span class="line">  	<span class="keyword">print</span> <span class="string">'the classifier came back with: %d, the real answer is : %d'</span>\</span><br><span class="line">  		%(classifierResult, classNumStr)</span><br><span class="line">  	<span class="keyword">if</span>(classifierResult != classNumStr):</span><br><span class="line">  		errorCount += <span class="number">1.0</span></span><br><span class="line">  <span class="keyword">print</span> <span class="string">'\nthe total number of errors is : %d'</span> %errorCount</span><br><span class="line">  <span class="keyword">print</span> <span class="string">'\nthe total error rate is: %f'</span> %(errorCount/float(mTest))</span><br></pre></td></tr></table></figure></p>
+<p> [参考资料]</p>
+<ol>
+<li><a href="">机器学习实战</a></li>
+<li><a href="http://pan.baidu.com/s/1eQEOOCU" target="_blank" rel="external">本文用到的代码与数据样本</a></li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/机器学习/">机器学习</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://ningban.github.io/2015/03/19/knn-algorithm/" data-title="knn algorithm | JNing+" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/03/19/hexo3-is-awesome/"  title="升级hexo3遇到的坑">
+ <strong>下一篇：</strong><br/> 
+ <span>升级hexo3遇到的坑
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/03/19/knn-algorithm/" data-title="knn algorithm" data-url="https://ningban.github.io/2015/03/19/knn-algorithm/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ 
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life/" title="Life">Life<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Machine-Learning/" title="Machine Learning">Machine Learning<sup>12</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>8</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/分享与发现/" title="分享与发现">分享与发现<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/计算机基础/" title="计算机基础">计算机基础<sup>3</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/机器学习/" title="机器学习">机器学习<sup>12</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OS/" title="OS">OS<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/计算机基础/" title="计算机基础">计算机基础<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Life/" title="Life">Life<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分享与发现/" title="分享与发现">分享与发现<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://www.v2ex.com/?r=Jning"" target="_blank" title="v2ex">v2ex</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://open.163.com" target="_blank" title="公开课">公开课</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://study.163.com" target="_blank" title="云课堂">云课堂</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.mooc.cn/" target="_blank" title="MOOC">MOOC</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/ningvsban" target="_blank" title="JNing">JNing</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m JNing. <br/>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="https://ningban.github.io/about" target="_blank" title="JNing">JNing</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"ningban"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+  </body>
+</html>
