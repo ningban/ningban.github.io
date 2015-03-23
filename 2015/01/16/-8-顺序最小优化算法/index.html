@@ -62,15 +62,15 @@
 				<ul>
 					<ul>
 					 
-						<li><a href="/">首页</a></li>
+						<li><a href="/">Home</a></li>
 					
-						<li><a href="/archives">归档</a></li>
+						<li><a href="/archives">Archives</a></li>
 					
-						<li><a href="/about">关于</a></li>
+						<li><a href="/about">About</a></li>
 					
 					<li>
  					
-					<form class="search" action="//glgoo.com/search" method="get" accept-charset="utf-8">
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
 						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
 						<input type="hidden" name="q" value="site:ningban.github.io">
@@ -298,6 +298,9 @@
     </ul>
 </div>
 
+  
+
+
   <div class="rsspart">
 	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
 </div>
@@ -393,8 +396,6 @@ $(document).ready(function(){
   var ai = $('.article-content>iframe'),
       ae = $('.article-content>embed'),
       t  = $('#toc'),
-      h  = $('article h2')
-      ah = $('article h2'),
       ta = $('#toc.toc-aside'),
       o  = $('.openaside'),
       c  = $('.closeaside');
@@ -404,19 +405,16 @@ $(document).ready(function(){
   if(ae.length>0){
    ae.wrap('<div class="video-container" />');
   };
-  if(ah.length==0){
-    t.css('display','none');
-  }else{
-    c.click(function(){
-      ta.css('display', 'block').addClass('fadeIn');
-    });
-    o.click(function(){
-      ta.css('display', 'none');
-    });
-    $(window).scroll(function(){
-      ta.css("top",Math.max(140,320-$(this).scrollTop()));
-    });
-  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+    
 });
 </script>
 
@@ -453,7 +451,7 @@ $(document).ready(function(){
 
 
 <script type="text/javascript">
-  var duoshuoQuery = {short_name:"ningban"};
+  var duoshuoQuery = {short_name:"ningban## e.g. wuchong   your duoshuo short name."};
   (function() {
     var ds = document.createElement('script');
     ds.type = 'text/javascript';ds.async = true;
@@ -510,41 +508,15 @@ $(document).ready(function(){
 
 <!-- Totop End -->
 
-<!-- MathJax Begin <!-- mathjax config similar to math.stackexchange -->
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
 
-  -->
 
 <!-- MathJax End -->
 
-  <!-- mathjax config similar to math.stackexchange -->
+<!-- Tiny_search Begin -->
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
+<!-- Tiny_search End -->
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-</body>
+  </body>
 </html>
