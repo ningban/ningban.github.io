@@ -52,11 +52,11 @@
 				<ul>
 					<ul>
 					 
-						<li><a href="/">Home</a></li>
+						<li><a href="/">首页</a></li>
 					
-						<li><a href="/archives">Archives</a></li>
+						<li><a href="/archives">归档</a></li>
 					
-						<li><a href="/about">About</a></li>
+						<li><a href="/about">关于</a></li>
 					
 					<li>
  					
@@ -103,7 +103,7 @@
 <p>同时修改_config.yml：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">deploy</span>:</span><br><span class="line">  <span class="attribute">type</span>: git      <span class="comment">//github&gt;&gt;git</span></span><br></pre></td></tr></table></figure></p>
 <p>　　<code>The second坑：</code>部署到github之后，<a href="https://github.com/hexojs/hexo-generator-feed" target="_blank" rel="external">rss</a>和<a href="https://github.com/hexojs/hexo-generator-sitemap" target="_blank" rel="external">sitemap</a>插件没有起到作用，解决方法是执行如下命令：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm <span class="operator"><span class="keyword">install</span> hexo-generator-feed <span class="comment">--save</span></span><br><span class="line">$ npm <span class="keyword">install</span> hexo-generator-sitemap <span class="comment">--save</span></span></span><br></pre></td></tr></table></figure></p>
 <p>　　<code>The third坑：</code>（PS：这个不能算坑，只能算是我的问题）多说无法使用，解决方法就是修改jacman主题的_config.yml，把其中的duoshuo_shortname写上你的shortname就可以了，当然首先你要去多说去注册一个账号才行。<br> 　　<code>The fourth坑（至今未出坑）：</code>关于jacman支持LaTex数学公式，jacman里面很简单，只需要在文章开头的front-matter中，加上一行mathjax: true。那么问题来了，什么叫做front-matter呢？请原谅我的对hexo的无知，搜索了之后才知道是文章的md文件中三个短线上面的配置，如title，date等配置，如下所示：<br> <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">title: <span class="string">"升级hexo3遇到的坑"</span></span><br><span class="line">date: <span class="number">2015</span>-<span class="number">03</span>-<span class="number">19</span> <span class="number">12</span>:<span class="number">33</span>:<span class="number">36</span></span><br><span class="line">categories: Hexo</span><br><span class="line">tags:  [Hexo]</span><br><span class="line">mathjax: true</span><br><span class="line">---</span><br><span class="line">从这里开始是正文<span class="keyword">...</span></span><br></pre></td></tr></table></figure></p>
-<p>　　这样配置好之后，我以为就可以随心所欲的写LaTex数学公式了，可惜我又入坑了。当我写两个数学公式的时候，我以为直接分别在不同的行写就可以了，可是经过我一番折腾才发现在<code>写第二个数学公式之前一定要留上一个空行</code>才可以，否则数学公式显示失效，其他类似情况也是一样。正确的姿势如下所示：<br>$$l(x_i) = -log_2(p(x_i))$$ </p>
+<p>　　这样配置好之后，我以为就可以随心所欲的写LaTex数学公式了，可惜我又入坑了。当我写两个数学公式的时候，我以为直接分别在不同的行写就可以了，可是经过我一番折腾才发现在<code>写第二个数学公式之前一定要留上一个空行</code>才可以，否则数学公式显示失效，其他类似情况也是一样。正确的姿势如下所示：<br>$$l(x_i) = -log_2 p(x_i) $$ </p>
 <p>$$H = -\sum_{i=1}^n p(x_i) log_2 p(x_i)$$<br>　　这样我们确实可以载本地的服务上即localhost:4000上看到的是正确的公式，但是为毛提交到github上之后就不行啊，也用了tag但是还是不行，搞不定了。最奇葩的是在手机上用uc浏览器访问公式是正常的，但是在电脑上用chrome和firefox都不行，难道是浏览器的解析问题，也可能是jacman对hexo3公式兼容的问题，好了，算了吧，不在这里浪费时间了。<br>　　对了，忘记说了最后一点，以后一定要先把hexo整个文件夹备份一份，或者至少要备份source文件夹和主题文件夹，以及根目录下的_config.yml文件这三个，否则产生的后果，你懂的。</p>
 <p>[参考资料]</p>
 <ol>
