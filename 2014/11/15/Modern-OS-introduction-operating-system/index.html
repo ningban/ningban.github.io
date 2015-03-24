@@ -1,0 +1,526 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Modern OS引论之操作系统概念 | JNing+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="JNing">
+    
+
+    
+    <meta name="description" content="文章是Modern Operating System的读书笔记，这里是引论的读书笔记，主要讲述了操作系统中的某些基本概念，诸如进程、地址空间以及文件等...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Modern OS引论之操作系统概念">
+<meta property="og:url" content="https://ningban.github.io/2014/11/15/Modern-OS-introduction-operating-system/index.html">
+<meta property="og:site_name" content="JNing+">
+<meta property="og:description" content="文章是Modern Operating System的读书笔记，这里是引论的读书笔记，主要讲述了操作系统中的某些基本概念，诸如进程、地址空间以及文件等...">
+<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/os1-14.png">
+<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/os1-16.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Modern OS引论之操作系统概念">
+<meta name="twitter:description" content="文章是Modern Operating System的读书笔记，这里是引论的读书笔记，主要讲述了操作系统中的某些基本概念，诸如进程、地址空间以及文件等...">
+
+    
+    <link rel="alternative" href="/atom.xml" title="JNing+" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.png">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="JNing+" title="JNing+"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="JNing+">JNing+</a></h1>
+				<h2 class="blog-motto">Stay hungry, Stay foolish...</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:ningban.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/11/15/Modern-OS-introduction-operating-system/" title="Modern OS引论之操作系统概念" itemprop="url">Modern OS引论之操作系统概念</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://ningban.github.io/about" title="JNing" target="_blank" itemprop="author">JNing</a>
+		
+  <p class="article-time">
+    <time datetime="2014-11-15T05:20:25.000Z" itemprop="datePublished"> 发表于 2014-11-15</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#操作系统概念"><span class="toc-number">1.</span> <span class="toc-text">操作系统概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#进程"><span class="toc-number">1.1.</span> <span class="toc-text">进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#地址空间"><span class="toc-number">1.2.</span> <span class="toc-text">地址空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件"><span class="toc-number">1.3.</span> <span class="toc-text">文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shell"><span class="toc-number">1.4.</span> <span class="toc-text">shell</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="操作系统概念">操作系统概念</h1><h2 id="进程">进程</h2><blockquote>
+<p>　　<code>进程</code>（process）本质上是正在执行的程序。与每个进程相关的是<code>进程的地址空间</code>（address space），这是从某个最小值的存储位置（通常是零）到某个最大值存储位置的列表。在这个地址空间中，进程可以进行读写。该地址空间中存放有可执行程序、程序的数据以及程序的堆栈。与每个进程相关的还有<code>资源集</code>，通常包括寄存器（含有程序计数器和堆栈指针）、打开文件的清单、突出的报警、有关进程清单，以及运行该程序所需要的所有其他信息。进程基本上是容纳运行一个程序所需要所有信息的容器。<br>　　在许多操作系统中，与一个进程有关的所有信息，除了该进程自身体质空间的内容以外，均存放在操作系统的一张表中，称为<strong>进程表（process table）</strong>，进程表是数组（或链表）结构，当前存在的每个进程都要占用其中一项。<br>　　所以，一个（挂起的）进程包括：进程的地址空间，以及对应的进程表项，其中包括寄存器以及稍后重启该进程所需要的许多其他信息。<br>　　与进程管理有关的最关键的系统调用是那些进行进程创建和进程终止的系统调用。其他可用的进程系统调用包括：申请更多的内存（或释放不再需要的内存），等待一个子进程结束，用另一个程序覆盖该程序等。<br>　　若一个进程能够创建一个或多个进程（称为子进程），而且这些进程又可以创建子进程，则很很容易得到<code>进程树</code>。合作完成某些作业的相关进程经常需要被彼此通信以便同步它们的行为。这种通信称为<code>进程间通信</code>（interprocess communication）。<br>　　系统管理器授权每个进程使用一个给定的UID标识（User IDentification）。每个被启动的进程都有一个启动该进程的用户UID。子进程拥有与父进程一样的UID。用户可以是某个组的成员，每个组也有一个GID标识（Group IDentification）。<br>　　在UNIX中，有一个UID成为超级用户（superuser），具有特殊的权利，可以违背一些保护规则。</p>
+</blockquote>
+<h2 id="地址空间">地址空间</h2><blockquote>
+<p>　　每台计算机都有一些主存，用来保存正在执行的程序。在非常简单的操作系统中，内存中一次只能有一个程序。如果要运行第二个程序，第一个程序就必须被移除内存，再把第二个程序装入内存。较复杂的操作系统允许在内存中同时运行多道程序。为了避免它们彼此相互干扰（包括操作系统），需要有某种保护机制。虽然这种机制必然是硬件形式的，但是它由操作系统掌控。<br>　　在许多32位或63位地址的计算机中，分别有2^32或2^64字节的地址空间。如果一个进程有比计算机拥有的主存还大的地址空间，而且该进程希望使用全部的内存，该怎么办呢？现在，有了一种称为<code>虚拟内存的技术</code>，操作系统可以把部分地址空间装入主存，部分留在磁盘上，并且在需要时穿梭交换它们。</p>
+</blockquote>
+<h2 id="文件">文件</h2><blockquote>
+<p>　　操作系统意向的主要功能是隐藏磁盘和其他I/O设备的细节特性，并提供给程序员一个良好，清晰的独立于设备的抽象文件模型。为了提供保存文件的地方，大多数操作系统支持目录（directory）的概念，从而把文件分类成组，如图1-14所示。<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os1-14.png" alt="图1-14"><br>　　进程和文件层次都可以组织成树状结构，但是这两种树状结构有不少不同之处。<br>　　1. 般进程的树状结构层次不深（很少超过三层），而文件树状结构的层次常常多达四层、五层或更多层。<br>　　2. 进程树层次结构是暂时的，通常最多存在几分钟，而目录层次则可能存在数年之久。<br>　　3. 进程和文件在所有权保护方面也是有区别的。典型地，只有父进程能控制和访问子进程，而在文件和目录中通常存在一种机制，使文件所有者之外的其他用户也可以访问文件。<br>　　<code>注意</code>：在MS-DOS和Windows中，用反斜线（\）字符作为分隔符，而在UNIX中使用正斜线（/）。<br>　　在UNIX中，有两类特殊文件：<code>块特殊文件</code>（block special file）和<code>字符特殊文件</code>（character special file）。块特殊文件指那些由可随机存取的块组成的设备，如磁盘等。字符特殊文件用打印机、调制解调器和其他接收或输出字符流的设备。按照惯例，特殊文件保存在/dev目录中。例如，/dev/lp是打印机。<br>　　最后讨论一个特性既与进程有关也与文件有关：管道。<strong>管道（pipe）</strong>是一种虚文件，它可连接两个进程，如图1-16所示。如果进程A和B希望通过管道对话，它们必须提前设置该管道。当进程A想对进程B发送数据时，它把数据写在管道上，仿佛管道就是输出文件一样。进程B可以通过读该管道而得到数据，仿佛该管道就是输入文件一样。这样，在UNIX中两个进程之间的通信就很类似于普通文件的读写了。<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os1-16.png" alt="图1-16"></p>
+</blockquote>
+<h2 id="shell">shell</h2><blockquote>
+<p>　　操作系统是进行系统调用的代码。编辑器、编译器、汇编程序、链接程序以及命令解释器等，尽管非常重要，也非常有用，但是它们确实不是操作系统的组成部分。为了避免可能发生的混淆，我们介绍一下UNIX的命令解释器，称为shell。尽管shell本身不是操作系统的一部分，但是它体现了许多操作系统的特性，并很好地说明了系统调用的具体用法。shell同时也是最终端用户与操作系统之间的界面。<br>　　用户登录时，同时启动了一个shell。它以终端作为标准输入和标准输出。首先显示提示符（prompt），它可能是一个美元符号，提示用户shell正在等待接收命令。假如用户键入：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">date</span><br></pre></td></tr></table></figure></p>
+<p>　　于是shell创建一个子进程，并运行date程序作为子进程。在该子进程运行期间，shell等待它结束。在子进程结束后，shell再次显示提示符，并等待下一行输入。</p>
+</blockquote>
+<p>[参考资料]</p>
+<ol>
+<li><a href="">现代操作系统</a></li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Operating-System/">Operating System</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/OS/">OS</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://ningban.github.io/2014/11/15/Modern-OS-introduction-operating-system/" data-title="Modern OS引论之操作系统概念 | JNing+" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/11/16/Modern-OS-introduction-system-call/" title="Mondern OS引论之系统调用">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Mondern OS引论之系统调用</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/11/14/Modern-OS-introduction-continue/"  title="Modern OS引论之计算机硬件">
+ <strong>下一篇：</strong><br/> 
+ <span>Modern OS引论之计算机硬件
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2014/11/15/Modern-OS-introduction-operating-system/" data-title="Modern OS引论之操作系统概念" data-url="https://ningban.github.io/2014/11/15/Modern-OS-introduction-operating-system/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#操作系统概念"><span class="toc-number">1.</span> <span class="toc-text">操作系统概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#进程"><span class="toc-number">1.1.</span> <span class="toc-text">进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#地址空间"><span class="toc-number">1.2.</span> <span class="toc-text">地址空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件"><span class="toc-number">1.3.</span> <span class="toc-text">文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shell"><span class="toc-number">1.4.</span> <span class="toc-text">shell</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life/" title="Life">Life<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Machine-Learning/" title="Machine Learning">Machine Learning<sup>14</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>8</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/分享与发现/" title="分享与发现">分享与发现<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/计算机基础/" title="计算机基础">计算机基础<sup>3</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/机器学习/" title="机器学习">机器学习<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OS/" title="OS">OS<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/计算机基础/" title="计算机基础">计算机基础<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Life/" title="Life">Life<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分享与发现/" title="分享与发现">分享与发现<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://www.v2ex.com/?r=Jning"" target="_blank" title="v2ex">v2ex</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://open.163.com" target="_blank" title="公开课">公开课</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://study.163.com" target="_blank" title="云课堂">云课堂</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.mooc.cn/" target="_blank" title="MOOC">MOOC</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/ningvsban" target="_blank" title="JNing">JNing</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m JNing. <br/>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="https://ningban.github.io/about" target="_blank" title="JNing">JNing</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+    
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"ningban## e.g. wuchong   your duoshuo short name."};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

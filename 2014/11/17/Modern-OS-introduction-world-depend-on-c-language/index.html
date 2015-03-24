@@ -1,0 +1,521 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Mondern OS引论之依靠C的世界 | JNing+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="JNing">
+    
+
+    
+    <meta name="description" content="文章是Modern Operating System的读书笔记，这里是引论的读书笔记。操作系统通常是由许多程序员写成的，包括很多部分的大型C（有时是C++）程序。本文主要讲述了C语言构建的项目的运行模型...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mondern OS引论之依靠C的世界">
+<meta property="og:url" content="https://ningban.github.io/2014/11/17/Modern-OS-introduction-world-depend-on-c-language/index.html">
+<meta property="og:site_name" content="JNing+">
+<meta property="og:description" content="文章是Modern Operating System的读书笔记，这里是引论的读书笔记。操作系统通常是由许多程序员写成的，包括很多部分的大型C（有时是C++）程序。本文主要讲述了C语言构建的项目的运行模型...">
+<meta property="og:image" content="http://7vihec.com1.z0.glb.clouddn.com/os1-30.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mondern OS引论之依靠C的世界">
+<meta name="twitter:description" content="文章是Modern Operating System的读书笔记，这里是引论的读书笔记。操作系统通常是由许多程序员写成的，包括很多部分的大型C（有时是C++）程序。本文主要讲述了C语言构建的项目的运行模型...">
+
+    
+    <link rel="alternative" href="/atom.xml" title="JNing+" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.png">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="JNing+" title="JNing+"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="JNing+">JNing+</a></h1>
+				<h2 class="blog-motto">Stay hungry, Stay foolish...</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:ningban.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/11/17/Modern-OS-introduction-world-depend-on-c-language/" title="Mondern OS引论之依靠C的世界" itemprop="url">Mondern OS引论之依靠C的世界</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://ningban.github.io/about" title="JNing" target="_blank" itemprop="author">JNing</a>
+		
+  <p class="article-time">
+    <time datetime="2014-11-17T07:44:46.000Z" itemprop="datePublished"> 发表于 2014-11-17</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#依靠C的世界"><span class="toc-number">1.</span> <span class="toc-text">依靠C的世界</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#头文件"><span class="toc-number">1.1.</span> <span class="toc-text">头文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#大型编程项目"><span class="toc-number">1.2.</span> <span class="toc-text">大型编程项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运行模型"><span class="toc-number">1.3.</span> <span class="toc-text">运行模型</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="依靠C的世界">依靠C的世界</h1><p>　　操作系统通常是由许多程序员写成的，包括很多部分的大型C（有时是C++）程序。</p>
+<h2 id="头文件">头文件</h2><p>　　一个操作系统项目通常包括多个目录，每个目录都包含有许多<code>.c文件</code>，这些文件中存有系统某个部分的代码，而一些<code>.h头文件</code>则包含供一个或多个代码文件使用的声明以及定义。头文件还可以包括简单的宏，诸如<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">define</span> BUFFER_SIZE 4096</span></span><br></pre></td></tr></table></figure></p>
+<p>宏允许程序员命名常数，这样在代码中出现的BUFFER_SIZE，<strong>在编译时该常数就被数值4096所替代</strong>。宏还可以附带参数，例如<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">define</span> max(a,b)(a&gt;b?a:b)</span></span><br></pre></td></tr></table></figure></p>
+<p>这个宏允许程序员编写<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">i = max(j, k+<span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
+<p>从而得到<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">i = (j&gt;k+<span class="number">1</span> ? j : k+<span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
+<p>　　头文件还可以包含条件编译，例如<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#ifdef PENTIUM</span></span><br><span class="line">intel_init_ack();</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure></p>
+<p>如果宏PENTIUM有定义，而不是其他，则编译进对intel_init_ack函数的调用。为了分割与机构有关的代码，大量使用了条件编译，这样只有当系统在Pentium上编译时，一些特定的代码才会被插入，其他的代码仅当系统在SPARC等机器上编译时才会插入。<strong>通过使用#include指令，一个.c文件体可以含有零个或多个头文件。</strong></p>
+<h2 id="大型编程项目">大型编程项目</h2><p>　　为了构建操作系统，每个.c被C编译器编译成一个目标文件。目标文件使用后缀.o，含有目标机器的二进制代码，它们可以随后直接在CPU上运行。<br>　　C编译器的第一道称为<code>C预处理器</code>。在它读入每个.c文件时，每当遇到一个#include指令，它就取来该名称的头文件，并加以处理、扩展宏、处理条件编译（以及其他事务），然后将结果传递给编译器的下一道，仿佛它们原先就包含在该文件中一样。<br>　　由于操作系统非常大（五百万行代码是很寻常的），每当文件修改后就重新编译时不能忍受的。另一方面，改变了用在成千个文件中的一个关键头文件，确实需要重新编译这些文件。没有一定的协助，要想记录哪个目标文件与哪个头文件相关是完全不可行的。<br>　　幸运的是，计算机非常善于处理事务分类。在UNIX系统中，有个名为make的程序，它读入Makefile，该Makefile说明哪个文件与哪个文件相关。<code>make的作用是</code>：在构建操作系统二进制码时，检查此刻需要那个目标文件，而且对于每个文件，检查自从上次目标文件创建后，是否有任何它依赖（代码和头文件）的文件已经被修改了。如果有，目标文件需要重新编译。在make确定了哪个.o文件需要重新编译之后，它调用C编译器重新编译这些文件，这样，就把编译的次数减少到最低限度。<br>　　一旦所有的.o文件都已经就绪，这些文件被传递给成为<code>linker</code>的程序，将其组合成一个单个可执行的二进制文件。此时，任何被调用的库函数都已经包含在内，函数之间的引用都已经解决，而机器地址也都按需要分配完毕。在linker完成之后，得到一个可执行程序，在UNIX中传统上成为a.out文件。这个过程中的各种部分如果1-30所示，图中的一个程序包含三个C文件，两个头文件。<br><img src="http://7vihec.com1.z0.glb.clouddn.com/os1-30.png" alt="图1-30"></p>
+<h2 id="运行模型">运行模型</h2><p>　　在操作系统二进制代码链接完成后，计算机就可以重新启动，新的操作系统开始运行。一旦运行，系统会动态调入那些没有静态包括在二进制代码中的模块，诸如设备驱动和文件系统。在运行过程中，操作系统可能由若干段组成，有文本段（程序代码）、数据段和堆栈段。文本段通常是不可改变的，在运行过程中不可修改。数据段开始时有一定的大小，并且确定的值进行初始化，但是随后就被修改了，其大小随需要增长。堆栈段被初始化为空，但是随着对函数的调用和从函数返回，堆栈段时时刻刻在增长和缩写。通常文本段放置在接近内存底部的位置，数据段在其上面，这样可以向上增长。而堆栈段处在高位的虚拟地址，具有向下增长的能力，不过不同系统的工作方式各有差别。</p>
+<p>[参考资料]</p>
+<ol>
+<li><a href="">现代操作系统</a></li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Operating-System/">Operating System</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/OS/">OS</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://ningban.github.io/2014/11/17/Modern-OS-introduction-world-depend-on-c-language/" data-title="Mondern OS引论之依靠C的世界 | JNing+" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/11/18/Modern-OS-process/" title="Modern OS第2章之进程">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Modern OS第2章之进程</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/11/16/Modern-OS-introduction-system-call/"  title="Mondern OS引论之系统调用">
+ <strong>下一篇：</strong><br/> 
+ <span>Mondern OS引论之系统调用
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2014/11/17/Modern-OS-introduction-world-depend-on-c-language/" data-title="Mondern OS引论之依靠C的世界" data-url="https://ningban.github.io/2014/11/17/Modern-OS-introduction-world-depend-on-c-language/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#依靠C的世界"><span class="toc-number">1.</span> <span class="toc-text">依靠C的世界</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#头文件"><span class="toc-number">1.1.</span> <span class="toc-text">头文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#大型编程项目"><span class="toc-number">1.2.</span> <span class="toc-text">大型编程项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运行模型"><span class="toc-number">1.3.</span> <span class="toc-text">运行模型</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life/" title="Life">Life<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Machine-Learning/" title="Machine Learning">Machine Learning<sup>14</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>8</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/分享与发现/" title="分享与发现">分享与发现<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/计算机基础/" title="计算机基础">计算机基础<sup>3</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/机器学习/" title="机器学习">机器学习<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OS/" title="OS">OS<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/计算机基础/" title="计算机基础">计算机基础<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Life/" title="Life">Life<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分享与发现/" title="分享与发现">分享与发现<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://www.v2ex.com/?r=Jning"" target="_blank" title="v2ex">v2ex</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://open.163.com" target="_blank" title="公开课">公开课</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://study.163.com" target="_blank" title="云课堂">云课堂</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.mooc.cn/" target="_blank" title="MOOC">MOOC</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/ningvsban" target="_blank" title="JNing">JNing</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m JNing. <br/>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="https://ningban.github.io/about" target="_blank" title="JNing">JNing</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+    
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"ningban## e.g. wuchong   your duoshuo short name."};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

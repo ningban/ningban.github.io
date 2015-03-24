@@ -1,0 +1,558 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Modern OS第2章之中断解析 | JNing+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="JNing">
+    
+
+    
+    <meta name="description" content="文章是Modern Operating System的读书笔记，这里是第二章进程与线程的读书笔记，本篇主要讲述了中断的实现原理以及Linux对中断的支持...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Modern OS第2章之中断解析">
+<meta property="og:url" content="https://ningban.github.io/2014/11/18/Modern-OS-interrupt/index.html">
+<meta property="og:site_name" content="JNing+">
+<meta property="og:description" content="文章是Modern Operating System的读书笔记，这里是第二章进程与线程的读书笔记，本篇主要讲述了中断的实现原理以及Linux对中断的支持...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Modern OS第2章之中断解析">
+<meta name="twitter:description" content="文章是Modern Operating System的读书笔记，这里是第二章进程与线程的读书笔记，本篇主要讲述了中断的实现原理以及Linux对中断的支持...">
+
+    
+    <link rel="alternative" href="/atom.xml" title="JNing+" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.png">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="JNing+" title="JNing+"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="JNing+">JNing+</a></h1>
+				<h2 class="blog-motto">Stay hungry, Stay foolish...</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:ningban.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/11/18/Modern-OS-interrupt/" title="Modern OS第2章之中断解析" itemprop="url">Modern OS第2章之中断解析</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://ningban.github.io/about" title="JNing" target="_blank" itemprop="author">JNing</a>
+		
+  <p class="article-time">
+    <time datetime="2014-11-18T13:08:26.000Z" itemprop="datePublished"> 发表于 2014-11-18</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#中断"><span class="toc-number">1.</span> <span class="toc-text">中断</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#异常"><span class="toc-number">1.1.</span> <span class="toc-text">异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中断向量"><span class="toc-number">1.2.</span> <span class="toc-text">中断向量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中断服务程序？"><span class="toc-number">1.3.</span> <span class="toc-text">中断服务程序？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隔离变化"><span class="toc-number">1.4.</span> <span class="toc-text">隔离变化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#保存当前“现场”"><span class="toc-number">1.5.</span> <span class="toc-text">保存当前“现场”</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux对中断的支持"><span class="toc-number">2.</span> <span class="toc-text">Linux对中断的支持</span></a></li></ol>
+		
+		</div>
+		
+		<h1 id="中断">中断</h1><p>　　计算机系统是靠硬件和软件配合来协同实现中断处理的全过程的。我们将通过IntelX86架构的实现来介绍这一过程。<br>　　CPU执行完一条指令后，下一条指令的逻辑地址存放在cs（Code Segment，代码段寄存器 ）和eip（IP是指令寄存器，存放当前指令的下一条指令的地址。CPU该执行哪条指令就是通过IP来指示的。<br>EIP是32位机的指令寄存器。）这对寄存器中。在执行新指令前，控制单元会检查在执行前一条指令的过程中是否有中断或异常发生。如果有，控制单元就会抛下指令，进入下面的流程：</p>
+<ol>
+<li>确定于中断或异常关联的向量i（0&lt;=i&lt;=255）</li>
+<li>寻找向量对应的处理程序</li>
+<li>保存当前的“工作现场”，执行中断或异常的处理程序</li>
+<li>处理程序执行完毕后，把控制权交还给控制单元</li>
+<li>控制单元恢复现场，返回继续执行原程序</li>
+</ol>
+<p>　　下面，让我们深入这个流程，看看都有什么问题需要面对。</p>
+<h2 id="异常">异常</h2><p>　　在处理器执行到由于编程失误而导致的错误指令（例如除数是0）的时候，或者在执行期间出现特殊情况（例如，缺页），需要靠操作系统来处理的时候，处理器就产生一个异常。对大部分处理器体系结构来说，处理异常和处理中断的方式基本相同的，x86架构的CPU也是如此。异常与中断还是有些区别，异常的产生必须考虑与处理器时钟的同步。实际上，异常往往被称为同步中断。</p>
+<h2 id="中断向量">中断向量</h2><p>　　中断向量代表的是中断源，从某种角度上讲，可以看做是中断或异常的类型。中断和异常的种类很多，比如说被0除是一种异常，缺页又是一种异常，网卡会产生中断，声卡也会产生中断，CPU如何区分它们呢？中断向量的概念就是由此引出的，其实它就是一个被送往CPU数据线的一个整数。CPU给每个IRQ（Interrupt Request，中断请求）分配了一个类型号，通过这个整数CPU来识别不同类别的中断。这里可能有很多朋友会询问为什么还要弄个中断向量这么麻烦的东西？为什么不直接用IRQ0-IRQ15就完了？比如就让IRQ0为0，IRQ1为1····，这不是简答的多吗？其实这里体现了模块化设计规则，以及节约规则。<br>　　首先我们先谈谈解决规则，所谓<code>节约规则</code>就是所使用的信号线数越少越好，这样如果每个IRQ都独立使用一根数据线，如IRQ0用0号线，IRQ1用1号线···这样，16个IRQ就会用16根线，这显然是一种浪费。那么也许马上就有朋友会说：那么只用4根线不就行了吗？（2^4=16）。<br>　　这个问题体现了<code>模块设计规则</code>。我们在前面就说过中断有很多类，可能是外部硬件触发，也可能是由软件触发，然而对于CPU来说中断就是中断，只有一种，CPU不用管它到底是由外部硬件触发的还是由软件触发的，因为对于CPU来说，中断处理的过程都是一样的：<strong>中断现有程序，转到中断服务程序处执行，回到被中断的程序继续执行</strong>。<code>CPU总共可以处理256种中断</code>，而并不知道，也不应该让CPU知道这是硬件来的中断还是软件来的中断，这样就可以使CPU的设计独立于中断控制器的设计，这样CPU所需要完成的工作很单纯了。CPU对于其他其它的模块只体统了一种接口，这就是256个中断处理向量，也成为中断号。由这些中断控制器自行去使用这256个中断号的一个CPU进行交互，比如，硬件中断可以使用前128个号，软件中断使用后128个号，也可以软件前128个号，硬件后128个号，这与CPU完全无关了。当你需要处理的时候，只需要告诉CPU你用的是哪个中断号就行了，而不需要告诉CPU你是来自哪儿的中断。这样也方便了以后的扩充，比如现在机器里又加了一片8259芯片，那么这个芯片就可以使用空闲的中断号，看哪一个空闲就是用哪一个，而不是必须要使用地0号或第1号中断了。其实这相当于一种映射机制，把IRQ信号映射到不同的中断号上，IRQ的排列或者编号是固定的，但通过改变映射机制，就可以让IRQ映射到不同的中断号，也可以说调用不同的中断服务程序。</p>
+<h2 id="中断服务程序？">中断服务程序？</h2><p>　　在响应一个特定中断的时候，内核会执行一个函数，该函数叫做中断处理程序（interrupt handler）或者中断服务程序（interrupt service routine，ISR）。产生中断的每个设备都有响应的中断处理程序。例如，由一个函数专门处理来自系统时钟的中断，另外一个函数专门处理由键盘产生的中断。<br>　　一般来说，中断服务程序要负责与硬件进行交互，告诉该设备中断已经被接收。此外，还需要完成其他相关工作。比如说网络设备的中断服务程序除了要给硬件应答，还要把来自硬件的网络数据包拷贝到内存，对其进行处理后再交给合适的协议栈或应用程序。每个中断服务程序根据其要完成的任务，复杂程度各不相同。<br>　　一般来说，一个设备的中断服务程序是它的设备驱动程序（device dirver）的一部分，设备驱动程序是用于对设备进行管理的内核代码。</p>
+<h2 id="隔离变化">隔离变化</h2><p>　　对于计算机来说，硬件的支持的，只能是中断这种电信号传播的方式和CPU对这种信号的接收方法，而具体如何处理这个中断，必须得靠操作系统实现。<br>　　当新的设备引入新类型的中断时，CPU和操作系统不用关注如何处理它。CPU只负责接收中断信号，并引用中断服务程序；而操作系统提供默认的中断服务——一般来说就是不理会这个信号，返回就可以了——并负责提供接口，让用户通过该接口注册根据设备具体功能而编制的中断服务程序。如果用户注册了对应于一个中断的服务程序，那么CPU就会在该中断到来时调用用户注册的服务程序。这样在中断来临时系统需要如何操作硬件，如何实现硬件功能这部分工作就完全独立于CPU架构和操作系统的设计了。<br>　　而当你需要加入新的设备的时候，只需要告诉操作系统该设备占用的中断号、按照操作系统要求的接口格式撰写中断服务程序，用操作系统提供的函数注册该服务程序，设备的中断就被系统支持了。<br>　　中断和对中断的处理被解除了耦合。这样，无论是你在需要加入新的中断时，还是你需要改变现有的中断的服务程序时，又或者是取消对某个中断的支持的时候，CPU架构和操作系统都不需要做改变。</p>
+<h2 id="保存当前“现场”">保存当前“现场”</h2><p>　　在中断处理完毕后，计算机一般来说还要回头处理原先收到正做的工作。这给中断的概念带来些额外的内涵。这就需要在处理中断信号之前保留工作“现场”。“现场”这个词比较晦涩，其实就是指一个信息集，它能反应某个时间点上任务的状态，并能保证按照这些信息就能恢复任务到该状态，继续执行下去。再直白点，现场不过就是一组寄存器值。而如何保护现场和恢复现场是中断机制需要考虑的重点之一。<br>　　每个中单处理都要经历这个保存和恢复的过程，我们可以抽象出其中的5个步骤：</p>
+<ol>
+<li>保存现场</li>
+<li>执行具体的中断服务程序</li>
+<li>从中断服务返回</li>
+<li>恢复现场</li>
+</ol>
+<p>　　上面说过了，“现场”看似在不断变化，没有那个瞬间相同。但实际上组成现场的要素却不会有任何改变。也就是说，只要我们保存了相关的寄存器状态，现场就能保存下来，而恢复“现场”机试重新载入这些寄存器。换句话说，对于任何一个中断，保护现场和恢复现场所做的都是完全相同的操作。<br>　　既然操作相同，实现操作的过程和代码相同。减少代码的冗余是模块化设计的基本准则，是在没有道理让所有的中断服务程序都重复实现这样的功能，应该将它作为一种基本的结构由底层的操作系统或硬件完成。而对中断的处理过程需要迅速完成，因此，Intel CPU的控制器就承担了这个任务，非但如此，上面的所有步骤次序都被固化下来，由控制器驱动完成。保存现场和恢复现场都由硬件自动完成，大大减轻了操作系统和设备驱动程序的负担。</p>
+<h1 id="Linux对中断的支持">Linux对中断的支持</h1><p>　　在Linxu中，中断处理程序看起来就是普普通通的C函数。只不过这些函数必须按照特定的类型声明，以便内核能够以标准的方式传递处理程序的信息，在其他方面，它们与一般的函数看起来别无二致。中断梳理程序与其他内核函数的真正区别在于，中断处理程序是被内核调用来响应中断的，而它们运行于我们称之为中断上下文的特殊上下文中。<br>　　中断可能随时繁盛，因此中断处理程序也就随时可能执行。所以必须保证中断处理程序能够快速执行，这样才能保证尽可能快递恢复被中断代码的执行。因此，尽管对硬件而言，迅速对其中断进行服务非常重要。但对系统的其他部分而言，让中断处理程序在尽可能短的时间内完成执行也同样重要。<br>　　即使最精简版的中断服务程序，它也要与硬件进行交互，告诉该设备中断已被接受。但通常我们不嗯给你像这样给中断服务程序随意减负，相反，我们要靠它完成大量的其他工作。例如，我们可以考虑一下网络设备的中断处理程序面临的挑战。该处理程序除了要对硬件应答，还要把来自硬件的网络数据包拷贝到内存，对齐进行处理后再交给合适的协议栈或应用程序。<br>　　现在我们来分析一下Linux操作系统为了支持中断机制，具体都需要做些什么工作。<br>　　首先，操作系统必须保证新的中断能够被支持。计算机赢家留给外设的是一个统一个中断信号接口。它固化了中断信号的接入和传递方法。拿PC机来说，中断机制是靠两块8259和CPU协作实现的。外设要做的只是把中断信号发送到8259的某个特定引脚上，这样8259就会谓词中断非配一个标示——也就是通常所说的中断向量，通过中断向量，CPU就能够在已中断向量为索引的表——中断向量表——里找到中断服务程序，由它决定具体如何处理中断。<br>　　因此，操作系统对新中低端的支持，说简单点，就是维护中断向量表。新的外围设备加入系统，首先得明确自己的中断向量号是多少，还得提供自身的中断的服务程序，然后刘勇Linux的内核调用界面，把&lt;中断向量号，中断服务程序&gt;这对信息填写到中断向量表中去。这样CPU在接受到中断信号时就会自动调用中断服务程序了。这种注册操作一般是由设备驱动程序完成的。<br>　　其次，操作系统必须提供给程序员简单可靠的变成界面来支持中断。中断的基本流程前面已经讲过了，它会中断当前正在进行的工作去执行中断服务程序，然后再回到先前的任务继续执行。这中间爱你有大量需要解决问题：如何保护现场、嵌套中断如何处理等等，操作系统要一一化解。<br>　　操作系统为我们屏蔽了这些与中断有关硬件机制打交道的细节，提供了一套精简的接口，让我们以为简单的方式实现对时间中断的支持，Linux是怎么完成做到这一点的呢？<br>　　<code>CPU对中断的处理流程：</code><br>　　我们首先必须了解CPU在接受到中断信号时会做什么。没办法，操作系统必须了解硬件的机制，不配合硬件就寸步难行。现在哦我忙呢假定内核已被初始化，CPU在保护模式下运行。<br>　　CPU执行完一条指令后，下一条指令的逻辑地址存放在cs和eip这对寄存器中。在执行新指令前，控制单元会检查在执行前一条指令的过程中是否有中断或异常发生。如果有，控制单元就会抛下指令，进入下面的流程：</p>
+<ol>
+<li>确定于中断或异常的关联向量i（0&lt;=i&lt;=255）.</li>
+<li>借由idtr寄存器（Interrupt Descriptor Table Register，IDTR，中断描述符表寄存器。用于存放中断描述符表IDT的32位线性基地址和16位表长度值）从IDT表（IDT表，将每个异常或中断向量分别与它们的处理过程联<br>系起来）中读取第i项（在下面的描述中，我们假定该IDT表项中包含的是一个中断门或一个陷阱门）。</li>
+<li>从gdtr寄存器（global descriptor Table Register，全局描述符表寄存器，用于存放全局描述符表GDT的32位线性基地址和16位表长度值。）获得GDT的基地址，并在GDT表中查找，以读取IDT表项中的选择符所表示的段描述符。这个描述符指定中断或异常处理程序所在的基地址。</li>
+<li>确信中断是由授权的（中断）发生源发出的。首先将当前特权级CPL（存放在cs寄存器的低两位）与段描述符（即DPL，存放在GDT中）的描述符特权级比较，如果CPL小于DPL，就产生一个“通用保护”异常，因为中断处理程序的特权不能低于引起中断的程序的特权。对于编程异常，则做进一步的安全检查：比较CPL与处于IDT中的门描述符的DPL，如果DPL小于CPL，就产生一个“通用保护”异常。这最后一个检查可以避免用户应用程序访问特殊的陷阱门或中断门。</li>
+<li><p>检查是否发生了特权级的变化，也就是说， CPL是否不同于所选择的段描述符的DPL。如果是，控制单元必须开始使用与新的特权级相关的栈。通过执行以下步骤来做到这点：</p>
+<blockquote>
+<p>  a. 读tr寄存器（Task Register，TR，该寄存器指向当前正在执行的线程的TSS,为了实现不同的线程之间的转换，CPU要求操作系统维护一份固定格式的数据（该数据存在于内存中），这份数据叫做Task-State Segment(TSS)，在这份数据结构里，维护着线程的EAX，EIP，DS(Data Segment)等寄存器的内容。 ），以访问运行进程的TSS段。<br> b. 用与新特权级相关的栈段和栈指针的正确值装载ss和esp寄存器，这些值可以在TSS中找到。<br> c. 在新的栈中保存ss（Stack Segment Register，存放栈的段地址）和esp（Extended stack pointer，指针寄存器的一种）以前的值，这些值定义了与旧特权级相关的栈的逻辑地址。</p>
+</blockquote>
+</li>
+<li><p>如果故障已发生，用引起异常的指令地址装载cs和eip寄存器，从而使得这条指令能再次被执行。</p>
+</li>
+<li>在栈中保存eflag（标志寄存器）、cs及eip的内容。</li>
+<li>如果异常产生了一个硬错误码，则将它保存在栈中。</li>
+<li>装载cs和eip寄存器，其值分别是IDT表中第i项门描述符的段选择符和偏移量域。这些值给出了中断或者异常处理程序的第一条指令的逻辑地址。<br>控制单元所执行的最后一步就是跳转到中断或者异常处理程序。换句话说，处理完中断信号后，控制单元所执行的指令就是被选中的处理程序的第一条指令。</li>
+</ol>
+<p>　　中断或异常被处理完后，相应的处理程序必须产生一条iret(interrupt return)指令，把控制权转交给被中断的进程，这将迫使控制单元：</p>
+<ol>
+<li>用保存在栈中的值装载cs、eip、或eflag寄存器。如果一个硬错误码曾被压入栈中，并且在eip内容的上面，那么，执行iret指令前必须先弹出这个硬错误码。</li>
+<li>检查处理程序的CPL是否等于cs中最低两位的值（这意味着被中断的进程与处理程序运行在同一特权级）。如果是，iret终止执行；否则，转入下一步。</li>
+<li>从栈中装载ss和esp寄存器，因此，返回到与旧特权级相关的栈。</li>
+<li>检查ds（Data Segment Registe，数据段寄存器）、es((Extra Segment Register，附加段寄存器)、fs(Flag Segment Register，)及gs(Global Segment Register,全局段寄存器)段寄存器的内容，如果其中一个寄存器包含的选择符是一个段描述符，并且其DPL值小于CPL，那么，清相应的段寄存器。控制单元这么做是为了禁止用户态的程序（CPL=3）利用内核以前所用的段寄存器（DPL=0）。如果不清这些寄存器，怀有恶意的用户程序就可能利用它们来访问内核地址空间。</li>
+</ol>
+<p>[参考资料]</p>
+<ol>
+<li><a href="http://www.kerneltravel.net/journal/viii/01.htm" target="_blank" rel="external">中断解析</a></li>
+<li><a href="http://blog.chinaunix.net/uid-20797642-id-2495244.html" target="_blank" rel="external">内存管理寄存器 </a></li>
+<li><a href="http://www.cnblogs.com/mumuliang/archive/2010/07/26/1873493.html" target="_blank" rel="external">32位CPU寄存器简介以及TSS和TR</a></li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Operating-System/">Operating System</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/OS/">OS</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://ningban.github.io/2014/11/18/Modern-OS-interrupt/" data-title="Modern OS第2章之中断解析 | JNing+" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/11/27/CS-bigEndian-and-littleEndian/" title="计算机基础篇之大端与小端">
+  <strong>上一篇：</strong><br/>
+  <span>
+  计算机基础篇之大端与小端</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/11/18/Modern-OS-process/"  title="Modern OS第2章之进程">
+ <strong>下一篇：</strong><br/> 
+ <span>Modern OS第2章之进程
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2014/11/18/Modern-OS-interrupt/" data-title="Modern OS第2章之中断解析" data-url="https://ningban.github.io/2014/11/18/Modern-OS-interrupt/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#中断"><span class="toc-number">1.</span> <span class="toc-text">中断</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#异常"><span class="toc-number">1.1.</span> <span class="toc-text">异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中断向量"><span class="toc-number">1.2.</span> <span class="toc-text">中断向量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中断服务程序？"><span class="toc-number">1.3.</span> <span class="toc-text">中断服务程序？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隔离变化"><span class="toc-number">1.4.</span> <span class="toc-text">隔离变化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#保存当前“现场”"><span class="toc-number">1.5.</span> <span class="toc-text">保存当前“现场”</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux对中断的支持"><span class="toc-number">2.</span> <span class="toc-text">Linux对中断的支持</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Life/" title="Life">Life<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Machine-Learning/" title="Machine Learning">Machine Learning<sup>14</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Operating-System/" title="Operating System">Operating System<sup>8</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/分享与发现/" title="分享与发现">分享与发现<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/计算机基础/" title="计算机基础">计算机基础<sup>3</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/机器学习/" title="机器学习">机器学习<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OS/" title="OS">OS<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/计算机基础/" title="计算机基础">计算机基础<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Life/" title="Life">Life<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分享与发现/" title="分享与发现">分享与发现<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://www.v2ex.com/?r=Jning"" target="_blank" title="v2ex">v2ex</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://open.163.com" target="_blank" title="公开课">公开课</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://study.163.com" target="_blank" title="云课堂">云课堂</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.mooc.cn/" target="_blank" title="MOOC">MOOC</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/ningvsban" target="_blank" title="JNing">JNing</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m JNing. <br/>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="https://ningban.github.io/about" target="_blank" title="JNing">JNing</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+    
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"ningban## e.g. wuchong   your duoshuo short name."};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
