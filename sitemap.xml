@@ -2,6 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://ningban.github.io/2015/01/08/underfit-and-overfit/</loc>
+    <lastmod>2015-03-24T07:36:54.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ningban.github.io/2015/01/16/smo-algorithm/</loc>
+    <lastmod>2015-03-24T07:36:28.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ningban.github.io/2015/01/15/optimal-margin-classifier/</loc>
+    <lastmod>2015-03-24T07:36:00.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ningban.github.io/2015/01/12/naive-bayes-algorithm/</loc>
+    <lastmod>2015-03-24T07:35:37.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ningban.github.io/2015/01/11/generate-learning-algorithm/</loc>
+    <lastmod>2015-03-24T07:35:12.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ningban.github.io/2015/01/21/bayesian-statistics-and-regularization/</loc>
+    <lastmod>2015-03-24T07:34:46.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ningban.github.io/2015/01/09/Newtown-methods/</loc>
+    <lastmod>2015-03-24T07:33:49.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ningban.github.io/2015/01/17/ERM/</loc>
+    <lastmod>2015-03-24T07:33:07.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ningban.github.io/2015/01/08/Gradient-Descent-algorithm/</loc>
     <lastmod>2015-03-24T07:01:38.000Z</lastmod>
   </url>
@@ -39,46 +79,6 @@
   <url>
     <loc>https://ningban.github.io/2014/11/12/Markdown/</loc>
     <lastmod>2015-03-19T05:33:10.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ningban.github.io/2015/01/21/bayesian-statistics-and-regularization/</loc>
-    <lastmod>2015-03-08T13:23:32.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ningban.github.io/2015/01/17/ERM/</loc>
-    <lastmod>2015-03-08T13:22:43.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ningban.github.io/2015/01/16/smo-algorithm/</loc>
-    <lastmod>2015-03-08T13:22:29.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ningban.github.io/2015/01/15/optimal-margin-classifier/</loc>
-    <lastmod>2015-03-08T13:22:10.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ningban.github.io/2015/01/12/naive-bayes-algorithm/</loc>
-    <lastmod>2015-03-08T13:21:48.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ningban.github.io/2015/01/11/generate-learning-algorithm/</loc>
-    <lastmod>2015-03-08T13:21:25.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ningban.github.io/2015/01/09/Newtown-methods/</loc>
-    <lastmod>2015-03-08T13:20:58.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ningban.github.io/2015/01/08/underfit-and-overfit/</loc>
-    <lastmod>2015-03-08T13:20:28.000Z</lastmod>
   </url>
   
   <url>
